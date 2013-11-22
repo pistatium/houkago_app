@@ -1,0 +1,22 @@
+application: hakadoru-img
+version: 5
+runtime: python27
+api_version: 1
+threadsafe: yes
+  
+handlers:
+- url: /css
+  static_dir: css
+- url: /fonts
+  static_dir: fonts
+- url: /js
+  static_dir: js
+- url: /img
+  static_dir: img
+
+- url: /.*
+  script: main.django_app
+
+libraries:
+- name: django
+  version: "1.4"
