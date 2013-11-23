@@ -8,8 +8,6 @@ body {
   padding-top: 70px;
 }
 
-
-
 /* Wrapper for page content to push down footer */
 #wrap {
   min-height: 100%;
@@ -24,4 +22,26 @@ body {
 #footer {
   height: 60px;
   background-color: #f5f5f5;
+}
+
+.profile_card{
+  border:1px solid #aaa;
+}
+.prof_thumb{
+  width: 100px;
+  height: 100px;
+}
+.prof_app_1{
+  width:160px;
+  height:160px;
+}
+.prof_app_2{
+  width:80px;
+  height:80px;
+}
+.prof_app_3{
+  width:80px;
+  height:80px;
+}
+.prof_nest_apps{
 }
