@@ -1,13 +1,16 @@
 {% extends "parent.html" %}
 {% block main %}
 
-	<div class="row">
-		{% include 'plugin/profile_card.html' %}
-		{% include 'plugin/profile_card.html' %}
-		{% include 'plugin/profile_card.html' %}
-		{% include 'plugin/profile_card.html' %}
-		{% include 'plugin/profile_card.html' %}
-	</div>
-	
+
+  <div class="page-header">
+    {% block title %}
+      <h1>放課後アプリ部 <small>集え個人ディベロッパー</small></h1>
+      空き時間等を活かして作られた個人開発のアプリプラットフォーム。
+    {% endblock %}
+  </div>
   <a href="{% url webfront.views_regist.index %} ">登録</a>
 {% endblock main %}
+
+{% block script%}
+	$('#nav_home').addClass("active");
+{% endblock %}

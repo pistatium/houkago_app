@@ -23,13 +23,30 @@ body {
   height: 60px;
   background-color: #f5f5f5;
 }
+.profiles{
 
+}
+.profile_wrap{
+  padding:3px;
+  border-radius: 10px;
+  border:#aaa solid 1px;
+  margin:10px 1px;
+  padding:10px;
+
+}
 .profile_card{
-  border:1px solid #aaa;
+  padding:3px;
+}
+.profile_card h3{
+  margin:5px 0;
+}
+.profile_card p {
+  word-wrap: break-word;
+  word-break: break-all;
+  margin: 0px 1px 3px 1px;
 }
 .prof_thumb{
-  width: 100px;
-  height: 100px;
+
 }
 .prof_app_1{
   width:160px;

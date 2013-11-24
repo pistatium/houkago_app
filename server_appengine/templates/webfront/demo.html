@@ -1,0 +1,29 @@
+{% extends "parent.html" %}
+{% block main %}
+
+ 	<div class="page-header">
+     	<h1>登録後デモ <small>作成中</small></h1>
+     	こんなかんじで登録されたディベロッパー・アプリを紹介する予定です。
+	</div>
+
+	<ul class="nav nav-tabs">
+	  <li><a href="#home" data-toggle="tab">Home</a></li>
+	  <li class="active"><a href="#android" data-toggle="tab">Android</a></li>
+	  <li><a href="#ios" data-toggle="tab">iOS</a></li>
+	  <li><a href="#web" data-toggle="tab">Web</a></li>
+	</ul>
+
+	<div class="row profiles">
+		{% include 'plugin/profile_card.html' %}
+		{% include 'plugin/profile_card.html' %}
+		{% include 'plugin/profile_card.html' %}
+		{% include 'plugin/profile_card.html' %}
+		{% include 'plugin/profile_card.html' %}
+	</div>
+	
+	<a href="{% url webfront.views_regist.index %} ">登録</a>
+{% endblock main %}
+
+{% block script%}
+	$('#nav_demo').addClass("active");
+{% endblock %}

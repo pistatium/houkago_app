@@ -30,6 +30,8 @@ from django.http import HttpResponseRedirect
 def index(request):
     return render_to_response('webfront/index.html',{})
 
+def demo(request):
+	return render_to_response('webfront/demo.html',{})
 
 def notfound(request):
     raise Http404
