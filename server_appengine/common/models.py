@@ -25,6 +25,7 @@ class DeveloperModel(ndb.Model):
     site_addr    = ndb.StringProperty()
     best_apps_id = ndb.IntegerProperty(repeated=True)
     thumb_nail   = ndb.StringProperty()
+    billing      = ndb.IntegerProperty(default = 0) # 0 未課金
 
     @classmethod
     def create(cls, params, is_commit = True):
@@ -94,7 +95,28 @@ class AppModel(ndb.Model):
     app_image     = ndb.StringProperty()
     category      = ndb.IntegerProperty()
 
+class ThumbnailModel(ndb.Moel):
+    image         = ndb.BlobProperty()
+    mimetype      = ndb.StringProperty()
+    developer_id  = ndb.IntegerProperty()
+    thumb_type    = ndb.IntegerProperty()
+    created_at    = ndb.DateTimeProperty(auto_now_add = True)
+    updated_at    = ndb.DateTimeProperty(auto_now = True)
 
+class PreUser(ndb.Model):
+    user_mail     = ndb.StringProperty()
+    send_status   = ndb.IntegerProperty(default = 0) 
+    created_at    = ndb.DateTimeProperty(auto_now_add = True)
+    updated_at    = ndb.DateTimeProperty(auto_now = True)
+
+    @classmethod
+    def getByMail(cls, email):
+        query = cls.query(cls.user_mail == email)
+        user = query.get()
+        if not user:
+          user = PreUser(user_mail = email)
+        return user
+        
 
 ###########################################################################
 ###########################################################################

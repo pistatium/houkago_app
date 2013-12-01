@@ -77,8 +77,14 @@ def form(request):
         return render_to_response('webfront/regist_form.html', data)
 
 @utils.login_required
+def uploadProf(request):
+    
+
+
+@utils.login_required
 def complete(request):
     return render_to_response('webfront/regist_complete.html',{})
+
 
 def notfound(request):
     raise Http404

@@ -73,6 +73,7 @@ INSTALLED_APPS = (
      'common',
      'libs',
      'api',
+     'libs.bootstrapform',
      'webfront',
 #    'django.contrib.auth',
 #    'django.contrib.contenttypes',

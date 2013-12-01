@@ -2,26 +2,71 @@
 {% block main %}
 
  	<div class="page-header">
-     	<h1>登録後デモ <small>作成中</small></h1>
-     	こんなかんじで登録されたディベロッパー・アプリを紹介する予定です。
+     	<h1>登録デモ <small>作成中</small></h1>
+     	こんなかんじで登録されたディベロッパー・アプリを紹介する予定です。<br>
+     	今はダミーデータです。
 	</div>
 
-	<ul class="nav nav-tabs">
-	  <li><a href="#home" data-toggle="tab">Home</a></li>
-	  <li class="active"><a href="#android" data-toggle="tab">Android</a></li>
-	  <li><a href="#ios" data-toggle="tab">iOS</a></li>
-	  <li><a href="#web" data-toggle="tab">Web</a></li>
-	</ul>
+	<div class="row">
+	  	<div class="main col-md-8 well">
+	  		<h3>今日のピックアップアプリ</h3>
+	  		ここでは登録されたアプリからランダム(もしくは特定のロジック)にて
+	  		毎日異なるアプリを表示していきます。
+	  		<div class="row" style="margin:10px">
+				<a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium.tomorrow">
+					<img class="col-xs-4 col-sm-2 img-responsive img-thumbnail" src="http://kimihiro-n.appspot.com/photo/show/291002.jpg">
+				</a>
+				<a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium.accountsbook">
+						<img class="col-xs-4 col-sm-2 img-responsive img-thumbnail" src="http://kimihiro-n.appspot.com/photo/show/182002.jpg">
+				</a>
+				<a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium">
+						<img class="col-xs-4 col-sm-2 img-responsive img-thumbnail" src="http://kimihiro-n.appspot.com/photo/show/184001.jpg">
+				</a>
+				<a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium.tomorrow">
+					<img class="col-xs-4 col-sm-2 img-responsive img-thumbnail" src="http://kimihiro-n.appspot.com/photo/show/291002.jpg">
+				</a>
+				<a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium.accountsbook">
+						<img class="col-xs-4 col-sm-2 img-responsive img-thumbnail" src="http://kimihiro-n.appspot.com/photo/show/182002.jpg">
+				</a>
+				<a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium">
+						<img class="col-xs-4 col-sm-2 img-responsive img-thumbnail" src="http://kimihiro-n.appspot.com/photo/show/184001.jpg">
+				</a>
+			</div>
 
-	<div class="row profiles">
-		{% include 'plugin/profile_card.html' %}
-		{% include 'plugin/profile_card.html' %}
-		{% include 'plugin/profile_card.html' %}
-		{% include 'plugin/profile_card.html' %}
-		{% include 'plugin/profile_card.html' %}
+	  		<h3>部員紹介</h3>
+	  		ここでは登録されたディベロッパーとそのディベロッパーが作ったアプリのうち選択した3つを表示していきます。
+	  		1ディベロッパーあたり3アプリに限定することで、アプリが埋もれにくくします。
+	  		Android,iOS,Web各プラットフォーム毎にページを用意する予定です。
+			<ul class="nav nav-tabs">
+			  <li><a href="#home" data-toggle="tab">Home</a></li>
+			  <li class="active"><a href="#android" data-toggle="tab">Android</a></li>
+			  <li><a href="#ios" data-toggle="tab">iOS</a></li>
+			  <li><a href="#web" data-toggle="tab">Web</a></li>
+			</ul>
+
+			<div class="row profiles">
+				{% include 'plugin/profile_card.html' %}
+				{% include 'plugin/profile_card.html' %}
+				{% include 'plugin/profile_card.html' %}
+				{% include 'plugin/profile_card.html' %}
+				{% include 'plugin/profile_card.html' %}
+				{% include 'plugin/profile_card.html' %}
+			</div>
+		</div>		
+
+		<div class="col-md-4">
+		<div>
+			<h2>事前登録</h2>
+	  			<a class="btn btn-primary btn-lg" href="{% url webfront.views_home.pre %}">事前登録してみる</a>
+	  			<h4>今なら登録料が無料！</h4>
+	  			プラットフォームへの登録の際、数百円程度の登録料を頂く予定ですが、
+	  			アルファ版へ事前登録をしていただいた方には特別登録料を無料にて提供いたします。
+	  			年会費のようなものは不要なため、今登録していただくと完全無料で利用できます。<br>
+	  			この機会に是非事前登録を！
+	  	</div>
+
 	</div>
 	
-	<a href="{% url webfront.views_regist.index %} ">登録</a>
 {% endblock main %}
 
 {% block script%}
