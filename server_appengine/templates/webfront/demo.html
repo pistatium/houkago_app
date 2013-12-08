@@ -8,8 +8,29 @@
 	</div>
 
 	<div class="row">
-	  	<div class="main col-md-8 well">
-	  		<h3>今日のピックアップアプリ</h3>
+	  	<div class="main col-md-8">
+
+	  		<h3>部員紹介</h3>
+	  		ここでは登録されたディベロッパーとそのディベロッパーが作ったアプリのうち選択した3つを表示していきます。
+	  		1ディベロッパーあたり3アプリに限定することで、アプリが埋もれにくくします。
+	  		Android,iOS,Web各プラットフォーム毎にページを用意する予定です。
+			<ul class="nav nav-tabs">
+			  <li><a href="#home" data-toggle="tab">Home</a></li>
+			  <li class="active"><a href="#android" data-toggle="tab">Android</a></li>
+			  <li><a href="#ios" data-toggle="tab">iOS</a></li>
+			  <li><a href="#web" data-toggle="tab">Web</a></li>
+			</ul>
+
+			<div class="row profiles">
+				{% include 'plugin/profile_card.html' %}
+				{% include 'plugin/profile_card.html' %}
+				{% include 'plugin/profile_card.html' %}
+				{% include 'plugin/profile_card.html' %}
+				{% include 'plugin/profile_card.html' %}
+				{% include 'plugin/profile_card.html' %}
+			</div>
+
+			<h3>今日のピックアップアプリ</h3>
 	  		ここでは登録されたアプリからランダム(もしくは特定のロジック)にて
 	  		毎日異なるアプリを表示していきます。
 	  		<div class="row" style="margin:10px">
@@ -33,37 +54,11 @@
 				</a>
 			</div>
 
-	  		<h3>部員紹介</h3>
-	  		ここでは登録されたディベロッパーとそのディベロッパーが作ったアプリのうち選択した3つを表示していきます。
-	  		1ディベロッパーあたり3アプリに限定することで、アプリが埋もれにくくします。
-	  		Android,iOS,Web各プラットフォーム毎にページを用意する予定です。
-			<ul class="nav nav-tabs">
-			  <li><a href="#home" data-toggle="tab">Home</a></li>
-			  <li class="active"><a href="#android" data-toggle="tab">Android</a></li>
-			  <li><a href="#ios" data-toggle="tab">iOS</a></li>
-			  <li><a href="#web" data-toggle="tab">Web</a></li>
-			</ul>
-
-			<div class="row profiles">
-				{% include 'plugin/profile_card.html' %}
-				{% include 'plugin/profile_card.html' %}
-				{% include 'plugin/profile_card.html' %}
-				{% include 'plugin/profile_card.html' %}
-				{% include 'plugin/profile_card.html' %}
-				{% include 'plugin/profile_card.html' %}
-			</div>
 		</div>		
 
 		<div class="col-md-4">
-		<div>
-			<h2>事前登録</h2>
-	  			<a class="btn btn-primary btn-lg" href="{% url webfront.views_home.pre %}">事前登録してみる</a>
-	  			<h4>今なら登録料が無料！</h4>
-	  			プラットフォームへの登録の際、数百円程度の登録料を頂く予定ですが、
-	  			アルファ版へ事前登録をしていただいた方には特別登録料を無料にて提供いたします。
-	  			年会費のようなものは不要なため、今登録していただくと完全無料で利用できます。<br>
-	  			この機会に是非事前登録を！
-	  	</div>
+			{% include 'plugin/regist_div.html' %}
+		</div>
 
 	</div>
 	

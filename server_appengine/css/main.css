@@ -8,8 +8,14 @@ body {
   padding-top: 70px;
 }
 .main p {
-  max-width:500px;
+  max-width:600px;
   display:block;
+}
+.block_line{
+  border-left: 6px #B7D4D6 solid;
+  padding-left: 6px;
+  margin-left:6px;
+
 }
 /* Wrapper for page content to push down footer */
 #wrap {

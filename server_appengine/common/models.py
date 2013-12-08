@@ -95,13 +95,14 @@ class AppModel(ndb.Model):
     app_image     = ndb.StringProperty()
     category      = ndb.IntegerProperty()
 
-class ThumbnailModel(ndb.Moel):
+class ThumbnailModel(ndb.Model):
     image         = ndb.BlobProperty()
     mimetype      = ndb.StringProperty()
     developer_id  = ndb.IntegerProperty()
     thumb_type    = ndb.IntegerProperty()
     created_at    = ndb.DateTimeProperty(auto_now_add = True)
     updated_at    = ndb.DateTimeProperty(auto_now = True)
+
 
 class PreUser(ndb.Model):
     user_mail     = ndb.StringProperty()

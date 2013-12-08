@@ -78,7 +78,7 @@ def form(request):
 
 @utils.login_required
 def uploadProf(request):
-    
+    pass
 
 
 @utils.login_required

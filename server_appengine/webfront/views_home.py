@@ -30,11 +30,9 @@ from django.http import HttpResponseRedirect
 # -- Views  --------------------------------------------
 # ------------------------------------------------------
 
-@cache_page(300)
 def index(request):
     return render_to_response('webfront/index.html',{})
 
-@cache_page(300)
 def demo(request):
     return render_to_response('webfront/demo.html',{})
 
