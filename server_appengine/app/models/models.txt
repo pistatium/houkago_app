@@ -1,0 +1,22 @@
+#coding: utf-8
+
+def _sortQuery(cls, query, sortby, reverse = False):
+    # created|updated|count|evaluated    
+    if sortby == 'created':
+        if reverse:
+            q = query.order(cls.created_at)
+        else:
+            q = query.order(-cls.created_at)
+
+    elif sortby == 'updated':
+        if reverse:
+            q = query.order(cls.updated_at)
+        else :
+            q = query.order(-cls.updated_at)
+            
+    elif sortby == 'evaluated':
+        if reverse:
+            q = query.order(-cls.total_count)
+        else :
+            q = query.order(cls.total_count)
+    return q

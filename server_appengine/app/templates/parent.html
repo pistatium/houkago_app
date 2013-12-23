@@ -1,0 +1,101 @@
+<!DOCTYPE html> 
+<html lang="ja"> 
+<head> 
+  <meta charset="UTF-8">
+  <meta http-equiv="content-script-type" content="text/javascript"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+  <link href="/css/bootstrap-theme.css" type="text/css" rel="stylesheet">
+  <link href="/css/main.css" type="text/css" rel="stylesheet">
+  <link rel="shortcut icon" href="/static/img/favicon.ico" />
+  <title>放課後アプリ部</title>
+  <!--[if lt IE 9]
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script type="text/javascript">
+    $(function(){
+      {% block script%}
+      <!-- 固有スクリプト -->
+      {% endblock %}
+    });
+  </script>
+  {% include 'plugin/analytics.html' %}
+</head> 
+<body> 
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">放課後アプリ部</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="nav_home"><a href="/">ホーム</a></li>
+            <li id="nav_demo"><a href="/demo">デモ</a></li>
+            <!--
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+            -->
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+           <li id="nav_pre"><a href="/pre">事前登録</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+  <div id="wrap">
+    <div class="container">
+
+      <div>
+  		{%block main%}
+  		{%endblock main%}
+  	  </div>
+
+      <!-- social buttons -->
+      <div class="ninja_onebutton">
+        <script type="text/javascript">
+        //<![CDATA[
+        (function(d){
+        if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_b72973f805acc6ae2372e185de8c0c52)=='undefined'){
+            document.write("<sc"+"ript type='text\/javascript' src='http:\/\/omt.shinobi.jp\/b\/b72973f805acc6ae2372e185de8c0c52'><\/sc"+"ript>");
+        }else{ 
+            window.NINJA_CO_JP_ONETAG_BUTTON_b72973f805acc6ae2372e185de8c0c52.ONETAGButton_Load();}
+        })(document);
+        //]]>
+        </script><span class="ninja_onebutton_hidden" style="display:none;"></span><span style="display:none;" class="ninja_onebutton_hidden"></span>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted credit">Copyright(c) 2013-{%now "Y" %} <a href="http://kimihiro-n.appspot.com">pistatium</a>. All Rights Reserved. </p>
+    </div>
+  </div>
+
+	
+</body></html>
