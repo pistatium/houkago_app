@@ -1,6 +1,6 @@
 
 import os
-
+import syskey
 DEBUG = os.environ.get('SERVER_SOFTWARE', '').startswith('Development') 
 TEMPLATE_DEBUG = DEBUG
 
@@ -36,7 +36,7 @@ MEDIA_URL = ''
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'h^*v&o#m@gvhx@$f53$@5@o$qxe$8+16ue@=u535w^t_sg_nx'
+SECRET_KEY = syskey.secret_key
 
 # Ensure that email is not sent via SMTP by default to match the standard App
 # Engine SDK behaviour. If you want to sent email via SMTP then add the name of
@@ -47,6 +47,7 @@ EMAIL_HOST = ''
 MIDDLEWARE_CLASSES = (
     'google.appengine.ext.ndb.django_middleware.NdbDjangoMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
 #    'django.contrib.sessions.middleware.SessionMiddleware',
 #    'django.contrib.auth.middleware.AuthenticationMiddleware',
 #    'django.middleware.doc.XViewMiddleware',

@@ -4,6 +4,10 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.http import Http404
 from django.core.paginator import Paginator
+from django.template import RequestContext
+from django.conf.urls.defaults import *
+
+
 
 from google.appengine.ext import ndb
 from google.appengine.api.datastore_errors import BadRequestError
@@ -26,9 +30,6 @@ from app.libs import utils
 import syskey
 from django.views.decorators.cache import cache_page
 from django.http import HttpResponseRedirect
-
-from django.conf.urls.defaults import *
-
 
 
 # -- Views  --------------------------------------------
@@ -53,7 +54,10 @@ def pre(request):
             return HttpResponseRedirect(reverse(pre_complete))
     else:
         form = PreForm()
-    return render_to_response('webfront/pre.html',{"form": form})
+    context = RequestContext(request, {
+        "form": form,
+    })
+    return render_to_response('webfront/pre.html', context)
 
 @cache_page(300)
 def pre_complete(request):

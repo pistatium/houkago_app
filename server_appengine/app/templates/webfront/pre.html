@@ -9,6 +9,7 @@
 			参加希望、もしくは興味がありましたら下記フォームよりメールアドレスをご登録ください。<br>
 			スタート時に登録していただいたメールアドレス宛に連絡を差し上げます。<br>
 			<form action="" method="POST" class="form-inline" role="form">
+				{% csrf_token %}
 				{{form|bootstrap_inline}}
 				<button type="submit" class="btn btn-md btn-primary">予約登録する</button>
 			</form>

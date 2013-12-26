@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse 
 from django.views.decorators.cache import cache_page
+from django.template import RequestContext
 
 from google.appengine.ext import ndb
 from google.appengine.api.datastore_errors import BadRequestError
@@ -46,9 +47,9 @@ def index(request):
 
 @utils.login_required
 def form(request):
-    data = {
+    context = RequestContext(request, {
         "form": "",
-    }
+    })
     user = users.get_current_user()
     # 登録済みならリダイレクト
     if Developer.getById(user.user_id()):
@@ -65,8 +66,8 @@ def form(request):
             developer.put()
             return HttpResponseRedirect(reverse(complete))
         else:
-            data["form"] = form.as_p()
-            return render_to_response('webfront/regist_form.html', data)
+            context["form"] = form
+            return render_to_response('webfront/regist_form.html', context)
 
     # GET
     else:
@@ -74,8 +75,8 @@ def form(request):
             'uname': user.nickname(),
             'email': user.email()
         })
-        data["form"] = form.as_p()
-        return render_to_response('webfront/regist_form.html', data)
+        context["form"] = form
+        return render_to_response('webfront/regist_form.html', context)
 
 @utils.login_required
 def uploadProf(request):

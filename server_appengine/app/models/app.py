@@ -8,7 +8,7 @@ class App(ndb.Model):
     app_name      = ndb.StringProperty()
     package_name  = ndb.StringProperty()
     platform      = ndb.IntegerProperty()
-    pr_summar     = ndb.StringProperty() # アプリ概要 
+    pr_summary    = ndb.StringProperty() # アプリ概要 
     why_create    = ndb.StringProperty() # アプリを作った理由
     product_point = ndb.StringProperty() # 開発に力を入れたポイント
     status        = ndb.IntegerProperty(default = 1)
@@ -17,3 +17,5 @@ class App(ndb.Model):
     thumb_nail    = ndb.StringProperty()
     app_image     = ndb.StringProperty()
     category      = ndb.IntegerProperty()
+    
+    
