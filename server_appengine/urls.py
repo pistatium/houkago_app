@@ -15,8 +15,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-    (r'^api', include('api.urls')),
-    (r'^regist', include('webfront.urls_regist')),
-    (r'^dev', include('webfront.urls_dev')),
-    (r'^', include('webfront.urls_home')),
+    (r'^regist', include('app.views.regist')),
+    (r'^dev', include('app.views.dev')),
+    (r'^', include('app.views.home')),
 )

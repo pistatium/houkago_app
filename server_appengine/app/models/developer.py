@@ -26,7 +26,7 @@ class Developer(ndb.Model):
     @classmethod
     def create(cls, params, is_commit = True):
 
-        developer = DeveloperModel(
+        developer = cls(
             user_id    = params['user_id'],
             uname      = params['uname'],
             profile    = params['profile'],

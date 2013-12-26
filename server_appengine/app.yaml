@@ -6,13 +6,13 @@ threadsafe: yes
   
 handlers:
 - url: /css
-  static_dir: css
+  static_dir: htdocs/css
 - url: /fonts
-  static_dir: fonts
+  static_dir: htdocs/fonts
 - url: /js
-  static_dir: js
+  static_dir: htdocs/js
 - url: /img
-  static_dir: img
+  static_dir: htdocs/img
 
 - url: /.*
   script: main.django_app
