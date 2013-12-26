@@ -1,4 +1,7 @@
-app_creator_platfprm
+app_creator_platfprm 
 ====================
 
-new plat form for app creator
+放課後アプリ部  
+http://houkago-no.appspot.com/
+
+New platform for non-commersial app developers.
