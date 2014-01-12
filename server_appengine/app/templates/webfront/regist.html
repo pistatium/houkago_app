@@ -2,9 +2,14 @@
 {% block main %}
 
 {% if login_url %}
-	<a href="{{login_url}}">login</a>
+    <h3>アプリ部に登録</h3>
+	<a href="{{login_url}}">登録（ログイン）はこちら</a><br>
+	Googleのアカウントで簡単に登録できます。<br>
+
 {% else %}
-	<a href="{{logout_url}}">logout</a>
+    <h3>ログアウト</h3>
+    現在 {{user.uname}} でログイン中です。<br>
+	<a href="{{logout_url}}">ログアウトはこちら</a>
 
 {% endif %}
 

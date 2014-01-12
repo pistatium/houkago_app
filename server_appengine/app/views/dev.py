@@ -40,7 +40,7 @@ def app_regist(request):
         "form": "",
     }
     user = users.get_current_user()
-    if Developer.getById(user.user_id()):
+    if not Developer.getById(user.user_id()):
         return HttpResponseRedirect("/dev/")
     # POST
     if request.method == 'POST':
@@ -54,7 +54,7 @@ def app_regist(request):
             developer.put()
             return HttpResponseRedirect("webfront/regist_complete")
         else:
-            data["form"] = form.as_p()
+            data["form"] = form
             return render_to_response('webfront/regist_form.html', data)
 
     # GET
@@ -63,7 +63,7 @@ def app_regist(request):
             'uname': user.nickname(),
             'email': user.email()
         })
-        data["form"] = form.as_p()
+        data["form"] = form
         return render_to_response('webfront/regist_form.html', data)
 
 @utils.login_required

@@ -26,6 +26,7 @@ from app.libs import utils
 from app.forms.registform import RegistForm
 
 from app.views import dev
+from pprint import pprint
 
 # -- Views  --------------------------------------------
 # ------------------------------------------------------
@@ -42,7 +43,7 @@ def index(request):
     else:
         data["user_id"] = user.user_id()
         data["logout_url"] = users.create_logout_url(reverse(index))
-
+        data["user"] = Developer.getById(data["user_id"])
     return render_to_response('webfront/regist.html',data)
 
 @utils.login_required
