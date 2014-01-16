@@ -1,6 +1,18 @@
 {% extends "parent.html" %}
 {% block main %}
-  <h1>{{ hello }}</h1>
+    <a href="{% url app.views.dev.app_regist %}">アプリ登録</a>
 
-  <a href="{% url app.views.dev.app_regist %}">アプリ登録</a>
+    <div class="row" style="margin:10px">
+        {% for app in apps %}
+            <div class="col-xs-4">
+                <h3>{{app.app_name}}</h3>
+                {{app.updated_at}}
+                <div>
+                    <a href="{% url app.views.dev.form app.id %}"
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+<a href="{% url app.views.dev.app_regist %}">アプリ登録</a>
+
 {% endblock main %}

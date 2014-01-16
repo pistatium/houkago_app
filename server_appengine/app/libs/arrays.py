@@ -1,6 +1,17 @@
 #coding: utf-8
 
 
+platforms = (
+    (0, "Web"),
+    (1, "Android"),
+    (2, "iOS")
+)
+
+status = {
+    0: "非公開",
+    1: "公開"
+}
+
 # DBへのアクセスを減らすため、
 # 途中変更の少ないカテゴリは直書きで運用する
 # 順序の変更は不可
@@ -67,7 +78,7 @@ class Category:
             cid = base_cid + i
             if not c.startswith('#'):
               categories.append(Category(cid, c, group))
-    	return categories
+        return categories
 
     @classmethod
     def getById(cls, cid):

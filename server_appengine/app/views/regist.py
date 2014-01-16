@@ -25,26 +25,40 @@ from app.models.developer import Developer
 from app.libs import utils
 from app.forms.registform import RegistForm
 
-from app.views import dev
+from app import views
 from pprint import pprint
+
+
+"""
+Viewの共通前処理をするデコレータ
+viewの引数にcontextが増えることに注意
+"""
+def custom_view(view):
+    import functools
+    @functools.wraps(view)
+    def override_view(request):        
+        user = users.get_current_user()
+        developer = Developer.getById(user.user_id())
+        context = RequestContext(request,{
+            "is_login": bool(user),
+            "logout_page": reverse(views.regist.index),
+            "developer" : developer,
+            "current_tab": "dev",
+        })
+        return view(request, context)
+    return override_view
 
 # -- Views  --------------------------------------------
 # ------------------------------------------------------
-
-def index(request):
-    data = {
-        "user_id"    : None,
-        "login_url"  : "",
-        "logout_url" : "",
-    }
+@custom_view
+def index(request, context):
     user = users.get_current_user()
     if not user:
-        data["login_url"] = users.create_login_url(reverse(form))
+        context["login_url"] = users.create_login_url(reverse(form))
     else:
-        data["user_id"] = user.user_id()
-        data["logout_url"] = users.create_logout_url(reverse(index))
-        data["user"] = Developer.getById(data["user_id"])
-    return render_to_response('webfront/regist.html',data)
+        context["user_id"] = user.user_id()
+        context["logout_url"] = users.create_logout_url(reverse(index))
+    return render_to_response('webfront/regist.html',context)
 
 @utils.login_required
 def form(request):
@@ -54,7 +68,7 @@ def form(request):
     user = users.get_current_user()
     # 登録済みならリダイレクト
     if Developer.getById(user.user_id()):
-        return HttpResponseRedirect(reverse(dev.index))
+        return HttpResponseRedirect(reverse(views.dev.index))
     # POST
     if request.method == 'POST':
         #developer = models.DeveloperModel()

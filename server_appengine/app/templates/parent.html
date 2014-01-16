@@ -20,6 +20,9 @@
       {% block script%}
       <!-- 固有スクリプト -->
       {% endblock %}
+      {% if current_tab %}
+        $('#nav_{{current_tab}}').addClass("active");
+      {% endif %}
     });
   </script>
   {% include 'plugin/analytics.html' %}
@@ -39,6 +42,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
+            {% if is_login %}
+              <li id="nav_dev"><a href ="{% url app.views.dev.index %}">開発者コンソール</a></li>
+            {% endif %}
             <li id="nav_home"><a href="/">ホーム</a></li>
             <li id="nav_demo"><a href="/demo">デモ</a></li>
             <!--
@@ -58,7 +64,11 @@
             -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
-           <li id="nav_pre"><a href="/regist">登録(ログイン)</a></li>
+           {% if is_login %}
+              <li id="nav_pre"><a href="{{logout_page}}">ログアウト</a></li>
+           {% else %}
+              <li id="nav_pre"><a href="/regist">登録(ログイン)</a></li>
+           {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>

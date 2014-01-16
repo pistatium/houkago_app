@@ -4,19 +4,44 @@ from django import forms
 # -- Rules of validation -------------------------------
 # ------------------------------------------------------
 
+from app.libs.arrays import platforms
+
 # regist用バリデーションルール
 class AppForm(forms.Form):
-	app_name = forms.CharField(
-        label = "アプリ名",
+    app_name = forms.CharField(
+        label = "アプリ名(必須)",
         max_length = 32, 
         required = True,
     )
     package_name = forms.CharField(
-        label = u"プロフィール",
+        label = u"ダウンロード/サイト URL(必須)",
         max_length = 256, 
+        required = True, 
+    )
+    platform = forms.ChoiceField(
+        label   = u"プラットフォーム",
+        choices = platforms, 
+    )
+    pr_summary = forms.CharField(
+        label = u"アプリ概要(必須)",
+        max_length = 2048, 
+        required = True, 
+        widget=forms.Textarea
+    )
+    why_create = forms.CharField(
+        label = u"アプリを作った理由",
+        max_length = 2048, 
         required = False, 
         widget=forms.Textarea
     )
+    product_point = forms.CharField(
+        label = u"開発に力を入れたポイント",
+        max_length = 2048, 
+        required = False, 
+        widget=forms.Textarea
+    )
+
+
 
 
 """

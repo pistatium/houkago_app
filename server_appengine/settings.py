@@ -72,8 +72,7 @@ TEMPLATE_DIRS = (
 INSTALLED_APPS = (
 #     'appengine_django',
      'app',
-     'app.libs.bootstrapform'
-     #'app.libs',
+     'app.libs.bootstrapform',
 #    'django.contrib.auth',
 #    'django.contrib.contenttypes',
 #    'django.contrib.sessions',

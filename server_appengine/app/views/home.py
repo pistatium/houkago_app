@@ -26,6 +26,8 @@ from logging import debug
 from app.models.preuser import PreUser
 from app.forms.preform import PreForm
 from app.libs import utils
+from app.models.developer import Developer
+from app import views
 #from app.forms import registform
 import syskey
 from django.views.decorators.cache import cache_page
@@ -35,14 +37,36 @@ from django.http import HttpResponseRedirect
 # -- Views  --------------------------------------------
 # ------------------------------------------------------
 
-def index(request):
-    return render_to_response('webfront/index.html',{})
 
-def demo(request):
-    return render_to_response('webfront/demo.html',{})
+"""
+Viewの共通前処理をするデコレータ
+viewの引数にcontextが増えることに注意
+"""
+def custom_view(view):
+    import functools
+    @functools.wraps(view)
+    def override_view(request):        
+        user = users.get_current_user()
+        developer = Developer.getById(user.user_id())
+        context = RequestContext(request,{
+            "is_login": bool(user),
+            "logout_page": reverse(views.regist.index),
+            "developer" : developer,
+            
+        })
+        return view(request, context)
+    return override_view
+
+@custom_view
+def index(request, context):
+    return render_to_response('webfront/index.html', context)
+
+@custom_view
+def demo(request, context):
+    return render_to_response('webfront/demo.html',context)
 
 
-# リリース前のみ
+# リリース前のみ利用するView
 def pre(request):
     if request.method == 'POST':
         form = PreForm(request.POST)
