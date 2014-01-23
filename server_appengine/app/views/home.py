@@ -47,7 +47,9 @@ def custom_view(view):
     @functools.wraps(view)
     def override_view(request):        
         user = users.get_current_user()
-        developer = Developer.getById(user.user_id())
+        developer = None
+        if user:
+            developer = Developer.getById(user.user_id())
         context = RequestContext(request,{
             "is_login": bool(user),
             "logout_page": reverse(views.regist.index),
@@ -59,6 +61,7 @@ def custom_view(view):
 
 @custom_view
 def index(request, context):
+    context["developers"] = Developer.getQuery().fetch(10)
     return render_to_response('webfront/index.html', context)
 
 @custom_view

@@ -32,6 +32,14 @@ body {
   height: 20px;
   background-color: #f5f5f5;
 }
+.dev_app{
+  padding: 10px;
+  border:1px solid #cccccc;
+}
+
+.platform img{
+  max-width: 50px;
+}
 
 .profiles{
 
@@ -74,4 +82,7 @@ body {
 }
 .ninja_onebutton{
   padding:10px;
+}
+.private_mode{
+  background: #ccc;
 }

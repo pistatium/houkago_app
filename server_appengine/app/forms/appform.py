@@ -1,10 +1,11 @@
 #coding: utf-8
 
 from django import forms
+
 # -- Rules of validation -------------------------------
 # ------------------------------------------------------
 
-from app.libs.arrays import platforms
+from app.libs.arrays import platforms, show_status
 
 # regist用バリデーションルール
 class AppForm(forms.Form):
@@ -40,8 +41,23 @@ class AppForm(forms.Form):
         required = False, 
         widget=forms.Textarea
     )
+    status = forms.ChoiceField(
+        label   = u"表示",
+        choices = show_status, 
+    )
 
 
+class AppFormUpdate(AppForm):
+    def __init__(self, *args, **kwargs):
+        super(AppFormUpdate, self).__init__(*args, **kwargs)
+        #self.fields.pop('platform')
+
+    def setParams(self, params):
+        #return dir(params)
+        for key in self.fields.keys():
+          if hasattr(params, key):
+            self.fields[key].initial = getattr(params, key)
+        return self
 
 
 """

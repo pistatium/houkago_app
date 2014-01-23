@@ -1,7 +1,10 @@
 {% extends "parent.html" %}
 {% block main %}
 
-
+{% for developer in developers %}
+    {{developer.uname}}
+{% endfor %}
+<!--
   <div class="jumbotron">
   	<h1>放課後アプリ部 <small>集え個人ディベロッパー</small></h1>
   	<p>悩めるサンデープログラマーへ捧げるアプリ集客支援プラットフォーム</p>
@@ -66,7 +69,7 @@
 		{% include 'plugin/regist_div.html' %}
 
 	</div>
-
+-->
           <!-- social buttons -->
       <div class="ninja_onebutton">
         <script type="text/javascript">

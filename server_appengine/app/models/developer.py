@@ -24,21 +24,27 @@ class Developer(ndb.Model):
     billing      = ndb.IntegerProperty(default = 0) # 0 未課金
 
     @classmethod
-    def create(cls, params, is_commit = True):
-
-        developer = cls(
-            user_id    = params['user_id'],
-            uname      = params['uname'],
-            profile    = params['profile'],
-            email      = params['email'],
-            tw_name    = params['tw_name'],
-            #fb_addr    = params['fb_addr'],
-            site_addr  = params['site_addr'],
-            status     = params['status'],
-        )
-        if is_commit:
-            developer.put()
+    def save(cls, params, instance = None):
+        developer = cls.create(params, instance)
+        developer.put()
         return developer
+
+    @classmethod
+    def create(cls, params, instance=None):
+        if not instance:
+            instance = cls()
+        instance.populate(**params)
+#        instance.populate(
+#            user_id    = params['user_id'],
+#            uname      = params['uname'],
+#            profile    = params['profile'],
+#            email      = params['email'],
+#            tw_name    = params['tw_name'],
+#            fb_addr    = params['fb_addr'],
+#            site_addr  = params['site_addr'],
+#            status     = params['status'],
+#        )
+        return instance
     
     @classmethod
     def getById(cls, developer_id):
@@ -48,6 +54,11 @@ class Developer(ndb.Model):
           return data
         return False
     
+    @classmethod
+    def getQuery(cls):
+        query = cls.query().order(cls.created_at)
+        return query
+
     '''    
     @classmethod
     def addRes(cls, thread_id):

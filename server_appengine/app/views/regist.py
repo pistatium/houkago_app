@@ -23,7 +23,7 @@ import syskey
 # import from project
 from app.models.developer import Developer
 from app.libs import utils
-from app.forms.registform import RegistForm
+from app.forms.registform import RegistFormFirst, RegistFormUpdate
 
 from app import views
 from pprint import pprint
@@ -38,7 +38,9 @@ def custom_view(view):
     @functools.wraps(view)
     def override_view(request):        
         user = users.get_current_user()
-        developer = Developer.getById(user.user_id())
+        developer = None
+        if user:
+            developer = Developer.getById(user.user_id())
         context = RequestContext(request,{
             "is_login": bool(user),
             "logout_page": reverse(views.regist.index),
@@ -72,13 +74,40 @@ def form(request):
     # POST
     if request.method == 'POST':
         #developer = models.DeveloperModel()
-        form = RegistForm(request.POST)
+        form = RegistFormFirst(request.POST)
         if form.is_valid():
             params = form.cleaned_data
             params["user_id"] = user.user_id()
             params["status"]  = 1
-            developer = Developer.create(params)
-            developer.put()
+
+            developer = Developer.save(params)
+            return HttpResponseRedirect(reverse(complete))
+        else:
+            context["form"] = form
+            return render_to_response('webfront/regist_form.html', context)
+    # GET
+    else:
+        form = RegistFormFirst(initial={
+            'uname': user.nickname(),
+            'email': user.email()
+        })
+        context["form"] = form
+        return render_to_response('webfront/regist_form.html', context)
+
+@custom_view
+def user_update(request, context={}):
+
+    developer = context["developer"]
+
+     # POST
+    if request.method == 'POST':
+        #developer = models.DeveloperModel()
+        form = RegistForm(request.POST)
+
+        if form.is_valid():
+            params["user_id"] = developer.user_id
+            params["status"]  = 1
+            Developer.save(params, developer)
             return HttpResponseRedirect(reverse(complete))
         else:
             context["form"] = form
@@ -86,12 +115,12 @@ def form(request):
 
     # GET
     else:
-        form = RegistForm(initial={
-            'uname': user.nickname(),
-            'email': user.email()
-        })
+        form = RegistFormUpdate()
+        form.setParams(app)
+
         context["form"] = form
         return render_to_response('webfront/regist_form.html', context)
+
 
 @utils.login_required
 def uploadProf(request):

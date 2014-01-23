@@ -26,9 +26,9 @@ import syskey
 from app.models.developer import Developer
 from app.models.app import App
 from app.libs import utils
-from app.forms.appform import AppForm
+from app.forms.appform import AppForm, AppFormUpdate
 from app import views
-
+from app.libs.arrays import platforms, show_status
 
 """
 Viewの共通前処理をするデコレータ
@@ -38,8 +38,8 @@ def custom_view(view):
     import functools
     @functools.wraps(view)
     @utils.login_required
-    def override_view(request):
-        
+    def override_view(*args, **kwargs):
+        request = args[0]
         user = users.get_current_user()
         developer = Developer.getById(user.user_id())
         if not developer:
@@ -49,9 +49,11 @@ def custom_view(view):
             "logout_page": reverse(views.regist.index),
             "developer" : developer,
             "current_tab": "dev",
+            "platforms": platforms,
+            "show_status": show_status
         })
-        
-        return view(request, context)
+        kwargs["context"] = context
+        return view(*args, **kwargs)
     return override_view
 
 # -- Views  --------------------------------------------
@@ -66,21 +68,13 @@ def index(request, context):
 
 @custom_view
 def app_regist(request, context):
-    context = RequestContext(request,{
-        "form": "",
-    })
-    user = users.get_current_user()
-    developer = Developer.getById(user.user_id())
-    if not developer:
-        return HttpResponseRedirect(reverse(form_view))
-    # POST
+     # POST
     if request.method == 'POST':
         #developer = models.DeveloperModel()
         form = AppForm(request.POST)
         if form.is_valid():
             params = form.cleaned_data
-            params["developer_id"] = user.user_id()
-            params["status"]  = 1
+            params["developer_id"] = (context["developer"]).user_id
             app = App.create(params)
             app.put()
             return HttpResponseRedirect(reverse(index))
@@ -94,9 +88,34 @@ def app_regist(request, context):
         context["form"] = form
         return render_to_response('webfront/regist_form.html', context)
 
-@utils.login_required
-def app_edit(request):
-    pass
+@custom_view
+def app_update(request, app_id, context={}):
+    app = App.getById(int(app_id))
+    if app is None:
+        return HttpResponseRedirect(reverse(app_regist))
+
+     # POST
+    if request.method == 'POST':
+        #developer = models.DeveloperModel()
+        form = AppFormUpdate(request.POST)
+        if form.is_valid():
+            params = form.cleaned_data
+            params["developer_id"] = (context["developer"]).user_id
+            app = App.save(params, instance=app)
+            app.put()
+            return HttpResponseRedirect(reverse(index))
+        else:
+            context["form"] = form
+            return render_to_response('webfront/regist_form.html', context)
+    # GET
+    else:
+        form = AppFormUpdate()
+        form.setParams(app)
+
+        context["form"] = form
+        return render_to_response('webfront/regist_form.html', context)
+
+
 
 @utils.login_required
 def regist_complete(request):
@@ -109,6 +128,6 @@ def regist_complete(request):
 
 urlpatterns = patterns(None,
     (r'^/app_regist/?$', app_regist),
-    (r'^/app_edit/?$', app_edit),
+    (r'^/app_update/(\d+)?$', app_update),
     (r'^/?$', index),
 )

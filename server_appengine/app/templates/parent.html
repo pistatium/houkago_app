@@ -28,6 +28,9 @@
   {% include 'plugin/analytics.html' %}
 </head> 
 <body> 
+    {% if debug %}
+      <div class="alert">{{ debug }}</div>
+    {% endif %}
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">

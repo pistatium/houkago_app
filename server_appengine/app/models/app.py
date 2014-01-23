@@ -19,21 +19,34 @@ class App(ndb.Model):
     category      = ndb.IntegerProperty()
     
     @classmethod
-    def create(cls, params, is_commit = True):
-        app = cls(
-            developer_id = params["developer_id"],
-            app_name     = params["app_name"],
-            package_name = params["package_name"],
-            platform     = int(params["platform"]),
-            pr_summary   = params["pr_summary"],
-            why_create   = params["why_create"],
-            product_point= params["product_point"],
-            status       = params["status"],
-        )
-
-        if is_commit:
-            app.put()
+    def save(cls, params, instance = None):
+        app = cls.create(params, instance)
+        app.put()
         return app
+
+    @classmethod
+    def create(cls, params, instance = None):
+        if not instance:
+            instance = cls()
+        params["platform"] = int(params["platform"])
+        params["status"]   = int(params["status"])
+        instance.populate(**params)
+#        instance.populate(
+#            developer_id = params["developer_id"],
+#            app_name     = params["app_name"],
+#            package_name = params["package_name"],
+#            platform     = int(params["platform"]),
+#            pr_summary   = params["pr_summary"],
+#            why_create   = params["why_create"],
+#            product_point= params["product_point"],
+#            status       = int(params["status"]),
+#        )
+        return instance
+
+    @classmethod
+    def getById(cls, appid):
+        return cls.get_by_id(appid)
+
 
     @classmethod
     def getQuery(cls):
