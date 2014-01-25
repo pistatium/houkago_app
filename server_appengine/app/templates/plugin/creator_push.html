@@ -1,0 +1,58 @@
+{% load my_utils %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">押しアプリ設定</h3>
+    </div>
+    <div class="panel-body">
+        {% if not apps.count %}
+            <div class="alert alert-info">
+                アプリが登録されていません。
+                アプリ登録から、掲載したいアプリを登録してください。
+            </div>
+        {% endif %}
+        {% regroup apps|dictsort:"platform" by platform as plat_list %}
+
+        <ul class="nav nav-tabs nav-justified">
+            {% for p in plat_list %}
+                <li class="{{ forloop.first|yesno:'active,' }}">
+                    <a href="#plat_{{ p.grouper }}" data-toggle="tab">{{ platforms|choise:p.grouper }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <p>
+            <div class="tab-content">
+                {% for p in plat_list %}
+                        <div class="tab-pane {{ forloop.first|yesno:'active,' }}" id="plat_{{p.grouper}}">
+                        <form class="form-horizontal" action="{% url app.views.dev.update_push %}" method="POST">
+                            {% for i in "123" %}
+                                <div class="form-group">
+
+                                    <label for="best_{{i}}_app" class="col-sm-4 control-label">ベスト {{i}}</label>
+                                    <div class="col-sm-8">
+                                        <SELECT name="best_{{i}}_app" id="best_{{i}}_app" class="col-xs-10 control-label">
+                                            <option value="">未選択</option>
+                                            {% for app in p.list %}
+                                                {% if app.status == 1 %}
+                                                    <option value="{{app.key.id}}" {{app.creator_push|eq:i|yesno:'selected,' }}>
+                                                        {{ app.app_name }}
+                                                    </option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </SELECT>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                              <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="platform" value="{{p.grouper}}">
+                                    <input type="submit" class="btn btn-primary">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </p>
+    </div>
+</div>

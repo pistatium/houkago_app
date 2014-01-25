@@ -5,9 +5,9 @@
 				<img class="prof_thumb img-responsive" src="http://kimihiro-n.appspot.com/static/img/pythoroid.jpg">
 			</div>
 			<div class="col-xs-8">
-				<h3>kimihiro-n</h3>
-				<p> hogehogehoge.hogehogehoge.hogehogehoge.</p>
-				<a href="kimihiro-n.appspot.com">kimihiro-n.appspot.com</a>
+				<h3>{{developer.uname}}</h3>
+				<div class="profile_desc"> {{developer.profile|default:""|linebreaks}}</div>
+				<a href="{{developer.site_addr}}">{{developer.site_addr|default:""}}</a>
 			</div>
 		</div>
 		<h4>開発者イチオシアプリ Best3</h4>

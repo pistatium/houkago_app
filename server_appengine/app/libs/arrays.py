@@ -2,9 +2,9 @@
 
 
 platforms = (
-    (0, "Web"),
     (1, "Android"),
-    (2, "iOS")
+    (2, "iOS"),
+    (9, "Web"),
 )
 
 show_status = (

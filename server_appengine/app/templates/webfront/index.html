@@ -1,10 +1,18 @@
 {% extends "parent.html" %}
 {% block main %}
 
+
+
+<h3>部員名簿</h3>
 {% for developer in developers %}
-    {{developer.uname}}
+    {% include 'plugin/profile_card.html' %}
 {% endfor %}
+
 <!--
+  <div class="jumbotron">
+    <h1>放課後アプリ部 <small>集え個人ディベロッパー</small></h1>
+  </div>
+
   <div class="jumbotron">
   	<h1>放課後アプリ部 <small>集え個人ディベロッパー</small></h1>
   	<p>悩めるサンデープログラマーへ捧げるアプリ集客支援プラットフォーム</p>

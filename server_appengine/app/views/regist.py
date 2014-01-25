@@ -102,13 +102,14 @@ def user_update(request, context={}):
      # POST
     if request.method == 'POST':
         #developer = models.DeveloperModel()
-        form = RegistForm(request.POST)
+        form = RegistFormUpdate(request.POST)
 
         if form.is_valid():
+            params = form.cleaned_data
             params["user_id"] = developer.user_id
             params["status"]  = 1
             Developer.save(params, developer)
-            return HttpResponseRedirect(reverse(complete))
+            return HttpResponseRedirect(reverse(views.dev.index))
         else:
             context["form"] = form
             return render_to_response('webfront/regist_form.html', context)
@@ -116,7 +117,7 @@ def user_update(request, context={}):
     # GET
     else:
         form = RegistFormUpdate()
-        form.setParams(app)
+        form.setParams(developer)
 
         context["form"] = form
         return render_to_response('webfront/regist_form.html', context)
@@ -141,6 +142,7 @@ def notfound(request):
 '''
 urlpatterns = patterns(None,
     (r'^/form/?$', form),
+    (r'^/user_update/?$', user_update),
     (r'^/complete/?$', complete),
     (r'^/?$', index),
 )

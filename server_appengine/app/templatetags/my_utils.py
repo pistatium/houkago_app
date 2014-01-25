@@ -4,5 +4,14 @@ from django import template
 register = template.Library()
 
 @register.filter
-def value(dict, key): 
-    return dict[key][1]
+def choise(array, key): 
+	vals = filter(lambda x : x[0] == key, array)
+	if vals:
+		return vals[0][1]
+
+
+@register.filter
+def eq(value1, value2):
+	return str(value1) == str(value2) 
+
+

@@ -27,6 +27,7 @@ from app.models.developer import Developer
 from app.models.app import App
 from app.libs import utils
 from app.forms.appform import AppForm, AppFormUpdate
+from app.forms.pushform import PushForm
 from app import views
 from app.libs.arrays import platforms, show_status
 
@@ -115,7 +116,17 @@ def app_update(request, app_id, context={}):
         context["form"] = form
         return render_to_response('webfront/regist_form.html', context)
 
-
+@custom_view
+def update_push(request, context):
+    if request.method == 'POST':
+        
+        form = PushForm(request.POST)
+        if form.is_valid():
+            params = form.cleaned_data
+            context["debug"] = params 
+            developer_id = (context["developer"]).user_id
+            App.update_push(developer_id, params)
+    return HttpResponseRedirect(reverse(index))
 
 @utils.login_required
 def regist_complete(request):
@@ -129,5 +140,6 @@ def regist_complete(request):
 urlpatterns = patterns(None,
     (r'^/app_regist/?$', app_regist),
     (r'^/app_update/(\d+)?$', app_update),
+    (r'^/update_push/?$', update_push),
     (r'^/?$', index),
 )

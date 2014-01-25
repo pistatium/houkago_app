@@ -50,7 +50,7 @@ class AppForm(forms.Form):
 class AppFormUpdate(AppForm):
     def __init__(self, *args, **kwargs):
         super(AppFormUpdate, self).__init__(*args, **kwargs)
-        #self.fields.pop('platform')
+        self.fields.pop('platform')
 
     def setParams(self, params):
         #return dir(params)

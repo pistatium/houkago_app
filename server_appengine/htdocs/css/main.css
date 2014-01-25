@@ -35,6 +35,7 @@ body {
 .dev_app{
   padding: 10px;
   border:1px solid #cccccc;
+  overflow: hidden;
 }
 
 .platform img{
@@ -50,8 +51,9 @@ body {
   border:#aaa solid 1px;
   margin:10px 1px;
   padding:10px;
-
+  overflow: hidden;
 }
+
 .profile_card{
   padding:3px;
 }
@@ -63,6 +65,12 @@ body {
   word-break: break-all;
   margin: 0px 1px 3px 1px;
 }
+.profile_desc{
+  height: 50px;
+  font-size: xx-small;
+  overflow: hidden;
+}
+
 .prof_thumb{
 
 }

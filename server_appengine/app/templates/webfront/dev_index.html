@@ -1,44 +1,74 @@
 {% extends "parent.html" %}
 {% load my_utils %}
 {% block main %}
-    <h3>ディベロッパー</h3>
-    {{developer.uname}}
-    ディベロッパー編集
-    <hr>
-    <h3>登録アプリ一覧</h3>
-    <a href="{% url app.views.dev.app_regist %}" class="btn btn-info">アプリ登録</a>
-
-    <div class="row" style="margin:10px">
-        {% for app in apps %}
-            {% if app.status == 0 %}
-                <div class="col-md-4 col-xs-12 col-sm-6 dev_app private_mode">
-                    <div class="pull-right">[非公開]</div>
-            {% else %}
-                <div class="col-md-4 col-xs-12 col-sm-6 dev_app">
-                    <div class="pull-right">[公開]</div>
-            {% endif %}
-                    <div class="platform">
-                        {% if app.platform == 0 %}
-                            <img src="/img/material/web.png" class="img-responsive" style="background:#555;">
-                            Webアプリ
-                        {% elif app.platform == 1 %}
-                            <img src="/img/material/android.png" class="img-responsive" style="background:#555;">
-                            Androidアプリ
-                        {% else %}
-                            <img src="/img/material/apple.png" class="img-responsive" style="background:#555;">
-                            iOSアプリ
-                        {% endif %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">ディベロッパー</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                {% if not developer.profile %}
+                    <div class="alert alert-warning">
+                        <b>Todo:</b>プロフィールがまだ未設定です。
                     </div>
-                    <h3>{{app.app_name}}</h3>
-
-                    {{app.updated_at}}
-                    <div>
-                        <a class="btn btn-info" href="{% url app.views.dev.app_update app.key.id %}">更新</a>
-                        <b>
-                    </div>
-            </div>
-        {% endfor %}
+                {% endif %}
+                {% include 'plugin/profile_card.html' %}
+                <a class="btn btn-middle btn-info" href="{% url app.views.regist.user_update %}">プロフィール編集</a>
+            </p>
+        </div>
     </div>
-<a href="{% url app.views.dev.app_regist %}" class="btn btn-info">アプリ登録</a>
+    <div class="row">
+        <div class="col-sm-5">
+            {% include 'plugin/creator_push.html' %}
+        </div>
 
+        <div class="col-sm-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">登録アプリ一覧</h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <a href="{% url app.views.dev.app_regist %}" class="btn btn-middle btn-success">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            アプリ登録
+                        </a>
+                    </p>
+
+                    <div class="row" style="margin:10px">
+                        {% for app in apps %}
+                            {% if app.status == 0 %}
+                                <div class="col-md-4 col-xs-12 col-sm-6 dev_app private_mode">
+                                    <div class="pull-right">[非公開]</div>
+                            {% else %}
+                                <div class="col-md-4 col-xs-12 col-sm-6 dev_app">
+                                    <div class="pull-right">[公開]</div>
+                            {% endif %}
+                                    <div class="platform">
+                                        {% if app.platform == 9 %}
+                                            <img src="/img/material/web.png" class="img-responsive" style="background:#555;">
+                                            Webアプリ
+                                        {% elif app.platform == 1 %}
+                                            <img src="/img/material/android.png" class="img-responsive" style="background:#555;">
+                                            Androidアプリ
+                                        {% else %}
+                                            <img src="/img/material/apple.png" class="img-responsive" style="background:#555;">
+                                            iOSアプリ
+                                        {% endif %}
+                                    </div>
+                                    <h3>{{app.app_name}}</h3>
+
+                                    {{app.updated_at}}
+                                    {{app.creator_push}}
+                                    <div>
+                                        <a class="btn btn-info" href="{% url app.views.dev.app_update app.key.id %}">編集</a>
+                                        
+                                    </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock main %}

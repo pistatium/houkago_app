@@ -73,6 +73,7 @@ INSTALLED_APPS = (
 #     'appengine_django',
      'app',
      'app.libs.bootstrapform',
+     'app.libs.filetransfers'
 #    'django.contrib.auth',
 #    'django.contrib.contenttypes',
 #    'django.contrib.sessions',

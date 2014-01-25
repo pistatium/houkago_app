@@ -17,6 +17,8 @@ class App(ndb.Model):
     thumb_nail    = ndb.StringProperty()
     app_image     = ndb.StringProperty()
     category      = ndb.IntegerProperty()
+    # イチオシアプリを数値管理 1,2,3
+    creator_push  = ndb.IntegerProperty()
     
     @classmethod
     def save(cls, params, instance = None):
@@ -28,7 +30,8 @@ class App(ndb.Model):
     def create(cls, params, instance = None):
         if not instance:
             instance = cls()
-        params["platform"] = int(params["platform"])
+        if "platform" in params:
+            params["platform"] = int(params["platform"])
         params["status"]   = int(params["status"])
         instance.populate(**params)
 #        instance.populate(
@@ -45,8 +48,39 @@ class App(ndb.Model):
 
     @classmethod
     def getById(cls, appid):
-        return cls.get_by_id(appid)
+        if appid:
+            return cls.get_by_id(appid)
 
+    @classmethod
+    def update_push(cls, developer_id, params):
+            cls.clear_push(developer_id, params["platform"])
+            best_apps = []
+            best_app_key = set([])
+            for i in range(1,4):
+                key = "best_" + str(i) + "_app"
+                if params[key] in best_app_key: 
+                    continue
+                app = App.getById(params[key])
+                if not app: continue
+                if not app.developer_id == developer_id: continue
+                if not app.platform  == int(params["platform"]): continue
+
+                setattr(app, "creator_push", len(best_apps) + 1)
+                best_apps.append(app)
+                best_app_key.add(params[key])
+            ndb.put_multi(best_apps)
+
+    @classmethod
+    def clear_push(cls, developer_id, platform):
+        apps = cls.query(
+            cls.developer_id == developer_id,
+            cls.platform     == int(platform),
+            cls.creator_push > 0
+        ).fetch()
+
+        for app in apps:
+            app.creator_push = None
+        ndb.put_multi(apps)
 
     @classmethod
     def getQuery(cls):
