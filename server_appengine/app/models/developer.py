@@ -6,12 +6,15 @@ from google.appengine.ext.db import BadValueError
 
 
 class Developer(ndb.Model):
-    user_id     = ndb.StringProperty()
+    # user id given by google
+    user_id      = ndb.StringProperty()
+    user_alias   = ndb.StringProperty()
+
     uname        = ndb.StringProperty()
     #いいねしたユーザー
     plused_user  = ndb.IntegerProperty(repeated=True)
     # レス数
-    status       = ndb.IntegerProperty(default = 1)
+    status       = ndb.IntegerProperty(default = 0)
     created_at   = ndb.DateTimeProperty(auto_now_add = True)
     updated_at   = ndb.DateTimeProperty(auto_now = True)
     profile      = ndb.TextProperty()
@@ -20,7 +23,7 @@ class Developer(ndb.Model):
     fb_addr      = ndb.StringProperty()
     site_addr    = ndb.StringProperty()
     best_apps_id = ndb.IntegerProperty(repeated=True)
-    thumb_nail   = ndb.StringProperty()
+    thumbnail   = ndb.IntegerProperty()
     billing      = ndb.IntegerProperty(default = 0) # 0 未課金
 
     @classmethod
@@ -49,6 +52,14 @@ class Developer(ndb.Model):
     @classmethod
     def getById(cls, developer_id):
         query = cls.query(cls.user_id == developer_id)
+        data = query.get()
+        if data:
+          return data
+        return False
+
+    @classmethod
+    def getByAlias(cls, user_alias):
+        query = cls.query(cls.user_alias == user_alias)
         data = query.get()
         if data:
           return data

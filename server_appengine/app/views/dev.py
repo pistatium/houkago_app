@@ -25,11 +25,16 @@ import syskey
 # import from project
 from app.models.developer import Developer
 from app.models.app import App
+from app.models.upload import ProfImage
+
 from app.libs import utils
 from app.forms.appform import AppForm, AppFormUpdate
 from app.forms.pushform import PushForm
+from app.forms.uploadform import UploadForm
+
 from app import views
 from app.libs.arrays import platforms, show_status
+from app.libs.filetransfers.api import prepare_upload
 
 """
 Viewの共通前処理をするデコレータ
@@ -68,6 +73,14 @@ def index(request, context):
     return render_to_response('webfront/dev_index.html',context)
 
 @custom_view
+def app_detail(request, app_id, context={}):
+    app = App.getById(int(app_id))
+    if app is None:
+        return HttpResponseRedirect(reverse(app_regist))
+    context["app"] = app
+    return render_to_response('webfront/app_detail.html',context)        
+
+@custom_view
 def app_regist(request, context):
      # POST
     if request.method == 'POST':
@@ -78,7 +91,7 @@ def app_regist(request, context):
             params["developer_id"] = (context["developer"]).user_id
             app = App.create(params)
             app.put()
-            return HttpResponseRedirect(reverse(index))
+            return HttpResponseRedirect(reverse(app_detail, args=[app.key.id()]))
         else:
             context["form"] = form
             return render_to_response('webfront/regist_form.html', context)
@@ -128,6 +141,31 @@ def update_push(request, context):
             App.update_push(developer_id, params)
     return HttpResponseRedirect(reverse(index))
 
+@custom_view
+def upload_img(request, context):
+    view_url = reverse(upload_img)
+    if request.method == 'POST':
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            params = form.cleaned_data
+            image = ProfImage(
+                image = params["file"].read(),
+                developer_id = (context["developer"]).user_id,
+                content_type = params["file"].content_type
+            )
+            image.put()
+            context["debug"] = image
+            return render_to_response('webfront/index.html', context)
+            #form.save()
+            return HttpResponseRedirect(view_url)
+
+    upload_url, upload_data = prepare_upload(request, view_url)
+    form = UploadForm()
+    context["form"] = form
+    context["upload_url"] = upload_url
+    context["upload_data"] = upload_data
+    return render_to_response('webfront/upload_form.html', context)
+
 @utils.login_required
 def regist_complete(request):
     return render_to_response('webfront/regist_complete.html',{})
@@ -139,7 +177,9 @@ def regist_complete(request):
 
 urlpatterns = patterns(None,
     (r'^/app_regist/?$', app_regist),
+    (r'^/app_detail/(\d+)?$', app_detail),
     (r'^/app_update/(\d+)?$', app_update),
     (r'^/update_push/?$', update_push),
+    (r'^/upload_img/?$', upload_img),
     (r'^/?$', index),
 )

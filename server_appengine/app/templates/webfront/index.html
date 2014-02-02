@@ -2,16 +2,28 @@
 {% block main %}
 
 
+<div class="jumbotron">
+	<h1>放課後アプリ部 <small>集え個人ディベロッパー</small></h1>
+	<p>悩めるサンデープログラマーへ捧げるアプリ集客支援プラットフォーム</p>
+</div>
 
-<h3>部員名簿</h3>
-{% for developer in developers %}
-    {% include 'plugin/profile_card.html' %}
-{% endfor %}
 
+<div class="row">
+	<div class="main col-md-8">
+		<h3>部員名簿</h3>
+		{% for developer in developers %}
+		    {% include 'plugin/profile_card.html' %}
+		{% endfor %}
+	</div>
+	<div class="col-md-4">
+		{% include 'plugin/regist_div.html' %}
+		
+		<div>
+			<h2>スポンサード・リンク</h2>
+			{% include 'plugin/ads.html' %}
+		</div>
+	</div>
 <!--
-  <div class="jumbotron">
-    <h1>放課後アプリ部 <small>集え個人ディベロッパー</small></h1>
-  </div>
 
   <div class="jumbotron">
   	<h1>放課後アプリ部 <small>集え個人ディベロッパー</small></h1>
@@ -73,10 +85,7 @@
 	  	</div>
 
 	</div>
-	<div class="col-md-4">
-		{% include 'plugin/regist_div.html' %}
 
-	</div>
 -->
           <!-- social buttons -->
       <div class="ninja_onebutton">

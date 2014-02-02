@@ -1,0 +1,6 @@
+indexes:
+- kind: App
+  properties:
+  - name: developer_id
+  - name: platform
+  - name: creator_push

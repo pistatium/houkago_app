@@ -6,8 +6,10 @@ from google.appengine.ext import ndb
 class App(ndb.Model):
     developer_id  = ndb.StringProperty()
     app_name      = ndb.StringProperty()
+    dl_link       = ndb.StringProperty()
     package_name  = ndb.StringProperty()
     platform      = ndb.IntegerProperty()
+    tagline       = ndb.StringProperty() #キャッチフレーズ
     pr_summary    = ndb.StringProperty() # アプリ概要 
     why_create    = ndb.StringProperty() # アプリを作った理由
     product_point = ndb.StringProperty() # 開発に力を入れたポイント

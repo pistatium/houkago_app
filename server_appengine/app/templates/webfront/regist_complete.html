@@ -1,6 +1,11 @@
 {% extends "parent.html" %}
 {% block main %}
-  <h1>Welcome.</h1>
+  <h1>ようこそ！放課後アプリ部へ。</h1>
 
-  <a href="{% url app.views.dev.index %}">開発者コンソールへ</a>
+  <p>
+  	放課後アプリ部への入部が完了いたしました。<br>
+    プロフィール登録やアプリ登録をすることで、放課後アプリ部の部員紹介・活動実績
+    に掲載されるようになります。
+  </p>
+  <a href="{% url app.views.dev.index %}" class="btn btn-default">開発者コンソールへ</a>
 {% endblock main %}

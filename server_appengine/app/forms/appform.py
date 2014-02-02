@@ -9,37 +9,48 @@ from app.libs.arrays import platforms, show_status
 
 # regist用バリデーションルール
 class AppForm(forms.Form):
+
+    platform = forms.ChoiceField(
+        label   = u"プラットフォーム",
+        choices = platforms, 
+        required = True, 
+    )
     app_name = forms.CharField(
         label = "アプリ名(必須)",
         max_length = 32, 
         required = True,
     )
-    package_name = forms.CharField(
-        label = u"ダウンロード/サイト URL(必須)",
-        max_length = 256, 
-        required = True, 
-    )
-    platform = forms.ChoiceField(
-        label   = u"プラットフォーム",
-        choices = platforms, 
+    tagline = forms.CharField(
+        label = "アプリのキャッチコピー（必須）",
+        widget=forms.TextInput(attrs={'maxlength':'40'})
     )
     pr_summary = forms.CharField(
         label = u"アプリ概要(必須)",
-        max_length = 2048, 
+        max_length = 480, 
         required = True, 
-        widget=forms.Textarea
+        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480})
     )
+    package_name = forms.CharField(
+        label = "アプリパッケージ名(必須)",
+        required = True,
+    )
+    dl_link = forms.URLField(
+        label = "ダウンロード/サイト URL(必須)",
+        required = True,
+        verify_exists = True,
+    )
+
     why_create = forms.CharField(
         label = u"アプリを作った理由",
-        max_length = 2048, 
+        max_length = 480, 
         required = False, 
-        widget=forms.Textarea
+        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480})
     )
     product_point = forms.CharField(
         label = u"開発に力を入れたポイント",
-        max_length = 2048, 
+        max_length = 480, 
         required = False, 
-        widget=forms.Textarea
+        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480})
     )
     status = forms.ChoiceField(
         label   = u"表示",

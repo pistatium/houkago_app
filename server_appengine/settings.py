@@ -1,6 +1,7 @@
 
 import os
 import syskey
+
 DEBUG = os.environ.get('SERVER_SOFTWARE', '').startswith('Development') 
 TEMPLATE_DEBUG = DEBUG
 
@@ -44,6 +45,7 @@ SECRET_KEY = syskey.secret_key
 EMAIL_HOST = ''
 
 
+
 MIDDLEWARE_CLASSES = (
     'google.appengine.ext.ndb.django_middleware.NdbDjangoMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -69,11 +71,15 @@ TEMPLATE_DIRS = (
     os.path.join(ROOT_PATH, 'templates'),
 )
 
+PREPARE_UPLOAD_BACKEND = 'app.libs.filetransfers.backends.default.prepare_upload'
+SERVE_FILE_BACKEND = 'app.libs.filetransfers.backends.default.serve_file'
+PUBLIC_DOWNLOAD_URL_BACKEND = 'app.filetransfers.backends.default.public_download_url'
+
 INSTALLED_APPS = (
 #     'appengine_django',
      'app',
      'app.libs.bootstrapform',
-     'app.libs.filetransfers'
+     'app.libs.filetransfers',
 #    'django.contrib.auth',
 #    'django.contrib.contenttypes',
 #    'django.contrib.sessions',

@@ -49,7 +49,6 @@
               <li id="nav_dev"><a href ="{% url app.views.dev.index %}">開発者コンソール</a></li>
             {% endif %}
             <li id="nav_home"><a href="/">ホーム</a></li>
-            <li id="nav_demo"><a href="/demo">デモ</a></li>
             <!--
             <li><a href="#contact">Contact</a></li>
             <li class="dropdown">
@@ -70,7 +69,7 @@
            {% if is_login %}
               <li id="nav_pre"><a href="{{logout_page}}">ログアウト</a></li>
            {% else %}
-              <li id="nav_pre"><a href="/regist">登録(ログイン)</a></li>
+              <li id="nav_pre"><a href="{% url app.views.regist.index %}">入部申請(ログイン)</a></li>
            {% endif %}
           </ul>
         </div><!--/.nav-collapse -->

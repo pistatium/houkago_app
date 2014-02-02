@@ -1,0 +1,27 @@
+{% extends 'parent.html' %}
+
+{% block main %}
+
+	<div class="media">
+		<a class="pull-left" href="#">
+			<img class="media-object" width=64 height=64 src="{%url app.views.img.app_icon app.key.id%}" alt="{{app.app_name}}">
+		</a>
+		<div class="media-body">
+			<h3 class="media-heading">{{app.app_name}}</h3>
+			<h4>{{app.tagline}}</h4>
+			<p>
+				<h3>なぜこのアプリを作ったのか？</h3>
+			</p>
+			<p>
+				<h3>このアプリの特徴は？</h3>
+			</p>
+			<p>
+				<h3></h3>
+			</p>
+			<p>
+				<h3></h3>
+			</p>
+			<p>{{app.pr_summary}}</p>
+	  	</div>
+	</div>
+{% endblock %}

@@ -2,7 +2,7 @@
 	<div class="profile_wrap">
 		<div class="row">
 			<div class="col-xs-4">
-				<img class="prof_thumb img-responsive" src="http://kimihiro-n.appspot.com/static/img/pythoroid.jpg">
+				<img class="prof_thumb img-responsive" src="{%url app.views.img.user_icon developer.key.id%}">
 			</div>
 			<div class="col-xs-8">
 				<h3>{{developer.uname}}</h3>
@@ -12,15 +12,11 @@
 		</div>
 		<h4>開発者イチオシアプリ Best3</h4>
 		<div class="row" style="margin:10px">
-			<a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium.tomorrow">
-				<img class="col-xs-4 img-responsive img-thumbnail" src="http://kimihiro-n.appspot.com/photo/show/291002.jpg">
+			{% for app in apps %}
+			<a href="{{app.dl_link}}">
+				<img class="col-xs-4 img-responsive img-thumbnail" src="{%url app.views.img.app_icon app.key.id%}">
 			</a>
-			<a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium.accountsbook">
-					<img class="col-xs-4 img-responsive img-thumbnail" src="http://kimihiro-n.appspot.com/photo/show/182002.jpg">
-			</a>
-			<a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium">
-					<img class="col-xs-4 img-responsive img-thumbnail" src="http://kimihiro-n.appspot.com/photo/show/184001.jpg">
-			</a>
+			{% endfor %}
 		</div>
 	</div>
 </div>
