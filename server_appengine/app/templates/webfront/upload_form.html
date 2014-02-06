@@ -1,7 +1,24 @@
+{% extends "parent.html" %}
 {% load filetransfers %}
-<form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  {% render_upload_data upload_data %}
-  <table>{{ form }}</table>
-  <input type="submit" value="Upload" />
-</form>
+{% load bootstrap %}
+
+{% block main %}
+	<p>
+		<h3>画像アップロード</h3>
+		<form action="" method="POST" enctype="multipart/form-data">
+		  {% csrf_token %}
+		  {% render_upload_data upload_data %}
+		  {{ form|bootstrap }}
+		  <input type="submit" value="アップロード" class="btn btn-default" />
+		</form>	
+	</p>
+	<hr>
+	<p>
+		<h4>注意</h4>
+		<ul>
+			<li>アイコンはなるべく正方形の比率のものをあげてください。</li>
+			<li>大きい画像は自動でリサイズされます。</li>
+			<li>ご自身で著作権を所有していない画像はアップロードしないでください。</li>
+		</ul>	
+	</p>
+{% endblock %}

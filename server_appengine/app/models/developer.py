@@ -23,7 +23,6 @@ class Developer(ndb.Model):
     fb_addr      = ndb.StringProperty()
     site_addr    = ndb.StringProperty()
     best_apps_id = ndb.IntegerProperty(repeated=True)
-    thumbnail   = ndb.IntegerProperty()
     billing      = ndb.IntegerProperty(default = 0) # 0 未課金
 
     @classmethod
@@ -50,8 +49,8 @@ class Developer(ndb.Model):
         return instance
     
     @classmethod
-    def getById(cls, developer_id):
-        query = cls.query(cls.user_id == developer_id)
+    def getByUserId(cls, user_id):
+        query = cls.query(cls.user_id == user_id)
         data = query.get()
         if data:
           return data

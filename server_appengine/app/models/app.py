@@ -4,15 +4,16 @@ from google.appengine.ext import ndb
 
 
 class App(ndb.Model):
-    developer_id  = ndb.StringProperty()
+    developer_id  = ndb.IntegerProperty()
     app_name      = ndb.StringProperty()
     dl_link       = ndb.StringProperty()
     package_name  = ndb.StringProperty()
     platform      = ndb.IntegerProperty()
-    tagline       = ndb.StringProperty() #キャッチフレーズ
+    tagline       = ndb.StringProperty() # キャッチフレーズ
     pr_summary    = ndb.StringProperty() # アプリ概要 
     why_create    = ndb.StringProperty() # アプリを作った理由
     product_point = ndb.StringProperty() # 開発に力を入れたポイント
+    target_user   = ndb.StringProperty() # どんなユーザーをターゲットにしているか
     status        = ndb.IntegerProperty(default = 1)
     created_at    = ndb.DateTimeProperty(auto_now_add = True)
     updated_at    = ndb.DateTimeProperty(auto_now = True)
@@ -96,3 +97,10 @@ class App(ndb.Model):
         if platform:
             query.query(cls.platform == platform)
         return query
+    @classmethod
+    def getRecentQuery(cls, platform = None):
+        query = cls.query()
+        query = query.filter(cls.status == 1)
+        if platform is not None:
+            query = query.filter(cls.platform == platform)
+        return query.order(-cls.status)

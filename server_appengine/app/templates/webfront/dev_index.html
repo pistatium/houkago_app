@@ -39,23 +39,26 @@
                     <div class="row" style="margin:10px">
                         {% for app in apps %}
                             {% if app.status == 0 %}
-                                <div class="col-md-4 col-xs-12 col-sm-6 dev_app private_mode">
+                                <div class="col-md-6 col-xs-12 col-sm-6 dev_app private_mode">
                                     <div class="pull-right">[非公開]</div>
                             {% else %}
-                                <div class="col-md-4 col-xs-12 col-sm-6 dev_app">
+                                <div class="col-md-6 col-xs-12 col-sm-12 dev_app">
                                     <div class="pull-right">[公開]</div>
                             {% endif %}
-                                    <div class="platform">
-                                        {% if app.platform == 9 %}
-                                            <img src="/img/material/web.png" class="img-responsive" style="background:#555;">
-                                            Webアプリ
-                                        {% elif app.platform == 1 %}
-                                            <img src="/img/material/android.png" class="img-responsive" style="background:#555;">
-                                            Androidアプリ
-                                        {% else %}
-                                            <img src="/img/material/apple.png" class="img-responsive" style="background:#555;">
-                                            iOSアプリ
-                                        {% endif %}
+                            <a href="{% url app.views.dev.upload_icon_img app.key.id %}">
+                                <img src="{% url app.views.img.app_icon app.key.id %}" class="img-responsive dev_app_icon" >
+                            </a>
+                                    <div class="platform clearfix">                      
+                                            {% if app.platform == 9 %}
+                                                <img src="/img/material/web.png" class="img-responsive pull-left" style="background:#555;">
+                                                <h4>Webアプリ</h4>
+                                            {% elif app.platform == 1 %}
+                                                <img src="/img/material/android.png" class="img-responsive pull-left" style="background:#555;">
+                                                <h4>Androidアプリ</h4>
+                                            {% else %}
+                                                <img src="/img/material/apple.png" class="img-responsive pull-left" style="background:#555;">
+                                                <h4>iOSアプリ</h4>
+                                            {% endif %}
                                     </div>
                                     <h3>{{app.app_name}}</h3>
 

@@ -3,88 +3,119 @@
 
 
 <div class="jumbotron">
-	<h1>放課後アプリ部 <small>集え個人ディベロッパー</small></h1>
-	<p>悩めるサンデープログラマーへ捧げるアプリ集客支援プラットフォーム</p>
+    <img src="/img/material/app_logo_beta_250.png" class="pull-left">
+    <h1>
+        放課後アプリ部<br>
+        <small>求む！放課後アプリディベロッパー！</small>
+    </h1>
+    <p>
+        法人として活動していない全ての個人・チームアプリ開発者のための新しい部活(Webサービス)です。
+    </p>
 </div>
 
 
 <div class="row">
-	<div class="main col-md-8">
-		<h3>部員名簿</h3>
-		{% for developer in developers %}
-		    {% include 'plugin/profile_card.html' %}
-		{% endfor %}
-	</div>
-	<div class="col-md-4">
-		{% include 'plugin/regist_div.html' %}
-		
-		<div>
-			<h2>スポンサード・リンク</h2>
-			{% include 'plugin/ads.html' %}
-		</div>
-	</div>
+    <div class="main col-md-8 col-xs-12">
+        <h3>部員名簿</h3>
+        <div class="row">
+            {% for developer in developers %}
+                    {% include 'plugin/profile_list.html' %}
+            {% endfor %}
+        </div>
+        <h3>活動履歴</h3>
+        {% for platform, r_apps in recent_apps.items %}
+            <h4>{{platform}}アプリ</h4>
+            <div class="row">
+                {% for app in r_apps %}
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+                        <a href="{% url app.views.home.app_detail app.key.id %}" class="">
+                            <div class="thumbnail">
+                        
+                                <div class="caption">
+                                    {{app.created_at|date:"Y/m/d登録"}}
+                                </div>
+                                <img src="{% url app.views.img.app_icon app.key.id %}" class="recent_app_icon">
+                                <div class="caption">
+                                    {{app.app_name}}
+                                </div>                        
+                            </div>
+                        </a>
+                    </div>
+                
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-4">
+        {% include 'plugin/regist_div.html' %}
+        
+        <div>
+            <h2>スポンサード・リンク</h2>
+            {% include 'plugin/ads.html' %}
+        </div>
+    </div>
 <!--
 
   <div class="jumbotron">
-  	<h1>放課後アプリ部 <small>集え個人ディベロッパー</small></h1>
-  	<p>悩めるサンデープログラマーへ捧げるアプリ集客支援プラットフォーム</p>
+    <h1>放課後アプリ部 <small>集え個人ディベロッパー</small></h1>
+    <p>悩めるサンデープログラマーへ捧げるアプリ集客支援プラットフォーム</p>
   </div>
   <div class="row">
-  	<div class="main col-md-8">
-  		<h2>なにこれ？</h2>
-  		<div class="block_line">
-  			<p class="lead">
-  				*『個人でアプリ作ったけど全然人集められない』<br>
-  				*『プレス打ちたいけど法人じゃないから打てない』<br>
-  				*『集客に大金を使いたくない』<br>
-  				そんな個人ディベロッパーの悩みを解決いたします!<br>
+    <div class="main col-md-8">
+        <h2>なにこれ？</h2>
+        <div class="block_line">
+            <p class="lead">
+                *『個人でアプリ作ったけど全然人集められない』<br>
+                *『プレス打ちたいけど法人じゃないから打てない』<br>
+                *『集客に大金を使いたくない』<br>
+                そんな個人ディベロッパーの悩みを解決いたします!<br>
 
-  			</p>
-  			<p>
-	  			「放課後アプリ部」では、個人やチームで開発したアプリの
-	  			（相互）集客をサポートするプラットフォームです。
-	  			会社等で開発したアプリとは違い、個人で空き時間を利用して作ったアプリは
-	  			プレスや広告費による集客手段が利用しづらく、
-	  			良いアプリを作っても思うように人が集まりません。
-	  			そんな状況を少しでも改善するため、個人ディベロッパーのためのサイトを作成致しました。
-	  			集客に苦しむサンデープログラマの皆様、是非｢放課後アプリ部｣にご入部ください！<br>
-	  			<b>※現在誠意作成中です。</b>
-		  	</p>
-	  	</div>
-	  		
-	  	<h2>デモ</h2>
-	  	<div class="block_line">
-	  		<p>
-				どんなことをしたいかということを伝えるため、デモ用のページを用意いたしました。
-				データが同じだったり、もろBootstrapだったりと仮組み段階ですが、
-				コンセプトとか雰囲気を感じてもらえたらな、と思っています。<br>
-				<a href="/demo" class="btn btn-info btn-md">デモを見てみる</a><br>
-		  		こんなかんじでディベロッパーとその登録アプリを紹介していきます。
-		  		対応プラットフォームはAndroid,iOS,Webアプリを予定してます。
+            </p>
+            <p>
+                「放課後アプリ部」では、個人やチームで開発したアプリの
+                （相互）集客をサポートするプラットフォームです。
+                会社等で開発したアプリとは違い、個人で空き時間を利用して作ったアプリは
+                プレスや広告費による集客手段が利用しづらく、
+                良いアプリを作っても思うように人が集まりません。
+                そんな状況を少しでも改善するため、個人ディベロッパーのためのサイトを作成致しました。
+                集客に苦しむサンデープログラマの皆様、是非｢放課後アプリ部｣にご入部ください！<br>
+                <b>※現在誠意作成中です。</b>
+            </p>
+        </div>
+            
+        <h2>デモ</h2>
+        <div class="block_line">
+            <p>
+                どんなことをしたいかということを伝えるため、デモ用のページを用意いたしました。
+                データが同じだったり、もろBootstrapだったりと仮組み段階ですが、
+                コンセプトとか雰囲気を感じてもらえたらな、と思っています。<br>
+                <a href="/demo" class="btn btn-info btn-md">デモを見てみる</a><br>
+                こんなかんじでディベロッパーとその登録アプリを紹介していきます。
+                対応プラットフォームはAndroid,iOS,Webアプリを予定してます。
 
-	  		</p>
-	  	</div>
+            </p>
+        </div>
 
-		<h2>活動予定</h2>
-	  	<div class="block_line">
-	  		
-	  		<p>
-	  			<dl>
- 					<dt>2014.01</dt>
-  					<dd>ディベロッパー登録、Web版スタート</dd>
-  					<dt>2014.02</dt>
-  					<dd>Android用アプリカタログ作成</dd>
-  					<dt>2014.03</dt>
-  					<dd>API類公開、相互集客ウィジェット･SDK作成</dd>
-  					<dt>2014.??</dt>
-  					<dd>iOS用アプリカタログ作成(勉強中)</dd>
-				</dl>
-				最初はアプリ紹介を中心に活動していきますが、
-				そのうちアプリ開発支援といったコンテンツも考えています。
-			</p>
-	  	</div>
+        <h2>活動予定</h2>
+        <div class="block_line">
+            
+            <p>
+                <dl>
+                    <dt>2014.01</dt>
+                    <dd>ディベロッパー登録、Web版スタート</dd>
+                    <dt>2014.02</dt>
+                    <dd>Android用アプリカタログ作成</dd>
+                    <dt>2014.03</dt>
+                    <dd>API類公開、相互集客ウィジェット･SDK作成</dd>
+                    <dt>2014.??</dt>
+                    <dd>iOS用アプリカタログ作成(勉強中)</dd>
+                </dl>
+                最初はアプリ紹介を中心に活動していきますが、
+                そのうちアプリ開発支援といったコンテンツも考えています。
+            </p>
+        </div>
 
-	</div>
+    </div>
 
 -->
           <!-- social buttons -->
@@ -105,5 +136,5 @@
 {% endblock main %}
 
 {% block script%}
-	$('#nav_home').addClass("active");
+    $('#nav_home').addClass("active");
 {% endblock %}

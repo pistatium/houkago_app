@@ -40,7 +40,7 @@ def custom_view(view):
         user = users.get_current_user()
         developer = None
         if user:
-            developer = Developer.getById(user.user_id())
+            developer = Developer.getByUserId(user.user_id())
         context = RequestContext(request,{
             "is_login": bool(user),
             "logout_page": reverse(views.regist.index),
@@ -69,7 +69,7 @@ def form(request):
     })
     user = users.get_current_user()
     # 登録済みならリダイレクト
-    if Developer.getById(user.user_id()):
+    if Developer.getByUserId(user.user_id()):
         return HttpResponseRedirect(reverse(views.dev.index))
     # POST
     if request.method == 'POST':

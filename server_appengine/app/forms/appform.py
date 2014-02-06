@@ -52,6 +52,12 @@ class AppForm(forms.Form):
         required = False, 
         widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480})
     )
+    target_user = forms.CharField(
+        label = u"どんなユーザーに使って欲しいか",
+        max_length = 480, 
+        required = False, 
+        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480})
+    )
     status = forms.ChoiceField(
         label   = u"表示",
         choices = show_status, 

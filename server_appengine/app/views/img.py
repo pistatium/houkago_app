@@ -1,14 +1,14 @@
 #coding: utf-8
 
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.core.urlresolvers import reverse 
 from django.conf.urls.defaults import *
 from django.template import RequestContext
 
 
 from app.models.developer import Developer
-from app.models.upload import ProfImage
+from app.models.upload import ProfImage, AppImage
 """
 Viewの共通前処理をするデコレータ
 viewの引数にcontextが増えることに注意
@@ -33,12 +33,7 @@ def custom_view(view):
 
 @custom_view
 def user_icon(request, user_id, context):
-    developer = Developer.getById(user_id)
-    if not developer:
-        return HttpResponseRedirect("/img/material/user.png")
-    if not developer.thumbnail:
-        return HttpResponseRedirect("/img/material/user.png")
-    image = ProfImage.get_by_id(developer.thumbnail)
+    image = ProfImage.getByDeveloper(long(user_id))
     if not image:
         return HttpResponseRedirect("/img/material/user.png")
     return HttpResponse(image.image, image.content_type)
@@ -46,7 +41,10 @@ def user_icon(request, user_id, context):
 
 @custom_view
 def app_icon(request, app_id, context):
-    return HttpResponseRedirect("/img/material/app.png")
+    image = AppImage.getByAppId(long(app_id))
+    if not image:
+        return HttpResponseRedirect("/img/material/app.png")
+    return HttpResponse(image.image, image.content_type)
 
 
 

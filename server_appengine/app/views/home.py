@@ -1,12 +1,10 @@
 #coding: utf-8
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
-from django.http import Http404
 from django.core.paginator import Paginator
 from django.template import RequestContext
 from django.conf.urls.defaults import *
-
 
 
 from google.appengine.ext import ndb
@@ -27,7 +25,9 @@ from app.models.preuser import PreUser
 from app.forms.preform import PreForm
 from app.libs import utils
 from app.models.developer import Developer
+from app.models.app import App
 from app import views
+from app.libs.arrays import platforms
 #from app.forms import registform
 import syskey
 from django.views.decorators.cache import cache_page
@@ -45,30 +45,55 @@ viewの引数にcontextが増えることに注意
 def custom_view(view):
     import functools
     @functools.wraps(view)
-    def override_view(request):        
+    def override_view(*args, **kwargs):
+        request = args[0]        
         user = users.get_current_user()
         developer = None
         if user:
-            developer = Developer.getById(user.user_id())
+            developer = Developer.getByUserId(user.user_id())
         context = RequestContext(request,{
             "is_login": bool(user),
             "logout_page": reverse(views.regist.index),
             "developer" : developer,
-            
         })
-        return view(request, context)
+        kwargs["context"] = context
+        return view(*args, **kwargs)
     return override_view
 
 @custom_view
 def index(request, context):
     context["developers"] = Developer.getQuery().fetch(10)
+    context["recent_apps"] = {}
+    for platform in platforms:
+        apps = App.getRecentQuery(platform[0]).fetch(12)
+        if apps:
+            context["recent_apps"][platform[1]] = apps
     return render_to_response('webfront/index.html', context)
 
 @custom_view
-def demo(request, context):
-    return render_to_response('webfront/demo.html',context)
+def about(request, context):
+    context["current_tab"] = "about"
+    return render_to_response('webfront/about.html',context)
 
+@custom_view
+def user(request, user_alias, context):
+    developer = Developer.getByAlias(user_alias)
+    if not developer:
+        pass
+    app = App.getQueryByDeveloper(developer.key.id())
+    context["developer"] = developer
+    context["apps"] = app
+    context["platforms"] = platforms
+    return render_to_response('webfront/developer_detail.html',context)
 
+@custom_view
+def app_detail(request, app_id, context):
+    app = App.getById(int(app_id))
+    if not app or app.status != 1:
+        raise Http404
+    context["app"] = app
+    return render_to_response('webfront/app_detail.html',context)   
+    
 # リリース前のみ利用するView
 def pre(request):
     if request.method == 'POST':
@@ -120,8 +145,10 @@ http://houkago-no.appspot.com
  URL パターン
 '''
 urlpatterns = patterns(None,
-    (r'^demo/?$', demo),
+    (r'^about/?$', about),
     (r'^pre_complete/?$', pre_complete),
     (r'^pre/?$', pre),
+    (ur'^user/(\w+)/?$' , user),
+    (r'^app_detail/(\d+)/?$' , app_detail),
     (r'^/?$', index),
 )
