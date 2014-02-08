@@ -55,6 +55,7 @@ def custom_view(view):
             "is_login": bool(user),
             "logout_page": reverse(views.regist.index),
             "developer" : developer,
+            "platforms" : platforms,
         })
         kwargs["context"] = context
         return view(*args, **kwargs)
@@ -76,10 +77,17 @@ def about(request, context):
     return render_to_response('webfront/about.html',context)
 
 @custom_view
+def user_id(request, user_id, context):
+    developer = Developer.get_by_id(user_id)
+    if not developer:
+        raise Http404
+    return HttpResponseRedirect(reverse(user, args=[developer.user_alias]))
+
+@custom_view
 def user(request, user_alias, context):
     developer = Developer.getByAlias(user_alias)
     if not developer:
-        pass
+        raise Http404
     app = App.getQueryByDeveloper(developer.key.id())
     context["developer"] = developer
     context["apps"] = app
@@ -92,6 +100,10 @@ def app_detail(request, app_id, context):
     if not app or app.status != 1:
         raise Http404
     context["app"] = app
+    developer = Developer.get_by_id(app.developer_id)
+    #if not developer.status != 1:
+    #    raise Http404
+    context["developer"] = developer
     return render_to_response('webfront/app_detail.html',context)   
     
 # リリース前のみ利用するView
@@ -148,6 +160,7 @@ urlpatterns = patterns(None,
     (r'^about/?$', about),
     (r'^pre_complete/?$', pre_complete),
     (r'^pre/?$', pre),
+    (r'^user_id/(\d+)/?$' , user_id),
     (ur'^user/(\w+)/?$' , user),
     (r'^app_detail/(\d+)/?$' , app_detail),
     (r'^/?$', index),

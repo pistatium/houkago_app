@@ -1,0 +1,23 @@
+{% load my_utils %}
+<div class="col-xs-2 visible-xs"></div>
+<div class="profile_card col-xs-9 col-sm-6 col-md-6 col-lg-5 col-lg-offset-1 center">
+	<a href="{% url app.views.home.user developer.user_alias %}">
+		<div class="profile_wrap">
+			<div class="row">
+				<div class="col-xs-3 center">
+					<img class="img-responsive" src="{%url app.views.img.user_icon developer.key.id%}">
+				</div>
+				<div class="col-xs-9 profile_main" >
+					<h3>{{developer.uname}}</h3>
+					入部日 ：　{{developer.created_at|date:"Y年 m月d日"}}
+					<div class="profile_line">
+						{{developer.profile|default:""|truncate:60}}
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</a>
+</div>
+<div class="col-xs-1 visible-xs"></div>

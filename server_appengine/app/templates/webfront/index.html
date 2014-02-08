@@ -1,13 +1,18 @@
 {% extends "parent.html" %}
+
+{% block title %}放課後アプリ部 - 集まれ！放課後アプリディベロッパー！{% endblock %}
 {% block main %}
-
-
 <div class="jumbotron">
-    <img src="/img/material/app_logo_beta_250.png" class="pull-left">
-    <h1>
-        放課後アプリ部<br>
-        <small>求む！放課後アプリディベロッパー！</small>
-    </h1>
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-4 pull-left center">
+            <img src="/img/material/app_logo_beta_250.png" class="img-responsive">
+        </div>
+        <h1 class="col-xs-11 col-sm-9 col-md-8">
+            
+            放課後アプリ部
+            <br><small>集まれ！ アプリディベロッパー！</small>
+        </h1>
+    </div>
     <p>
         法人として活動していない全ての個人・チームアプリ開発者のための新しい部活(Webサービス)です。
     </p>
@@ -16,15 +21,20 @@
 
 <div class="row">
     <div class="main col-md-8 col-xs-12">
-        <h3>部員名簿</h3>
+        <h2>部員名簿<small>(新規登録順)</small></h2>
         <div class="row">
             {% for developer in developers %}
                     {% include 'plugin/profile_list.html' %}
             {% endfor %}
+
         </div>
-        <h3>活動履歴</h3>
+        <div class="more_link">
+            <a href="#">&gt;&gt; もっとみる</a>
+        </div>
+            
+        <h2>部員活動履歴<small>(新規登録順)</small></h2>
         {% for platform, r_apps in recent_apps.items %}
-            <h4>{{platform}}アプリ</h4>
+            <h3>{{platform}}アプリ</h3>
             <div class="row">
                 {% for app in r_apps %}
                     <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
@@ -41,11 +51,16 @@
                             </div>
                         </a>
                     </div>
-                
                 {% endfor %}
             </div>
+            <div class="more_link">
+                <a href="#">&gt;&gt; もっとみる</a>
+            </div>
         {% endfor %}
+
     </div>
+
+
     <div class="col-md-4">
         {% include 'plugin/regist_div.html' %}
         

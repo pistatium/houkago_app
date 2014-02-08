@@ -1,27 +1,72 @@
 {% extends 'parent.html' %}
+{% load my_utils %}
 
+
+{% block title %}[{{platforms|choise:app.platform}}]{{app.app_name}} - 放課後アプリ部{% endblock %}
 {% block main %}
+	<div class="row">
+		<div class="col-xs-12 col-sm-8">
+			<div class="row">
+		        <div class="col-xs-12 col-sm-3 col-md-4 pull-left center">
+    		        <img src="{%url app.views.img.app_icon app.key.id%}" class="img-responsive">
+		        </div>
+				<div class="col-xs-12 col-sm-9 col-md-8">
+					<h1 class="media-heading">
+						{{app.app_name}}
+						<br><small>{{app.tagline}}</small>
+						<hr>
+						<a href="{{app.dl_link}}" class="btn btn-primary btn-lg btn-block">
+							アプリを今すぐ使ってみる！
+						</a>
+					</h1>
+				</div>
+			</div>
+			<div>	
+				<h2>アプリの概要</h2>
+				{{app.pr_summary|linebreaks}}
+				
+				{% if app.why_create %}
+					<h2>なぜこのアプリを作ったのか？</h2>
+					{{app.why_create|linebreaks}}
+				{% endif %}
 
-	<div class="media">
-		<a class="pull-left" href="#">
-			<img class="media-object" width=64 height=64 src="{%url app.views.img.app_icon app.key.id%}" alt="{{app.app_name}}">
-		</a>
-		<div class="media-body">
-			<h2 class="media-heading">{{app.app_name}}</h2>
-			<h4>{{app.tagline}}</h4>
-			<p>
-				<h3>アプリ概要</h3>
-				{{app.pr_summary}}
-			</p>
-			<p>
-				<h3>なぜこのアプリを作ったのか？</h3>
-			</p>
-			<p>
-				<h3>このアプリの特徴は？</h3>
-			</p>
-			<p>
-				<h3></h3>
-			</p>
-	  	</div>
+				{% if app.product_point %}
+					<h2>このアプリの特徴は？</h2>
+					{{ app.product_point|linebreaks}}
+				{% endif %}
+				
+		  	</div>
+		</div>
+
+		<div class="col-xs-12 col-sm-4">
+			<div class="col-xs-12 visible-xs">
+				<a href="{{app.dl_link}}" class="btn btn-primary btn-lg btn-block">
+					アプリを今すぐ使ってみる！
+				</a>
+			</div>
+
+
+			<h2>このアプリの作者</h2>
+			<div class="row">
+				<div class="col-xs-3 col-md-3"></div>
+				<div class="col-xs-6 col-md-6 center">
+					<a href="{% url app.views.home.user developer.user_alias %}">
+						<div class="thumbnail">
+							<img class="prof_thumb img-responsive" src="{%url app.views.img.user_icon developer.key.id%}">
+							<div class="caption">
+								<h4>{{developer.uname}}</h4>
+								{{developer.profile|linebreaks}}
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			{% include 'plugin/regist_div.html' %}
+        
+	        <div>
+	            <h2>スポンサード・リンク</h2>
+	            {% include 'plugin/ads.html' %}
+	        </div>
+		</div>
 	</div>
 {% endblock %}

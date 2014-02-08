@@ -19,7 +19,9 @@ def eq(value1, value2):
 
 @register.filter
 @stringfilter
-def truncate( value, arg):
+def truncate(value, arg):
+	if not value:
+		return ""
 	size = int(arg)
 	if len(value) > size:
 		return value[:size] + u"…"

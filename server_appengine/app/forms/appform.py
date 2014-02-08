@@ -33,11 +33,11 @@ class AppForm(forms.Form):
     package_name = forms.CharField(
         label = "アプリパッケージ名(必須)",
         required = True,
+        widget=forms.TextInput(attrs={'placeholder':'Webアプリの場合はURL'})
     )
     dl_link = forms.URLField(
         label = "ダウンロード/サイト URL(必須)",
         required = True,
-        verify_exists = True,
     )
 
     why_create = forms.CharField(
