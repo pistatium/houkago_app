@@ -3,19 +3,25 @@
 {% block main %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">ディベロッパー</h3>
+            <h3 class="panel-title">部員登録情報</h3>
         </div>
         <div class="panel-body">
-            <p>
-                {% if not developer.profile %}
-                    <div class="alert alert-warning">
-                        <b>Todo:</b>プロフィールがまだ未設定です。
-                    </div>
-                {% endif %}
+            {% if not developer.profile %}
+                <div class="alert alert-warning">
+                    <b>Todo:</b>プロフィールがまだ未設定です。
+                </div>
+            {% endif %}
+            <div class="row">
+                
+                
                 {% include 'plugin/profile_card.html' %}
-                <a class="btn btn-middle btn-info" href="{% url app.views.regist.user_update %}">プロフィール編集</a>
-                <a class="btn btn-middle btn-success" href="{% url app.views.dev.upload_img %}">プロフィール画像変更</a>
-            </p>
+                
+                <div class="col-xs-12 col-sm-5 col-lg-7">
+                    <a class="btn btn-block btn-primary" href="{% url app.views.regist.user_update %}">プロフィール編集</a>
+                    <a class="btn btn-block btn-info" href="{% url app.views.home.user developer.user_alias %}">プロフィールページ確認</a> 
+                </div>
+            </div>
+        
         </div>
     </div>
     <div class="row">
@@ -65,7 +71,8 @@
                                     {{app.updated_at}}
                                     {{app.creator_push}}
                                     <div>
-                                        <a class="btn btn-info" href="{% url app.views.dev.app_update app.key.id %}">編集</a>
+                                        <a class="btn btn-block btn-primary" href="{% url app.views.dev.app_update app.key.id %}">アプリ情報編集</a>
+                                        <a class="btn btn-block btn-info" href="{% url app.views.home.app_detail app.key.id %}">アプリページ確認</a>
                                         
                                     </div>
                             </div>

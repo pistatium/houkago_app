@@ -66,7 +66,7 @@ class Developer(ndb.Model):
     
     @classmethod
     def getQuery(cls):
-        query = cls.query().order(cls.created_at)
+        query = cls.query().order(-cls.created_at)
         return query
 
     '''    

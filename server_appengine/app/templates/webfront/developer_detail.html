@@ -28,7 +28,7 @@
 						{% endif %}
 						{% if developer.fb_addr %}
 							<div>
-								<a href="{{developer.fb_addr}}">
+								<a href="http://facebook.com/{{developer.fb_addr}}">
 									<img src="/img/button/facebook.png" width=26>
 									{{developer.fb_addr}}<br>
 								</a>
@@ -71,6 +71,16 @@
 					{% endif %}
 				{% endfor %}
 			</div>
+		</div>
+
+		<div class="col-xs-12 col-sm-4">
+	
+			{% include 'plugin/regist_div.html' %}
+        
+	        <div>
+	            <h2>スポンサード・リンク</h2>
+	            {% include 'plugin/ads.html' %}
+	        </div>
 		</div>
 	</div>
 

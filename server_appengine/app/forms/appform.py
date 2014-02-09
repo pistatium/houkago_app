@@ -11,7 +11,7 @@ from app.libs.arrays import platforms, show_status
 class AppForm(forms.Form):
 
     platform = forms.ChoiceField(
-        label   = u"プラットフォーム",
+        label   = u"プラットフォーム(変更不可)",
         choices = platforms, 
         required = True, 
     )
@@ -22,13 +22,13 @@ class AppForm(forms.Form):
     )
     tagline = forms.CharField(
         label = "アプリのキャッチコピー（必須）",
-        widget=forms.TextInput(attrs={'maxlength':'40'})
+        widget=forms.TextInput(attrs={'maxlength':'40','placeholder':'アプリの魅力を端的に'})
     )
     pr_summary = forms.CharField(
         label = u"アプリ概要(必須)",
         max_length = 480, 
         required = True, 
-        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480})
+        widget=forms.Textarea(attrs={"rows": 6,"cols":100, "maxlength":480})
     )
     package_name = forms.CharField(
         label = "アプリパッケージ名(必須)",
@@ -41,22 +41,25 @@ class AppForm(forms.Form):
     )
 
     why_create = forms.CharField(
-        label = u"アプリを作った理由",
+        label = u"このアプリを作った理由を教えて下さい！",
         max_length = 480, 
         required = False, 
-        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480})
+        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480,
+            'placeholder':'開発のきっかけ、開発に対する想いなど'})
     )
     product_point = forms.CharField(
-        label = u"開発に力を入れたポイント",
+        label = u"このアプリを開発する上で力を入れたポイントは？",
         max_length = 480, 
         required = False, 
-        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480})
+        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480,
+            'placeholder':'開発でこだわった点、上手く行かなくて苦労した点など'})
     )
     target_user = forms.CharField(
-        label = u"どんなユーザーに使って欲しいか",
+        label = u"どんなユーザーに使って欲しいですか？",
         max_length = 480, 
         required = False, 
-        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480})
+        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480,
+            'placeholder':'ターゲットとしたユーザー、利用想定シーンなど'})
     )
     status = forms.ChoiceField(
         label   = u"表示",

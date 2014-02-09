@@ -1,8 +1,10 @@
-<div class="profile_card col-xs-12 col-sm-6 col-lg-4">
+<div class="profile_card col-xs-12 col-sm-7 col-lg-5">
 	<div class="profile_wrap">
 		<div class="row">
 			<div class="col-xs-4">
-				<img class="prof_thumb img-responsive" src="{%url app.views.img.user_icon developer.key.id%}">
+				<a href="{% url app.views.dev.upload_img %}">
+					<img class="prof_thumb img-responsive" src="{%url app.views.img.user_icon developer.key.id%}">
+				</a>
 			</div>
 			<div class="col-xs-8">
 				<h3>{{developer.uname}}</h3>
@@ -10,7 +12,7 @@
 				<a href="{{developer.site_addr}}">{{developer.site_addr|default:""}}</a>
 			</div>
 		</div>
-		<h4>開発者イチオシアプリ Best3</h4>
+<!--		<h4>開発者イチオシアプリ Best3</h4>
 		<div class="row" style="margin:10px">
 			{% for app in apps %}
 			<a href="{{app.dl_link}}">
@@ -18,5 +20,6 @@
 			</a>
 			{% endfor %}
 		</div>
+-->
 	</div>
 </div>

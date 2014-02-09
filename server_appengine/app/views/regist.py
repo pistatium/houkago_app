@@ -66,6 +66,7 @@ def index(request, context):
 def form(request):
     context = RequestContext(request, {
         "form": "",
+        "title": u"部員登録"
     })
     user = users.get_current_user()
     # 登録済みならリダイレクト

@@ -26,15 +26,18 @@
 				{{app.pr_summary|linebreaks}}
 				
 				{% if app.why_create %}
-					<h2>なぜこのアプリを作ったのか？</h2>
+					<h2>このアプリを作った理由</h2>
 					{{app.why_create|linebreaks}}
 				{% endif %}
 
 				{% if app.product_point %}
-					<h2>このアプリの特徴は？</h2>
+					<h2>このアプリを作る上で力を入れたところ</h2>
 					{{ app.product_point|linebreaks}}
 				{% endif %}
-				
+				{% if app.target_user %}
+					<h2>どんなユーザーに使って欲しいか</h2>
+					{{ app.product_point|linebreaks}}
+				{% endif %}
 		  	</div>
 		</div>
 
@@ -48,8 +51,8 @@
 
 			<h2>このアプリの作者</h2>
 			<div class="row">
-				<div class="col-xs-3 col-md-3"></div>
-				<div class="col-xs-6 col-md-6 center">
+				<div class="col-xs-2 col-md-2"></div>
+				<div class="col-xs-8 col-md-8 center">
 					<a href="{% url app.views.home.user developer.user_alias %}">
 						<div class="thumbnail">
 							<img class="prof_thumb img-responsive" src="{%url app.views.img.user_icon developer.key.id%}">

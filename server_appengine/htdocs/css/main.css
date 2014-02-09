@@ -24,6 +24,11 @@ h3 {
   border-left: 9px solid #777;
   padding: 10px 0 10px 5px; 
 }
+a.anchor{
+  padding-top:300px;
+  margin-top:-300px
+}
+
 .center{
   text-align: center;
   padding: 2px;
@@ -125,7 +130,7 @@ h3 {
   margin: 0px 1px 3px 1px;
 }
 .profile_desc{
-  height: 50px;
+  height: 100px;
   font-size: xx-small;
   overflow: hidden;
 }

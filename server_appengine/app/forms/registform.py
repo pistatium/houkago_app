@@ -25,7 +25,7 @@ class RegistForm(forms.Form):
         label = u"プロフィール",
         max_length = 2048, 
         required = False, 
-        widget=forms.Textarea
+        widget=forms.Textarea(attrs={'maxlength':'40'})
     )
     email       = forms.EmailField(
         label = "メールアドレス(非公開、連絡用)",
@@ -36,8 +36,9 @@ class RegistForm(forms.Form):
         required = False
     )
     fb_addr     = forms.CharField(
-        label = "Facebook",
-        required = False
+        label = "Facebook (ID)",
+        required = False,
+        widget=forms.TextInput(attrs={'placeholder':u'http://facebook.com/以降のID'})
     )
     site_addr   = forms.URLField(
         label = "サイト、ブログURL",

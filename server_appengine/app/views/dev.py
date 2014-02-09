@@ -83,6 +83,7 @@ def app_detail(request, app_id, context={}):
 @custom_view
 def app_regist(request, context):
      # POST
+    context["title"] = u"アプリ情報登録"
     if request.method == 'POST':
         #developer = models.DeveloperModel()
         form = AppForm(request.POST)
@@ -104,6 +105,7 @@ def app_regist(request, context):
 
 @custom_view
 def app_update(request, app_id, context={}):
+    context["title"] = u"アプリ情報更新"
     app = App.getById(int(app_id))
     if app is None:
         return HttpResponseRedirect(reverse(app_regist))
