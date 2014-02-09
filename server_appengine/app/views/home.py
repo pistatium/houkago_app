@@ -104,67 +104,7 @@ def app_detail(request, app_id, context):
     #    raise Http404
     context["developer"] = developer
     return render_to_response('webfront/app_detail.html',context)   
-    
-# リリース前のみ利用するView
-def pre(request):
-    if request.method == 'POST':
-        form = PreForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data["user_mail"]
-            user = PreUser.getByMail(email)
-            user.put()
-            _send_pre_complete_mail(email)
-            return HttpResponseRedirect(reverse(pre_complete))
-    else:
-        form = PreForm()
-    context = RequestContext(request, {
-        "form": form,
-    })
-    return render_to_response('webfront/pre.html', context)
 
-#@cache_page(300)
-#def pre_complete(request):
-#    return render_to_response('webfront/pre_complete.html',{})
-
-@utils.login_required
-def beta_release(request):
-    user = users.get_current_user()
-    if not user or not users.is_current_user_admin():
-        raise Http404
-    pre_user = PreUser.getOne()
-    if pre_user:
-        pre_user = pre_user[0]
-        _send_pre_release_mail(pre_user.user_mail)
-        pre_user.send_status = 1
-        pre_user.put()
-        return HttpResponse("send to:" + pre_user.user_mail)
-    return HttpResponse("complate")
-
-def _send_pre_release_mail(email):
-    message = mail.EmailMessage(
-        sender=u"放課後アプリ部<info@houkago-no.appspotmail.com>",
-        subject=u"放課後アプリ部ベータ版リリースしました")
-    message.to = email
-    message.body = u"""放課後アプリ部に事前登録していただいた皆さま、
-大変お待たせいたしました。
-
-この度、放課後アプリ部のベータ版の提供が開始いたしました。
-
-http://houkago-no.appspot.com
-
-放課後アプリ部は
-法人以外で活動するアプリ開発者で作る新しい部活(Webサービス)です。
-作ったアプリのPRや、開発者としての実績ログとして是非ご活用ください。
-どうぞよろしくお願いいたします。
-
-※このメールアドレスは送信専用です。返信されても内容を確認できませんのでご注意ください。
-
-============================
-放課後アプリ部
-http://houkago-no.appspot.com
-============================
-"""
-    message.send()
 
 
 
@@ -174,8 +114,6 @@ http://houkago-no.appspot.com
 '''
 urlpatterns = patterns(None,
     (r'^about/?$', about),
-    (r'^adm/beta_release?$', beta_release),
-    (r'^pre/?$', pre),
     (r'^user_id/(\d+)/?$' , user_id),
     (ur'^user/(\w+)/?$' , user),
     (r'^app_detail/(\d+)/?$' , app_detail),
