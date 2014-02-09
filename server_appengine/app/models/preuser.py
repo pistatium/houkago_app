@@ -14,3 +14,8 @@ class PreUser(ndb.Model):
         if not user:
           user = PreUser(user_mail = email)
         return user
+
+    @classmethod
+    def getOne(cls):
+        query = cls.query(cls.send_status == 0).order(cls.created_at)
+        return query.fetch(1)

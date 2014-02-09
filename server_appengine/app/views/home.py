@@ -14,7 +14,6 @@ from google.appengine.api import users
 from google.appengine.api import mail
 from django.core.urlresolvers import reverse 
 
-
 from hashlib import sha1, md5
 from random import randint
 from datetime import datetime, timedelta
@@ -123,23 +122,40 @@ def pre(request):
     })
     return render_to_response('webfront/pre.html', context)
 
-@cache_page(300)
-def pre_complete(request):
-    return render_to_response('webfront/pre_complete.html',{})
-           
+#@cache_page(300)
+#def pre_complete(request):
+#    return render_to_response('webfront/pre_complete.html',{})
 
-def _send_pre_complete_mail(email):
+@utils.login_required
+def beta_release(request):
+    user = users.get_current_user()
+    if not user or not users.is_current_user_admin():
+        raise Http404
+    pre_user = PreUser.getOne()
+    if pre_user:
+        pre_user = pre_user[0]
+        _send_pre_release_mail(pre_user.user_mail)
+        pre_user.send_status = 1
+        pre_user.put()
+        return HttpResponse("send to:" + pre_user.user_mail)
+    return HttpResponse("complate")
+
+def _send_pre_release_mail(email):
     message = mail.EmailMessage(
         sender=u"放課後アプリ部<info@houkago-no.appspotmail.com>",
-        subject=u"事前登録が完了致しました。")
+        subject=u"放課後アプリ部ベータ版リリースしました")
     message.to = email
-    message.body = u"""この度は、放課後アプリ部の事前登録にご登録いただきありがとうございます。
-サービスオープン時の事前登録が完了致しました。
+    message.body = u"""放課後アプリ部に事前登録していただいた皆さま、
+大変お待たせいたしました。
+
+この度、放課後アプリ部のベータ版の提供が開始いたしました。
 
 http://houkago-no.appspot.com
 
-現在、2014年1月を目処に開発を進めておりますので今しばらくお待ちください。
-放課後アプリ部をどうぞよろしくお願いします。
+放課後アプリ部は
+法人以外で活動するアプリ開発者で作る新しい部活(Webサービス)です。
+作ったアプリのPRや、開発者としての実績ログとして是非ご活用ください。
+どうぞよろしくお願いいたします。
 
 ※このメールアドレスは送信専用です。返信されても内容を確認できませんのでご注意ください。
 
@@ -158,7 +174,7 @@ http://houkago-no.appspot.com
 '''
 urlpatterns = patterns(None,
     (r'^about/?$', about),
-    (r'^pre_complete/?$', pre_complete),
+    (r'^adm/beta_release?$', beta_release),
     (r'^pre/?$', pre),
     (r'^user_id/(\d+)/?$' , user_id),
     (ur'^user/(\w+)/?$' , user),
