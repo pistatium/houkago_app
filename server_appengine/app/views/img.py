@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect,HttpResponse
 from django.core.urlresolvers import reverse 
 from django.conf.urls.defaults import *
 from django.template import RequestContext
-
+from django.views.decorators.cache import cache_page
 
 from app.models.developer import Developer
 from app.models.upload import ProfImage, AppImage
@@ -31,6 +31,7 @@ def custom_view(view):
         return view(*args, **kwargs)
     return override_view
 
+@cache_page(60 * 15)
 @custom_view
 def user_icon(request, user_id, context):
     image = ProfImage.getByDeveloper(long(user_id))
@@ -38,16 +39,13 @@ def user_icon(request, user_id, context):
         return HttpResponseRedirect("/img/material/user.png")
     return HttpResponse(image.image, image.content_type)
 
-
+@cache_page(60 * 15)
 @custom_view
 def app_icon(request, app_id, context):
     image = AppImage.getByAppId(long(app_id))
     if not image:
         return HttpResponseRedirect("/img/material/app.png")
     return HttpResponse(image.image, image.content_type)
-
-
-
 
 
 #======================================================================================

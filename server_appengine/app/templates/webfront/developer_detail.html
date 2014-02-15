@@ -56,13 +56,13 @@
 								<div class="platform clearfix">                      
 	                                {% if app.platform == 9 %}
 	                                    <img src="/img/material/web.png" class="img-responsive pull-left" style="background:#555;">
-	                                    <h4>Webアプリ</h4>
+	                                    <h4>Web</h4>
 	                                {% elif app.platform == 1 %}
 	                                    <img src="/img/material/android.png" class="img-responsive pull-left" style="background:#555;">
-	                                    <h4>Androidアプリ</h4>
+	                                    <h4>Android</h4>
 	                                {% else %}
 	                                    <img src="/img/material/apple.png" class="img-responsive pull-left" style="background:#555;">
-	                                    <h4>iOSアプリ</h4>
+	                                    <h4>iOS</h4>
 	                                {% endif %}
 	                            </div>
 								<img src="{% url app.views.img.app_icon app.key.id %}" class="img-responsive user_app_img">

@@ -1,4 +1,5 @@
 {% extends "parent.html" %}
+{% load my_utils %}
 
 {% block title %}放課後アプリ部 - 集まれ！放課後アプリディベロッパー！{% endblock %}
 {% block main %}
@@ -14,7 +15,7 @@
         </h1>
     </div>
     <p>
-        法人として活動していないアプリ開発者が集まって作る新しい部活(Webサービス)です。
+        法人として活動していないアプリ開発者が集まって作る新しいWebサービスです。
         今なら無料でディベロッパー登録が出来ます。
     </p>
 </div>
@@ -22,6 +23,21 @@
 
 <div class="row">
     <div class="main col-md-8 col-xs-12">
+
+        <h2>部員活動履歴<small>(新規登録順)</small></h2>
+        {% for platform, r_apps in recent_apps.items %}
+            <h3>{{platform}}アプリ</h3>
+            <div class="row">
+                {% for app in r_apps %}
+                    {% include 'plugin/app_box.html' %}
+                {% endfor %}
+            </div>
+            <div class="more_link">
+                <a href="{% url app.views.home.app_list platform 1 %}">&gt;&gt; もっとみる</a>
+            </div>
+        {% endfor %}
+
+
         <h2>部員名簿<small>(新規登録順)</small></h2>
         <div class="row">
             {% for developer in developers %}
@@ -33,31 +49,7 @@
             <a href="#">&gt;&gt; もっとみる</a>
         </div>-->
             
-        <h2>部員活動履歴<small>(新規登録順)</small></h2>
-        {% for platform, r_apps in recent_apps.items %}
-            <h3>{{platform}}アプリ</h3>
-            <div class="row">
-                {% for app in r_apps %}
-                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-                        <a href="{% url app.views.home.app_detail app.key.id %}" class="">
-                            <div class="thumbnail">
-                        
-                                <div class="caption">
-                                    {{app.created_at|date:"Y/m/d登録"}}
-                                </div>
-                                <img src="{% url app.views.img.app_icon app.key.id %}" class="recent_app_icon">
-                                <div class="caption">
-                                    {{app.app_name}}
-                                </div>                        
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-            <!--<div class="more_link">
-                <a href="#">&gt;&gt; もっとみる</a>
-            </div>-->
-        {% endfor %}
+
 
     </div>
 
@@ -134,19 +126,7 @@
     </div>
 
 -->
-          <!-- social buttons -->
-      <div class="ninja_onebutton">
-        <script type="text/javascript">
-        //<![CDATA[
-        (function(d){
-        if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_b72973f805acc6ae2372e185de8c0c52)=='undefined'){
-            document.write("<sc"+"ript type='text\/javascript' src='http:\/\/omt.shinobi.jp\/b\/b72973f805acc6ae2372e185de8c0c52'><\/sc"+"ript>");
-        }else{ 
-            window.NINJA_CO_JP_ONETAG_BUTTON_b72973f805acc6ae2372e185de8c0c52.ONETAGButton_Load();}
-        })(document);
-        //]]>
-        </script><span class="ninja_onebutton_hidden" style="display:none;"></span><span style="display:none;" class="ninja_onebutton_hidden"></span>
-      </div>
+    {% include "plugin/social_btn.html" %}
   </div>
 
 {% endblock main %}

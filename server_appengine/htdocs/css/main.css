@@ -55,6 +55,10 @@ a.anchor{
   margin-left:6px;
 
 }
+.app-box{
+  height:200px;
+  overflow: hidden;
+}
 /* Wrapper for page content to push down footer */
 #wrap {
   min-height: 100%;
@@ -77,10 +81,10 @@ a.anchor{
   color:#333;
 }
 .dev_app_icon{
-  height:140px;
+  height:100px;
 }
 .user_app_img{
-  max-height: 200px;
+  height: 100px;
   text-align:center;
   padding:0 auto;
   margin: 0 auto;

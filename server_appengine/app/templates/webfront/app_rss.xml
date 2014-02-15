@@ -1,0 +1,28 @@
+{% load my_utils %}<?xml version="1.0" encoding="utf-8"?>
+<rss version='2.0'>
+
+  <channel> 
+    <title>放課後アプリ部 新着登録アプリ</title> 
+    <link>http://houkago-no.appspot.com</link> 
+    <description>放課後アプリ部の新着アプリ一覧です</description> 
+    <language>ja</language> 
+    <pubDate>{%now "r"%}</pubDate> 
+  
+    {%for app in apps%}
+      <item> 
+        <title>[{{platforms|choise:app.platform}}] {{app.app_name}}</title> 
+        <link>http://houkago-no.appspot.com{% url app.views.home.app_detail app.key.id %}</link> 
+        <description><![CDATA[
+          <img src="{%url app.views.img.app_icon app.key.id%}">
+          <h1>{{app.app_name}}</h1>
+          {{app.tagline}}
+          <a href="{{app.dl_link}}">アプリのダウンロード</a>
+          <hr>
+          <a href="{% url app.views.home.app_detail app.key.id %}">放課後アプリ部で詳細を見る</a>
+        ]]></description> 
+        <pubDate>{{app.created_at|date:"r"}}</pubDate>
+         <guid isParmalinl="true">{% url app.views.home.app_detail app.key.id %}</guid> 
+      </item>
+    {%endfor%}
+  </channel>
+</rss>

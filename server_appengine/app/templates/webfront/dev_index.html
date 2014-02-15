@@ -41,8 +41,11 @@
                             アプリ登録
                         </a>
                     </p>
-
+                    <hr>
+                    
+                    <div>アイコンクリックで画像アップロードできます。</div>
                     <div class="row" style="margin:10px">
+
                         {% for app in apps %}
                             {% if app.status == 0 %}
                                 <div class="col-md-6 col-xs-12 col-sm-6 dev_app private_mode">
@@ -52,19 +55,13 @@
                                     <div class="pull-right">[公開]</div>
                             {% endif %}
                             <a href="{% url app.views.dev.upload_icon_img app.key.id %}">
-                                <img src="{% url app.views.img.app_icon app.key.id %}" class="img-responsive dev_app_icon" >
+                                <div class="center">
+                                    <img src="{% url app.views.img.app_icon app.key.id %}" class="img-responsive dev_app_icon" >
+                            </div>
                             </a>
-                                    <div class="platform clearfix">                      
-                                            {% if app.platform == 9 %}
-                                                <img src="/img/material/web.png" class="img-responsive pull-left" style="background:#555;">
-                                                <h4>Webアプリ</h4>
-                                            {% elif app.platform == 1 %}
-                                                <img src="/img/material/android.png" class="img-responsive pull-left" style="background:#555;">
-                                                <h4>Androidアプリ</h4>
-                                            {% else %}
-                                                <img src="/img/material/apple.png" class="img-responsive pull-left" style="background:#555;">
-                                                <h4>iOSアプリ</h4>
-                                            {% endif %}
+                                    <div class="platform clearfix center">
+                                        <img src="/img/platform/{{app.platform}}.png" class="img-responsive pull-left">
+                                        <h4>{{platforms|choise:app.platform}}アプリ</h4>
                                     </div>
                                     <h3>{{app.app_name}}</h3>
 

@@ -1,0 +1,35 @@
+{% extends "parent.html" %}
+{% load my_utils %}
+
+{% block title %}{{plat_str}}アプリ一覧 page.{{page}} - 放課後アプリ部{% endblock %}
+{% block main %}
+    <div>
+        <h1>{{plat_str}}アプリ一覧 page.{{page}}</h1>
+        <ul class="pager">
+            <li class="{{apps.has_previous|yesno:"active,disabled"}}">
+                <a href="{{ apps.previous_page_number }}">&larr; previous</a>
+            </li>
+            Page {{ apps.number }} of {{ apps.paginator.num_pages }}.
+            <li class="{{apps.has_next|yesno:"active,disabled"}}">
+                <a href="{{ apps.next_page_number }}">&rarr; next</a>
+            </li>            
+        </ul>
+        <hr>
+        <div class="row">
+            {% for app in apps %}
+                {% include 'plugin/app_box.html' %}
+            {% endfor %}
+        </div>
+        <hr>
+        <ul class="pager">
+            <li class="{{apps.has_previous|yesno:"active,disabled"}}">
+                <a href="{{ apps.previous_page_number }}">&larr; previous</a>
+            </li>
+            Page {{ apps.number }} of {{ apps.paginator.num_pages }}.
+            <li class="{{apps.has_next|yesno:"active,disabled"}}">
+                <a href="{{ apps.next_page_number }}">&rarr; next</a>
+            </li>            
+        </ul>
+    </div>
+
+{% endblock %}

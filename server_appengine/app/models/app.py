@@ -95,12 +95,19 @@ class App(ndb.Model):
     def getQueryByDeveloper(cls, developer_id, platform = None):
         query = cls.query(cls.developer_id == developer_id)
         if platform:
-            query.query(cls.platform == platform)
+            query = query.filter(cls.platform == platform)
         return query
+        
     @classmethod
     def getRecentQuery(cls, platform = None):
         query = cls.query()
         query = query.filter(cls.status == 1)
         if platform is not None:
             query = query.filter(cls.platform == platform)
-        return query.order(-cls.status)
+        return query.order(-cls.created_at)
+
+    @classmethod
+    def getPush(cls, developer_id, platform):
+        query = cls.query(cls.developer_id == developer_id)
+        query = query.filter(cls.platform == platform)
+        return query.order(-cls.creator_push).fetch(3)
