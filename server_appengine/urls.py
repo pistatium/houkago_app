@@ -15,6 +15,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
+	(r'^api', include('app.views.api')),
     (r'^regist', include('app.views.regist')),
     (r'^dev', include('app.views.dev')),
     (r'^upload', include('app.views.img')),

@@ -1,6 +1,8 @@
 import datetime
+from hashlib import sha1
 from django.http import HttpResponseRedirect
 from google.appengine.api import users
+from syskey import api_key
 
 class UtcTzinfo(datetime.tzinfo):
     def utcoffset(self, dt):
@@ -28,6 +30,9 @@ class JstTzinfo(datetime.tzinfo):
     def olsen_name(self):
         return 'Asia/Tokyo'
 
+def make_api_key(value):
+    seed = (api_key % (value))
+    return sha1(seed).hexdigest()
 
 def jst_date(value=''):
     if not value:

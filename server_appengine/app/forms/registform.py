@@ -23,9 +23,9 @@ class RegistForm(forms.Form):
 
     profile     = forms.CharField(
         label = u"プロフィール",
-        max_length = 2048, 
+        max_length = 480, 
         required = False, 
-        widget=forms.Textarea(attrs={'maxlength':'40'})
+        widget=forms.Textarea(attrs={"rows": 6,"cols":100, "maxlength":480})
     )
     email       = forms.EmailField(
         label = "メールアドレス(非公開、連絡用)",

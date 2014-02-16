@@ -25,16 +25,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-5">
-            {% include 'plugin/creator_push.html' %}
-        </div>
-
         <div class="col-sm-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">登録アプリ一覧</h3>
                 </div>
                 <div class="panel-body">
+                    <p>放課後アプリ部に掲載するアプリはこちらで編集できます。</p>
                     <p>
                         <a href="{% url app.views.dev.app_regist %}" class="btn btn-middle btn-success">
                             <span class="glyphicon glyphicon-plus"></span>
@@ -64,9 +61,8 @@
                                         <h4>{{platforms|choise:app.platform}}アプリ</h4>
                                     </div>
                                     <h3>{{app.app_name}}</h3>
-
-                                    {{app.updated_at}}
-                                    {{app.creator_push}}
+                                    <p>カテゴリ：{{app.category|cat2str}}</p>
+                                    <p>更新日：{{app.updated_at}}</p>
                                     <div>
                                         <a class="btn btn-block btn-primary" href="{% url app.views.dev.app_update app.key.id %}">アプリ情報編集</a>
                                         <a class="btn btn-block btn-info" href="{% url app.views.home.app_detail app.key.id %}">アプリページ確認</a>
@@ -75,6 +71,26 @@
                             </div>
                         {% endfor %}
                     </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-5">
+            {% include 'plugin/creator_push.html' %}
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">API利用申請</h3>
+                </div>
+                <div class="panel-body">
+                    放課後アプリ部のAPIを利用したい場合は下記フォームから申請して下さい。
+                    <p>
+                        <a href="{% url app.views.dev.api_regist %}" class="btn btn-middle btn-success">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                API利用申請
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>

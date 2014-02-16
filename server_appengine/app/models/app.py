@@ -17,8 +17,7 @@ class App(ndb.Model):
     status        = ndb.IntegerProperty(default = 1)
     created_at    = ndb.DateTimeProperty(auto_now_add = True)
     updated_at    = ndb.DateTimeProperty(auto_now = True)
-    thumb_nail    = ndb.StringProperty()
-    app_image     = ndb.StringProperty()
+    thumbnail    = ndb.StringProperty()
     category      = ndb.IntegerProperty()
     # イチオシアプリを数値管理 1,2,3
     creator_push  = ndb.IntegerProperty()
@@ -35,6 +34,7 @@ class App(ndb.Model):
             instance = cls()
         if "platform" in params:
             params["platform"] = int(params["platform"])
+        
         params["status"]   = int(params["status"])
         instance.populate(**params)
 #        instance.populate(

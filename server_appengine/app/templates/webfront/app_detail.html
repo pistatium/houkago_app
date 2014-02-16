@@ -45,11 +45,14 @@
 					<div class="well pull-right">
 						<dl>
 	  						<dt>登録日</dt><dd>{{app.created_at|date:"Y/m/d"}}</dd>
+	  						<dt>カテゴリ</dt>
+								<dd>{{app.category|cat2str}}</dd>
 	  						<dt>プラットフォーム</dt>
 	  							<dd>							
 	  								<img src="/img/platform/{{app.platform}}.png" width=20>
 									{{platforms|choise:app.platform}}
 								</dd>
+
 
 						</dl>
 					</div>

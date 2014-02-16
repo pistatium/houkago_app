@@ -25,12 +25,14 @@ import syskey
 # import from project
 from app.models.developer import Developer
 from app.models.app import App
+from app.models.useapi import UseApi
 from app.models.upload import ProfImage, AppImage
 
 from app.libs import utils
 from app.forms.appform import AppForm, AppFormUpdate
 from app.forms.pushform import PushForm
 from app.forms.uploadform import UploadForm
+from app.forms.useapiform import UseApiForm
 
 from app import views
 from app.libs.arrays import platforms, show_status
@@ -194,6 +196,28 @@ def upload_icon_img(request, app_id, context):
     return render_to_response('webfront/upload_form.html', context)
 
 
+@custom_view
+def api_regist(request, context):
+    context["form"] = UseApiForm()
+    developer_id = context["developer"].key.id()
+    context["use_api"] = UseApi.getQuery(developer_id)
+    if request.method == 'POST':
+        form = UseApiForm(request.POST)
+        if form.is_valid():
+            params = form.cleaned_data
+            params["developer_id"] = developer_id
+            useapi = UseApi.create(params)
+            useapi.put()
+            return HttpResponseRedirect(reverse(api_regist))
+        else:
+            context["form"] = form
+
+
+    #apps = App.getQueryByDeveloper(context["developer"].key.id())
+    #context["apps"] = apps
+    return render_to_response('webfront/api_regist.html',context)
+
+
 @utils.login_required
 def regist_complete(request):
     return render_to_response('webfront/regist_complete.html',{})
@@ -210,5 +234,6 @@ urlpatterns = patterns(None,
     (r'^/update_push/?$', update_push),
     (r'^/upload_img/?$', upload_img),
     (r'^/upload_icon_img/(\d+)/?$', upload_icon_img),
+    (r'^/api_regist$', api_regist),
     (r'^/?$', index),
 )

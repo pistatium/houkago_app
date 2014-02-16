@@ -79,6 +79,12 @@ def about(request, context):
     context["current_tab"] = "about"
     return render_to_response('webfront/about.html',context)
 
+@cache_page(60 * 15)
+@custom_view
+def about_api(request, context):
+    context["current_tab"] = "about"
+    return render_to_response('webfront/about_api.html',context)
+
 @cache_page(60 * 60)
 @custom_view
 def user_id(request, user_id, context):
@@ -140,6 +146,7 @@ def app_rss(request, platform = None):
 '''
 urlpatterns = patterns(None,
     (r'^about/?$', about),
+    (r'^about_api/?$', about_api),
     (r'^user_id/(\d+)/?$' , user_id),
     (ur'^user/(\w+)/?$' , user),
     (r'^app_list/(\w+)/(\d+)?$' , app_list),

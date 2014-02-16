@@ -1,0 +1,51 @@
+{% extends "parent.html" %}
+{% load my_utils %}
+{% load bootstrap %}
+{% block main %}
+	<div>
+		<h2>申請済み一覧</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>アプリ名</th>
+					<th>client=</th>
+					<th>key=</th>
+					<th>ステータス</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for ua in use_api %}
+					<tr>
+						<td>{{ ua.client_name }}</td>
+						<td>
+							{{ developer.user_alias|cat:"_"|cat:ua.key.id }}
+						</td>
+						<td>
+							{{ developer.user_alias|cat:"_"|cat:ua.key.id|calc_api_key }}
+						</td>
+						<td>
+							{% if ua.status == 1 %}
+								<span class="label label-success">利用可能</span>
+							{% else %}
+								<span class="label label-error">利用不可</span>
+							{% endif %}
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-5">
+			<h2>利用申請</h2>
+			<form action="" method="POST" class="form" role="form">
+				{% csrf_token %}
+				{{form|bootstrap}}
+				<button type="submit" class="btn btn-md btn-primary">登録する</button>
+			</form>
+		</div>
+		<div class="col-xs-12 col-sm-7">
+			{% include 'plugin/api_info.html' %}
+		</div>
+	</div>
+
+{% endblock %}

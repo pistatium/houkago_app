@@ -5,7 +5,7 @@ from django import forms
 # -- Rules of validation -------------------------------
 # ------------------------------------------------------
 
-from app.libs.arrays import platforms, show_status
+from app.libs.arrays import platforms, categories, show_status
 
 # regist用バリデーションルール
 class AppForm(forms.Form):
@@ -19,6 +19,11 @@ class AppForm(forms.Form):
         label = "アプリ名(必須)",
         max_length = 32, 
         required = True,
+    )
+    category = forms.ChoiceField(
+        label   = u"カテゴリ",
+        choices = categories, 
+        required = False, 
     )
     tagline = forms.CharField(
         label = "アプリのキャッチコピー（必須）",
@@ -65,6 +70,12 @@ class AppForm(forms.Form):
         label   = u"表示",
         choices = show_status, 
     )
+    def clean_category(self):
+        category = self.cleaned_data['category']
+        if category:
+            return int(category)
+        
+
 
 
 class AppFormUpdate(AppForm):

@@ -1,0 +1,25 @@
+{% extends "parent.html" %}
+{% load my_utils %}
+{% block title %}放課後アプリ部APIについて{% endblock %}
+
+{% block main %}
+	<h1>放課後アプリ部API <small>(Experimental)</small></h1>
+	入部後、APIの利用申請をすることで、放課後アプリに登録してある
+	アプリ一覧や詳細の情報がAPIとして取得することが出来ます。
+
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-8">
+			{% include 'plugin/api_info.html' %}
+		</div>
+		<div class="col-xs-12 col-sm-4">
+	
+			{% include 'plugin/regist_div.html' %}
+        
+	        <div>
+	            <h2>スポンサード・リンク</h2>
+	            {% include 'plugin/ads.html' %}
+	        </div>
+		</div>
+	</div>
+{% endblock %}

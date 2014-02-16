@@ -20,90 +20,41 @@ show_status = (
 
 # DBへのアクセスを減らすため、
 # 途中変更の少ないカテゴリは直書きで運用する
-# 順序の変更は不可
-# カテゴリ追加の場合は一番下に追記する
-# カテゴリ削除の場合は、カテゴリ名の先頭に｢#｣をつける
-
-_cat_apps = (
-  (10,"アプリ / ツール(日常的に使う)"),
-  (10,"アプリ /ツール(あると便利)"),
-  (10,"アプリ /カスタマイズ"),
-  (10,"アプリ /情報収集"),
-  (10,"アプリ /コミュニケーション"),
-  (10,"アプリ /エンターテイメント"),
-  (10,"アプリ /教育･学習"),
-  (10,"アプリ /健康･医療"),
-  (10,"アプリ /旅行･アウトドア"),
-  (10,"アプリ /グルメ･フード"),
-  (10,"アプリ /ビジネス"),
-  (10,"アプリ /写真･動画"),
-  (10,"アプリ /音楽"),
-  (10,"アプリ /カスタマイズ"),
-  (10,"ゲーム / 2Dアクション"),
-  (10,"ゲーム / 3Dアクション"),
-  (10,"ゲーム / "),
-  (10,"ゲーム / アーケード"),
-  (10,"ゲーム / 音楽"),
-  (10,"ゲーム / シミュレーション"),
-  (10,"ゲーム / ストラテジ"),
-  (10,"ゲーム / カード･テーブル"),
-  (10,"ゲーム / クイズ"),
-  (10,"ゲーム / レースゲーム"),
+categories = (
+  ( 100, "アプリ / ツール(日常的に使う)"),
+  ( 110, "アプリ / ツール(あると便利)"),
+  ( 120, "アプリ / カスタマイズ"),
+  ( 130, "アプリ / 情報収集"),
+  ( 140, "アプリ / コミュニケーション"),
+  ( 150, "アプリ / エンターテイメント"),
+  ( 160, "アプリ / 教育･学習"),
+  ( 170, "アプリ / 健康･医療"),
+  ( 180, "アプリ / 旅行･アウトドア"),
+  ( 190, "アプリ / グルメ･フード"),
+  ( 200, "アプリ / ビジネス"),
+  ( 210, "アプリ / 写真･動画・音楽"),
+  ( 220, "アプリ / カスタマイズ"),
+  ( 230, "アプリ / その他"),
+  ( 510, "ゲーム / アクション"),
+  ( 520, "ゲーム / RPG"),
+  ( 530, "ゲーム / パズル"),
+  ( 540, "ゲーム / アドベンチャー"),
+  ( 550, "ゲーム / シミュレーション"),
+  ( 560, "ゲーム / シューティング"),
+  ( 570, "ゲーム / スポーツ"),
+  ( 580, "ゲーム / 音楽"),
+  ( 590, "ゲーム / その他"),
 )
 
-_BASE_CID_GAME = 1000
-
-class Category:
-    def __init__(self, cid, label, group):
-        self.id      = cid
-        self.label   = label 
-        self.group  = group # app, game
-
-    def __repr__(self):
-        return "[ %s Category.%d (%s) ]" % (self.group, self.id, self.label)
-
-    @classmethod
-    def getList(cls, group):
-        group = group.capitalize()
-        base_cid = 0 
-        if group == 'App':
-            cats = _cat_apps
-        elif group == 'Game':
-            cats = _cat_games
-            base_cid = _BASE_CID_GAME
-        else:
-            return []
-        categories = []
-        for i,c in enumerate(cats):
-            cid = base_cid + i
-            if not c.startswith('#'):
-              categories.append(Category(cid, c, group))
-        return categories
-
-    @classmethod
-    def getById(cls, cid):
-        category = ""
-        categories = []
-        if cid < _BASE_CID_GAME:
-            if cid < len(_cat_apps):
-                return Category(cid, _cat_apps[cid], 'App')
-            else:
-                return Category(cid, 'その他', 'App')
-        else:
-            cid = cid - _BASE_CID_GAME
-            if cid < len(_cat_games):
-                return Category(cid, _cat_games[cid], 'Game')
-            else:
-                return Category(cid, 'その他', 'Game')
+def get_category(cat_id):
+  cat = filter(lambda x : x[0] == cat_id, categories)
+  if cat:
+    return cat[0][1]
+  else:
+    return u"(未設定)"
 
 
 
-def test():
-    print repr(Category.getList('App'))
-    print repr(Category.getList('Game'))
-    print repr(Category.getList('Hoge'))
-    print Category.getById(1001)
-    print Category.getById(1200)
 
 if __name__ == '__main__':
     test()

@@ -14,6 +14,7 @@
 		</p>
 
 	{% else %}
+			<a href="{% url app.views.dev.index %}" class="btn btn-info">開発者ページへ</a>
 		    <h2>ログアウト</h2>
 		    <p>
 		    	現在 <code>{{developer.uname}}</code>でログイン中です。
