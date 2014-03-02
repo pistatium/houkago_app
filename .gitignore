@@ -1,4 +1,13 @@
+.*
 *.pyc
+Design
 server_appengine/syskey.py
 ads.html
 *.pptx
+android/keystore
+android/.*
+android/tmp_gen
+android/gen
+android/DESIGN
+android/bin
+android/APK

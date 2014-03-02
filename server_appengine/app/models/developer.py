@@ -2,7 +2,7 @@
 #from django import forms
 from google.appengine.ext import ndb
 from google.appengine.ext.db import BadValueError
-
+#from app.libs.utils import cache
 
 
 class Developer(ndb.Model):
@@ -56,6 +56,7 @@ class Developer(ndb.Model):
           return data
         return False
 
+    #@cache
     @classmethod
     def getByAlias(cls, user_alias):
         query = cls.query(cls.user_alias == user_alias)

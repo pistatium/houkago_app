@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/app"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="8dp"
+    android:background="@color/base_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dip"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/touchable_item"
+        android:orientation="horizontal" >
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/app_icon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_margin="4dp"
+            android:layout_weight="0"
+            android:src="@drawable/app" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="4dp" >
+
+            <TextView
+                android:id="@+id/app_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="Large Text"
+                android:textColor="@color/primary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/app_tagline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:text="Large Text"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/app_border"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0"
+            android:layout_marginLeft="4dp"
+            android:background="@color/shadow" />
+        
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/shadow" />
+
+</LinearLayout>

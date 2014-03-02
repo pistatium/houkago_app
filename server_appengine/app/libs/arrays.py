@@ -4,6 +4,7 @@
 platforms = (
     (1, "Android"),
     (2, "iOS"),
+    (3, "WidnowsPhone"),
     (9, "Web"),
 )
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ボタンが押されたときの定義 -->
+    <item android:state_pressed="true"><shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <solid android:color="@color/primary_dark" />
+        </shape></item>
+
+    <!-- ボタンが押されていないときの定義 -->
+    <item android:state_pressed="false"><shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <gradient android:angle="270" android:endColor="@color/primary_grd" android:startColor="@color/primary"></gradient>
+        </shape></item>
+
+</selector>

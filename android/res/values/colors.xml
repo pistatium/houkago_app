@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<resources>  
+    <color name="base_bg">#f5f0f0</color>
+    <color name="base_text">#232000</color>  
+    <color name="item_bg">#ffffff</color>  
+    <color name="item_bg_touched">#f0f0e0</color>  
+    <color name="primary">#f55d4b</color>
+    <color name="primary_grd">#CF3320</color>
+    <color name="primary_dark">#A81301</color>
+    <color name="primary_light">#FFA59B</color>
+    <color name="shadow">#d0d0d0</color>
+    <color name="dark">#505050</color>
+
+</resources>  

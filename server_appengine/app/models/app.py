@@ -97,7 +97,8 @@ class App(ndb.Model):
         if platform:
             query = query.filter(cls.platform == platform)
         return query
-        
+    
+    #@cache
     @classmethod
     def getRecentQuery(cls, platform = None):
         query = cls.query()
@@ -106,6 +107,7 @@ class App(ndb.Model):
             query = query.filter(cls.platform == platform)
         return query.order(-cls.created_at)
 
+    
     @classmethod
     def getPush(cls, developer_id, platform):
         query = cls.query(cls.developer_id == developer_id)

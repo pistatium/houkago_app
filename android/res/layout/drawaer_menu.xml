@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_content"
+    android:layout_width="260dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="left"
+    android:background="@color/base_bg"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="8dp" >
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:src="@drawable/ic_launcher120" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="©放課後アプリ部" />
+    <!-- ============================== -->
+
+    <Button
+        android:id="@+id/btn_about_circle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/touchable_item"
+        android:text="放課後アプリ部とは" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/shadow" />
+
+    <Button
+        android:id="@+id/btn_enter_circle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/touchable_item"
+        android:text="アプリ部に入部する" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/shadow" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/share_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/touchable_item"
+        android:text="友達に教える" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/shadow" />
+
+    <Button
+        android:id="@+id/evaluate_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/touchable_item"
+        android:text="このアプリを評価" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:background="@color/shadow" />
+
+</LinearLayout>

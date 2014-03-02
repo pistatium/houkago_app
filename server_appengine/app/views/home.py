@@ -7,7 +7,6 @@ from django.template import RequestContext
 from django.views.decorators.cache import cache_page
 from django.conf.urls.defaults import *
 
-
 from google.appengine.ext import ndb
 from google.appengine.api.datastore_errors import BadRequestError
 from google.appengine.api import memcache
@@ -32,6 +31,7 @@ from app.libs.arrays import platforms, get_platform_id
 #from app.forms import registform
 import syskey
 from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 from django.http import HttpResponseRedirect
 
 
@@ -62,7 +62,6 @@ def custom_view(view):
         return view(*args, **kwargs)
     return override_view
 
-@cache_page(60 * 15)
 @custom_view
 def index(request, context):
     context["developers"] = Developer.getQuery().fetch(10)
@@ -73,19 +72,16 @@ def index(request, context):
             context["recent_apps"][platform[1]] = apps
     return render_to_response('webfront/index.html', context)
 
-@cache_page(60 * 15)
 @custom_view
 def about(request, context):
     context["current_tab"] = "about"
     return render_to_response('webfront/about.html',context)
 
-@cache_page(60 * 15)
 @custom_view
 def about_api(request, context):
     context["current_tab"] = "about"
     return render_to_response('webfront/about_api.html',context)
 
-@cache_page(60 * 60)
 @custom_view
 def user_id(request, user_id, context):
     developer = Developer.get_by_id(user_id)
@@ -93,7 +89,6 @@ def user_id(request, user_id, context):
         raise Http404
     return HttpResponseRedirect(reverse(user, args=[developer.user_alias]))
 
-@cache_page(60 * 15)
 @custom_view
 def user(request, user_alias, context):
     developer = Developer.getByAlias(user_alias)
@@ -105,7 +100,6 @@ def user(request, user_alias, context):
     context["platforms"] = platforms
     return render_to_response('webfront/developer_detail.html',context)
 
-@cache_page(60 * 15)
 @custom_view
 def app_list(request, plat_str, page, context):
     COUNT = 12
@@ -117,7 +111,6 @@ def app_list(request, plat_str, page, context):
     context["apps"] = p.page(page)
     return render_to_response('webfront/app_list.html',context) 
 
-@cache_page(60 * 15)
 @custom_view
 def app_detail(request, app_id, context):
     app = App.getById(int(app_id))

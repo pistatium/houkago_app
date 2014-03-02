@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">放課後アプリ部</string>
+    <string name="gp_link">https://play.google.com/store/apps/details?id=com.appspot.pistatium.houkagoapp</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="share_app" formatted="false">個人の開発者で作る放課後アプリ部！ http://goo.gl/TdwdtF</string>
+</resources>
