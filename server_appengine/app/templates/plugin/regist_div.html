@@ -1,6 +1,9 @@
-{% if developer %}
+{% if is_login %}
 	<h2>ログイン中</h2>
-	<a href="{% url app.views.dev.index %}" class="btn btn-primary btn-block">開発者用ページヘ</a>
+	<p>
+		<a href="{% url app.views.dev.index %}" class="btn btn-primary btn-block">開発者用ページヘ</a>
+	</p>
+	<p>こちらからプロフィールの変更、アプリの登録等が行えます。</p>
 {% else %}
 	<div>
 		<h2>開発者の方へ</h2>

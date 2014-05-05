@@ -15,6 +15,10 @@ def choise(array, key):
 		return vals[0][1]
 
 @register.filter
+def keyvalue(dict, key):
+    return dict[key]
+
+@register.filter
 def cat2str(cat_id):
 	return get_category(cat_id)
 

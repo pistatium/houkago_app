@@ -86,6 +86,7 @@ def app_detail(request, app_id, context={}):
 def app_regist(request, context):
      # POST
     context["title"] = u"アプリ情報登録"
+    context["description"] = u"こちらからアプリの詳細を入力してください。\n一部フォームは任意入力ですが、アプリについてより多くの情報を入力すると検索などから流入増加が見込めます。"
     if request.method == 'POST':
         #developer = models.DeveloperModel()
         form = AppForm(request.POST)
@@ -108,6 +109,7 @@ def app_regist(request, context):
 @custom_view
 def app_update(request, app_id, context={}):
     context["title"] = u"アプリ情報更新"
+    context["description"] = u"こちらで登録したアプリの情報を修正できます。\n修正がサイト上で反映されるまでしばらく時間がかかります。\n一部フォームは任意入力ですが、アプリについてより多くの情報を入力すると検索などから流入増加が見込めます。"
     app = App.getById(int(app_id))
     if app is None:
         return HttpResponseRedirect(reverse(app_regist))

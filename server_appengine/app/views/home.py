@@ -66,10 +66,13 @@ def custom_view(view):
 def index(request, context):
     context["developers"] = Developer.getQuery().fetch(10)
     context["recent_apps"] = {}
+    context["has_more"] = {}
+    FETCH_LIMIT = 12
     for platform in platforms:
-        apps = App.getRecentQuery(platform[0]).fetch(8)
+        apps = App.getRecentQuery(platform[0]).fetch(FETCH_LIMIT + 1)
         if apps:
-            context["recent_apps"][platform[1]] = apps
+            context["recent_apps"][platform[1]] = apps[:FETCH_LIMIT]
+            context["has_more"][platform[1]] = bool(len(apps) > FETCH_LIMIT)
     return render_to_response('webfront/index.html', context)
 
 @custom_view
@@ -102,7 +105,7 @@ def user(request, user_alias, context):
 
 @custom_view
 def app_list(request, plat_str, page, context):
-    COUNT = 12
+    COUNT = 24
     platform = get_platform_id(plat_str)
     query = App.getRecentQuery(platform)
     p = GAEPaginator(query, COUNT)
