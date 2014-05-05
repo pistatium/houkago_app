@@ -47,7 +47,6 @@ import android.widget.Toast;
 public class MainActivity extends FragmentActivityBase implements
 LoaderManager.LoaderCallbacks<Cursor> {
 
-	
 	private RequestQueue mQueue;
 	private AppCursorAdapter adapter;
 	ListView listView;
