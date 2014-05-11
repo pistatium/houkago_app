@@ -27,7 +27,7 @@ from app.libs.gae_paginator import GAEPaginator
 from app.models.developer import Developer
 from app.models.app import App
 from app import views
-from app.libs.arrays import platforms, get_platform_id
+from app.libs.arrays import platforms, get_platform_id, categories
 #from app.forms import registform
 import syskey
 from django.views.decorators.cache import cache_page
@@ -104,12 +104,35 @@ def user(request, user_alias, context):
     return render_to_response('webfront/developer_detail.html',context)
 
 @custom_view
+def user_list(request, page, context):
+    COUNT = 50
+    query = Developer.getQuery()
+    p = GAEPaginator(query, COUNT)
+    context["page"] = page
+    context["developers"] = p.page(page)
+    return render_to_response('webfront/user_list.html',context)
+
+@custom_view
 def app_list(request, plat_str, page, context):
     COUNT = 24
     platform = get_platform_id(plat_str)
     query = App.getRecentQuery(platform)
     p = GAEPaginator(query, COUNT)
     context["plat_str"] = plat_str
+    context["page"] = page
+    context["categories"] = categories
+    context["apps"] = p.page(page)
+    return render_to_response('webfront/app_list.html',context) 
+
+@custom_view
+def app_cat(request, plat_str, cat_id, page, context):
+    COUNT = 24
+    platform = get_platform_id(plat_str)
+    query = App.getRecentQuery(platform, int(cat_id))
+    p = GAEPaginator(query, COUNT)
+    context["plat_str"] = plat_str
+    context["cat_id"] = int(cat_id)
+    context["categories"] = categories
     context["page"] = page
     context["apps"] = p.page(page)
     return render_to_response('webfront/app_list.html',context) 
@@ -145,7 +168,10 @@ urlpatterns = patterns(None,
     (r'^about_api/?$', about_api),
     (r'^user_id/(\d+)/?$' , user_id),
     (ur'^user/(\w+)/?$' , user),
+    (ur'^user_list/(\d+)/?$' , user_list),
     (r'^app_list/(\w+)/(\d+)?$' , app_list),
+    (r'^app_cat/(\w+)/(\d+)/(\d+)?$' , app_cat),
+    (r'^app_cat/(\w+)//(\d+)?$' , app_cat),
     (r'^app_detail/(\d+)/?$' , app_detail),
     (r'^rss.xml$', app_rss),
     (r'^/?$', index),

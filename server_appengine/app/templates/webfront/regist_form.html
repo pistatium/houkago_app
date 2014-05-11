@@ -11,4 +11,14 @@
 	  </form>
 </div>
 <hr>
+
+<script>
+    $(function(){
+        var addDescription = function(target_id, description) {
+            $("#" + target_id).after('<p class="form_desc">' + description + '</p>');
+        };
+        addDescription("id_package_name", 
+          "web： http://<b>www.example.com</b><br>iOS： https://itunes.apple.com/jp/app/<b>(このApp Idの部分)</b><br>Android： https://play.google.com/store/apps/details?id=<b>(このpackagenameの部分)</b>");
+    });
+</script>
 {% endblock main %}

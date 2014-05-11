@@ -22,6 +22,14 @@ indexes:
 
 - kind: App
   properties:
+  - name: category
+  - name: platform
+  - name: status
+  - name: created_at
+    direction: desc
+
+- kind: App
+  properties:
   - name: developer_id
   - name: platform
   - name: creator_push

@@ -100,11 +100,13 @@ class App(ndb.Model):
     
     #@cache
     @classmethod
-    def getRecentQuery(cls, platform = None):
+    def getRecentQuery(cls, platform = None, cat_id = None):
         query = cls.query()
         query = query.filter(cls.status == 1)
         if platform is not None:
             query = query.filter(cls.platform == platform)
+        if cat_id is not None:
+            query = query.filter(cls.category == cat_id)
         return query.order(-cls.created_at)
 
     

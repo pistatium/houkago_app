@@ -1,0 +1,52 @@
+{% extends "parent.html" %}
+{% load my_utils %}
+
+{% block title %}
+{{cat_id}}
+    {% if cat_id %}
+        新入部員一覧 page.{{page}} - 放課後アプリ部
+    {% else %}
+        {{plat_str}}アプリ一覧 page.{{page}} - 放課後アプリ部
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+	<div class="row">
+		<div class="col-md-8">
+			<h1>新入部員一覧<small>(新規登録順)</small></h1>
+
+		    <ul class="pager">
+		        <li class="{{developers.has_previous|yesno:"active,disabled"}}">
+		            <a href="{{ developers.previous_page_number }}">&larr; previous</a>
+		        </li>
+		        Page {{ apps.number }} of {{ apps.paginator.num_pages }}.
+		        <li class="{{developers.has_next|yesno:"active,disabled"}}">
+		            <a href="{{ developers.next_page_number }}">&rarr; next</a>
+		        </li>            
+		    </ul>
+
+		    <div class="row">
+		        {% for developer in developers %}
+		                {% include 'plugin/profile_list.html' %}
+		        {% endfor %}
+		    </div>
+
+		    <ul class="pager">
+		        <li class="{{developers.has_previous|yesno:"active,disabled"}}">
+		            <a href="{{ developers.previous_page_number }}">&larr; previous</a>
+		        </li>
+		        Page {{ apps.number }} of {{ apps.paginator.num_pages }}.
+		        <li class="{{developers.has_next|yesno:"active,disabled"}}">
+		            <a href="{{ developers.next_page_number }}">&rarr; next</a>
+		        </li>            
+		    </ul>
+		</div>
+
+		<div class="col-md-4">
+			{% include 'plugin/regist_div.html' %}
+
+			<h2>スポンサード・リンク</h2>
+            {% include 'plugin/ads.html' %}
+		</div>
+	</div>
+{% endblock %}

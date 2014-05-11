@@ -1,35 +1,69 @@
 {% extends "parent.html" %}
 {% load my_utils %}
 
-{% block title %}{{plat_str}}アプリ一覧 page.{{page}} - 放課後アプリ部{% endblock %}
-{% block main %}
-    <div>
-        <h1>{{plat_str}}アプリ一覧 page.{{page}}</h1>
-        <ul class="pager">
-            <li class="{{apps.has_previous|yesno:"active,disabled"}}">
-                <a href="{{ apps.previous_page_number }}">&larr; previous</a>
-            </li>
-            Page {{ apps.number }} of {{ apps.paginator.num_pages }}.
-            <li class="{{apps.has_next|yesno:"active,disabled"}}">
-                <a href="{{ apps.next_page_number }}">&rarr; next</a>
-            </li>            
-        </ul>
-        <hr>
-        <div class="row">
-            {% for app in apps %}
-                {% include 'plugin/app_box.html' %}
-            {% endfor %}
-        </div>
-        <hr>
-        <ul class="pager">
-            <li class="{{apps.has_previous|yesno:"active,disabled"}}">
-                <a href="{{ apps.previous_page_number }}">&larr; previous</a>
-            </li>
-            Page {{ apps.number }} of {{ apps.paginator.num_pages }}.
-            <li class="{{apps.has_next|yesno:"active,disabled"}}">
-                <a href="{{ apps.next_page_number }}">&rarr; next</a>
-            </li>            
-        </ul>
-    </div>
+{% block title %}
+{{cat_id}}
+    {% if cat_id %}
+        {{cat_id|cat2str}}カテゴリ {{plat_str}}アプリ一覧 page.{{page}} - 放課後アプリ部
+    {% else %}
+        {{plat_str}}アプリ一覧 page.{{page}} - 放課後アプリ部
+    {% endif %}
+{% endblock %}
 
+{% block main %}
+    <div class="row">
+        <div class="col-md-8">
+            <h1>
+                {% if cat_id %}
+                    {{cat_id|cat2str}}カテゴリ 
+                    <br>{{plat_str}}アプリ一覧
+                {% else %}
+                    {{plat_str}}アプリ一覧
+                {% endif %}
+            </h1>
+            <ul class="pager">
+                <li class="{{apps.has_previous|yesno:"active,disabled"}}">
+                    <a href="{{ apps.previous_page_number }}">&larr; previous</a>
+                </li>
+                Page {{ apps.number }} of {{ apps.paginator.num_pages }}.
+                <li class="{{apps.has_next|yesno:"active,disabled"}}">
+                    <a href="{{ apps.next_page_number }}">&rarr; next</a>
+                </li>            
+            </ul>
+            <hr>
+            <div class="row">
+                {% for app in apps %}
+                    {% include 'plugin/app_box.html' %}
+                {% endfor %}
+            </div>
+            <hr>
+            <ul class="pager">
+                <li class="{{apps.has_previous|yesno:"active,disabled"}}">
+                    <a href="{{ apps.previous_page_number }}">&larr; previous</a>
+                </li>
+                Page {{ apps.number }} of {{ apps.paginator.num_pages }}.
+                <li class="{{apps.has_next|yesno:"active,disabled"}}">
+                    <a href="{{ apps.next_page_number }}">&rarr; next</a>
+                </li>            
+            </ul>
+        </div>
+        <div class="col-md-4">
+            {% if cat_id %}
+                <div class="list-group">
+    
+            {% endif %}
+
+            <h2>カテゴリ一覧</h2>
+            <div class="list-group">      
+                <a class="list-group-item {{cat_id|default:0|yesno:"list-group-item-success, active"}}" href="{% url app.views.home.app_list plat_str 1 %}">全カテゴリ{{plat_str}}アプリ一覧</a>     
+
+                {% for cat in categories %}
+                    <a class="list-group-item {{cat_id|eq:cat.0|yesno:"active,"}}" href="{% url app.views.home.app_cat plat_str cat.0 1 %}">{{cat.1}}</a>
+                {% endfor %}
+            </div>
+
+            <h2>スポンサード・リンク</h2>
+            {% include 'plugin/ads.html' %}
+        </div>
+    </div>
 {% endblock %}

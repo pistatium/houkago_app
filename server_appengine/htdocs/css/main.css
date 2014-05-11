@@ -224,3 +224,7 @@ a.anchor{
   border:none;
   font-weight: bold;
 }
+.form_desc{
+  padding: 0 0 10px 10px;
+  color: #669;
+}

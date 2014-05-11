@@ -35,7 +35,7 @@
                             </h3>
                         </a>
                     </div>
-                    <div id="collapse{{platform}}" class="panel-collapse collapse {{forloop.first|yesno:",in,"}}">
+                    <div id="collapse{{platform}}" class="panel-collapse collapse">
                         <div class="panel-body row">
                             {% for app in r_apps %}
                                 {% include 'plugin/app_box.html' %}
@@ -51,16 +51,15 @@
             {% endfor %}
         </div>
 <script>$('.collapse').collapse();</script>
-        <h2>新入部員<small>(新規登録順)</small></h2>
+        <h1>新入部員<small>(新規登録順)</small></h1>
         <div class="row">
             {% for developer in developers %}
                     {% include 'plugin/profile_list.html' %}
             {% endfor %}
-
         </div>
-        <!--<div class="more_link">
-            <a href="#">&gt;&gt; もっとみる</a>
-        </div>-->
+        <div class="more_link">
+            <a href="{% url app.views.home.user_list 1 %}">&gt;&gt; もっとみる</a>
+        </div>
             
 
 
