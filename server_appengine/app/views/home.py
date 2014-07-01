@@ -148,6 +148,8 @@ def app_detail(request, app_id, context):
     #    raise Http404
     context["developer"] = developer
     context["push_app"] = App.getPush(app.developer_id, app.platform)
+    # 自身が含まれている可能性があるので +1件
+    context["related_app"] = App.getRecentQuery(app.platform, app.category).fetch(3 + 1)
     return render_to_response('webfront/app_detail.html',context)   
 
 @cache_page(60 * 15)

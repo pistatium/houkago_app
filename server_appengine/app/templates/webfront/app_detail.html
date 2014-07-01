@@ -127,6 +127,15 @@
 				{% endfor %}
 			</div>
 
+			{% if related_app|length > 1 %}
+				<h2>関連アプリ</h2>
+
+				{% for rapp in related_app %}
+					{% if rapp.key.id != app.key.id %}
+						{% include 'plugin/app_box.html' %}
+					{% endif %}
+				{% endfor %}
+			{% endif %}
 
 			{% include 'plugin/regist_div.html' %}
         

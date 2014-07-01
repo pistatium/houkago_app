@@ -60,6 +60,7 @@ def index(request, context):
     else:
         context["user_id"] = user.user_id()
         context["logout_url"] = users.create_logout_url(reverse(index))
+    context["developers"] = Developer.getQuery().fetch(10)
     return render_to_response('webfront/regist.html',context)
 
 @utils.login_required

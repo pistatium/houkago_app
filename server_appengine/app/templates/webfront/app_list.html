@@ -21,31 +21,65 @@
                     {{plat_str}}アプリ一覧
                 {% endif %}
             </h1>
+
             <ul class="pager">
-                <li class="{{apps.has_previous|yesno:"active,disabled"}}">
-                    <a href="{{ apps.previous_page_number }}">&larr; previous</a>
-                </li>
+                {% if apps.has_previous %}
+                    <li class="active">
+                        <a href="{{ apps.previous_page_number }}">&larr; previous</a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <a href="#">&larr; previous</a>
+                    </li>
+                {% endif %}
+
                 Page {{ apps.number }} of {{ apps.paginator.num_pages }}.
-                <li class="{{apps.has_next|yesno:"active,disabled"}}">
-                    <a href="{{ apps.next_page_number }}">&rarr; next</a>
-                </li>            
+
+                {% if apps.has_next %}
+                    <li class="active">
+                        <a href="{{ apps.next_page_number }}">&rarr; next</a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <a href="#">next &rarr; </a>
+                    </li>
+                {% endif %}
             </ul>
+
             <hr>
             <div class="row">
-                {% for app in apps %}
-                    {% include 'plugin/app_box.html' %}
+                {% for rapp in apps %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                        {% include 'plugin/app_box.html' %}
+                    </div>
                 {% endfor %}
             </div>
             <hr>
+
             <ul class="pager">
-                <li class="{{apps.has_previous|yesno:"active,disabled"}}">
-                    <a href="{{ apps.previous_page_number }}">&larr; previous</a>
-                </li>
+                {% if apps.has_previous %}
+                    <li class="active">
+                        <a href="{{ apps.previous_page_number }}">&larr; previous</a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <a href="#">&larr; previous</a>
+                    </li>
+                {% endif %}
+
                 Page {{ apps.number }} of {{ apps.paginator.num_pages }}.
-                <li class="{{apps.has_next|yesno:"active,disabled"}}">
-                    <a href="{{ apps.next_page_number }}">&rarr; next</a>
-                </li>            
+
+                {% if apps.has_next %}
+                    <li class="active">
+                        <a href="{{ apps.next_page_number }}">&rarr; next</a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <a href="#">next &rarr; </a>
+                    </li>
+                {% endif %}
             </ul>
+
         </div>
         <div class="col-md-4">
             {% if cat_id %}

@@ -1,12 +1,11 @@
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-    <a href="{% url app.views.home.app_detail app.key.id %}" class="">
+
+    <a href="{% url app.views.home.app_detail rapp.key.id %}" class="">
         <div class="app-box">
     
-            <img src="{% url app.views.img.app_icon app.key.id %}" class="recent_app_icon">
+            <img src="{% url app.views.img.app_icon rapp.key.id %}" class="recent_app_icon">
             <div class="caption">
-                {{app.app_name}}<br>
-                <small>{{app.tagline}}</small>
+                {{rapp.app_name}}<br>
+                <small>{{rapp.tagline}}</small>
             </div>
         </div>
     </a>
-</div>

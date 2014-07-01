@@ -3,27 +3,32 @@
 
 {% block title %}放課後アプリ部 - 集まれ！放課後アプリディベロッパー！{% endblock %}
 {% block main %}
-<div class="jumbotron">
-    <div class="row">
-        <div class="col-xs-12 col-sm-3 col-md-2 pull-left center">
-            <img src="/img/material/app_icon512.png" class="img-responsive">
-        </div>
-        <h1 class="col-xs-11 col-sm-9 col-md-10">
-            
-            放課後アプリ部
-            <br><small>集まれ！ アプリデベロッパー！</small>
-        </h1>
-    </div>
-    <p class="head-line">
-        「放課後アプリ部」は、個人のアプリ開発者達が集まって作る新しいプラットフォームです。
-        会社の方針や収益性にとらわれないデベロッパー達が作る自由なアプリを集めてます！
-    </p>
-</div>
+
 
 
 <div class="row">
     <div class="main col-md-8 col-xs-12">
 
+        <div class="jumbotron" id="title_box">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-2 pull-left center">
+                    <img src="/img/material/app_icon512.png" class="img-responsive" style="max-height:250px">
+                </div>
+                <h1 class="col-xs-11 col-sm-9 col-md-10 main_title">
+                    
+                    放課後アプリ部
+                    <br><small>集まれ！ アプリデベロッパー！</small>
+                </h1>
+            </div>
+        </div>
+        <div>
+            <h2>放課後アプリ部とは</h2>
+                個人のアプリ開発者達が集まって作る新しいプラットフォームです。<br>
+                会社の方針や収益性にとらわれないデベロッパー達が作る自由なアプリを集めてます！
+                <div class="more_link">
+                    <a href="/about">&gt;&gt;もっとみる</a>
+                </div>
+        </div>
         <h2>部員活動履歴<small>(新規登録順)</small></h2>
         <div class="panel-group" id="accordion">
             {% for platform, r_apps in recent_apps.items %}
@@ -37,8 +42,10 @@
                     </div>
                     <div id="collapse{{platform}}" class="panel-collapse collapse">
                         <div class="panel-body row">
-                            {% for app in r_apps %}
-                                {% include 'plugin/app_box.html' %}
+                            {% for rapp in r_apps %}
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                    {% include 'plugin/app_box.html' %}
+                                </div>
                             {% endfor %}
                             {% if has_more|keyvalue:platform %}
          　                      <div class="more_link">
@@ -51,10 +58,14 @@
             {% endfor %}
         </div>
 <script>$('.collapse').collapse();</script>
-        <h1>新入部員<small>(新規登録順)</small></h1>
+        <h2>新入部員<small>(新規登録順)</small></h2>
         <div class="row">
             {% for developer in developers %}
+                <div class="col-xs-2 visible-xs"></div>
+                <div class="profile_card col-xs-9 col-sm-6 col-md-6 col-lg-5 col-lg-offset-1 center">
                     {% include 'plugin/profile_list.html' %}
+                </div>
+                <div class="col-xs-1 visible-xs"></div>
             {% endfor %}
         </div>
         <div class="more_link">
@@ -82,6 +93,14 @@
 
                 </p>
         </div>
+        <div>
+            <h2><a class="twitter-timeline" href="https://twitter.com/houkago_app" data-widget-id="480624310030049280">@houkago_app</a></h2>
+            
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+        </div>
+
         <div>
             <h2>スポンサード・リンク</h2>
             {% include 'plugin/ads.html' %}

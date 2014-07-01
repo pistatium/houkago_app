@@ -46,21 +46,19 @@
 
 			<h2>活動実績</h2>
 			<div class="row">
-				{% for app in apps %}
-					{% if app.status == 1 %}
-						<a href="{% url app.views.home.app_detail app.key.id %}">
-							<div class="col-xs-6 col-md-4 dev_app">
-								登録日: {{app.created_at|date:"Y/m/d"}}
-								<h3>{{app.app_name}}</h3>
-
-								<div class="platform clearfix">                      
-	                                {% if app.platform == 9 %}
+				{% for rapp in apps %}
+					{% if rapp.status == 1 %}
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+							<hr>
+							登録日: {{rapp.created_at|date:"Y/m/d"}}<br>
+							<div class="platform clearfix">                      
+	                                {% if rapp.platform == 9 %}
 	                                    <img src="/img/material/web.png" class="img-responsive pull-left" style="background:#555;">
 	                                    <h4>Web</h4>
-	                                {% elif app.platform == 1 %}
+	                                {% elif rapp.platform == 1 %}
 	                                    <img src="/img/material/android.png" class="img-responsive pull-left" style="background:#555;">
 	                                    <h4>Android</h4>
-	                         		{% elif app.platform == 3 %}
+	                         		{% elif rapp.platform == 3 %}
 	                                    <img src="/img/material/windows.png" class="img-responsive pull-left" style="background:#555;">
 	                                    <h4>WindowsPhone</h4>
 	                                {% else %}
@@ -68,9 +66,8 @@
 	                                    <h4>iOS</h4>
 	                                {% endif %}
 	                            </div>
-								<img src="{% url app.views.img.app_icon app.key.id %}" class="img-responsive user_app_img">
-							</div>
-						</a>
+                        	{% include 'plugin/app_box.html' %}
+                    	</div>
 					{% endif %}
 				{% endfor %}
 			</div>

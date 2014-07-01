@@ -46,7 +46,7 @@ a.anchor{
 }
 .more_link{
   width:99%;
-  padding: 10px 30px 10px 0;
+  padding: 0px 30px 10px 0;
   text-align: right;
   font-weight: bold;
   font-size: 120%;
@@ -72,14 +72,6 @@ a.anchor{
   border-radius: 15px;
 }
 
-.app-box{
-  height:70px;
-  margin: 5px 0;
-  overflow: hidden;
-}
-.app-box .caption > small{
-  color:#555;
-}
 /* Wrapper for page content to push down footer */
 #wrap {
   min-height: 100%;
@@ -139,7 +131,7 @@ a.anchor{
   overflow: hidden;
 }
 .profile_wrap h3{
-    word-break: normal;
+  word-break: normal;
   word-wrap: normal;
   overflow: hidden;
 }
@@ -201,13 +193,24 @@ a.anchor{
 .private_mode{
   background: #ccc;
 }
+.app-box{
+  height:100px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+.app-box .caption > small{
+  color:#555;
+}
+
 .recemt_app_date{
   font-size:xx-small;
 }
 .recent_app_icon{
-  max-height:60px;
+  max-height:90px;
+  max-width: 90px;
   float: left;
-  margin: 5px;
+  margin: 1px;
+  margin-right: 5px;
 }
 .list_thumb{
   max-height: 85px;
@@ -227,4 +230,26 @@ a.anchor{
 .form_desc{
   padding: 0 0 10px 10px;
   color: #669;
+}
+.main_title{
+  white-space: nowrap;
+  word-break: normal;
+  word-wrap: normal;
+  overflow: hidden;
+}
+
+#title_box{
+  background: #FFF7DF;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#zenback-widget .zenback-module-label a,
+#zenback-widget .zenback-module-label span
+{
+  font-size: 130%;
+  font-weight: normal !important;
+  display: block;
+  padding-left: 10px !important;
+  border-left: 5px solid #DF5A6B;
 }
