@@ -12,11 +12,13 @@
   <link href="/css/main.css" type="text/css" rel="stylesheet">
   <link rel="shortcut icon" href="/static/img/favicon.ico" />
   <title>{% block title %}放課後アプリ部{% endblock %}</title>
+  {% block custom_og %}
   <meta property="og:title" content="放課後アプリ部">
   <meta property="og:type" content="website">
   <meta property="og:description" content="法人として活動していないアプリ開発者が集まって作る新しい部活(Webサービス)です。今なら無料でディベロッパー登録が出来ます。">
   <meta property="og:url" content="http://houkago-no.appspot.com/">
   <meta property="og:site_name" content="放課後アプリ部">
+  {% endblock %}
   {% block meta %}
     <meta property="og:image" content="http://houkago-no.appspot.com/img/material/app_logo_beta_250.png">
   {% endblock %}
@@ -50,9 +52,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><img src="/img/material/app_logo_beta_250_notitle_w.png" height=22>放課後アプリ部</a>
+          <a class="navbar-brand" href="/"><img src="/img/material/app_logo_beta_250_notitle_w.png" height="22px">放課後アプリ部</a>
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" id="top_nav_collapse">
           <ul class="nav navbar-nav">
             
             <li id="nav_home">

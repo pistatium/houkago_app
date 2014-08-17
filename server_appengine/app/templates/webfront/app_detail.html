@@ -3,6 +3,16 @@
 
 {% block title %}[{{platforms|choise:app.platform}}]{{app.app_name}} - 放課後アプリ部{% endblock %}
 
+
+  {% block custom_og %}
+  <meta property="og:title" content="{{app.app_name}} - 放課後アプリ部">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="{{app.tagline}} | 個人開発者が集まる放課後アプリ部！">
+  <meta property="og:image" content="http://houkago-no.appspot.com{%url app.views.img.app_icon app.key.id%}">
+
+  <meta property="og:site_name" content="放課後アプリ部">
+  {% endblock %}
+
 {% block meta %}
 	<meta property="og:image" content="http://houkago-no.appspot.com{%url app.views.img.app_icon app.key.id%}">
 	<meta name="twitter:card" content="product">
@@ -82,6 +92,15 @@
 				{% endif %}
 		  	</div>
 		  	<div>
+		  		<a href="{{app.dl_link}}" class="btn btn-primary btn-lg btn-block">
+					<img src="/img/platform/{{app.platform}}_w.png" width=40>
+					アプリを今すぐ使ってみる！
+				</a>
+				<p>
+					アプリの製作者が設定したダウンロードページ等に移動します。
+				</p>
+			</div>
+		  	<div>
 		  	
 		  	    <!-- X:S ZenBackWidget --><div id="zenback-widget-loader"></div><script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var r=Math.ceil((new Date()*1)*Math.random());var j=d.createElement("script");j.id=i;j.async=true;j.src="//w.zenback.jp/v1/?base_uri=http%3A//houkago-no.appspot.com&nsid=120843364928119134%3A%3A120843900993680072&rand="+r;d.body.appendChild(j);}}(document,"zenback-widget-js");</script><!-- X:E ZenBackWidget -->
             </div >
@@ -89,12 +108,6 @@
 		</div>
 
 		<div class="col-xs-12 col-sm-4">
-			<div class="col-xs-12 visible-xs">
-				<a href="{{app.dl_link}}" class="btn btn-primary btn-lg btn-block">
-					アプリを今すぐ使ってみる！
-				</a>
-			</div>
-
 
 			{% include "plugin/social_btn.html" %}
 
