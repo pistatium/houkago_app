@@ -14,6 +14,10 @@ class App(ndb.Model):
     why_create    = ndb.StringProperty() # アプリを作った理由
     product_point = ndb.StringProperty() # 開発に力を入れたポイント
     target_user   = ndb.StringProperty() # どんなユーザーをターゲットにしているか
+    technology    = ndb.StringProperty() # 使用技術、ライブラリ
+    dev_scale     = ndb.StringProperty() # 開発規模
+    future_vision = ndb.StringProperty() # 今後の展望
+    
     status        = ndb.IntegerProperty(default = 1)
     created_at    = ndb.DateTimeProperty(auto_now_add = True)
     updated_at    = ndb.DateTimeProperty(auto_now = True)

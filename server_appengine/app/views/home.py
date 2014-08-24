@@ -1,39 +1,22 @@
 #coding: utf-8
 
-from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
-from django.core.paginator import Paginator
 from django.template import RequestContext
 from django.views.decorators.cache import cache_page
-from django.conf.urls.defaults import *
 
-from google.appengine.ext import ndb
-from google.appengine.api.datastore_errors import BadRequestError
-from google.appengine.api import memcache
 from google.appengine.api import users
-from google.appengine.api import mail
-from django.core.urlresolvers import reverse 
-
-from hashlib import sha1, md5
-from random import randint
-from datetime import datetime, timedelta
-from logging import debug
+from django.core.urlresolvers import reverse
+from django.http import Http404
+from django.conf.urls import patterns
 
 # import from project
-from app.models.preuser import PreUser
-from app.forms.preform import PreForm
-from app.libs import utils
 from app.libs.gae_paginator import GAEPaginator
 from app.models.developer import Developer
 from app.models.app import App
 from app import views
 from app.libs.arrays import platforms, get_platform_id, categories
 #from app.forms import registform
-import syskey
-from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_cookie
 from django.http import HttpResponseRedirect
-
 
 # -- Views  --------------------------------------------
 # ------------------------------------------------------
@@ -43,6 +26,8 @@ from django.http import HttpResponseRedirect
 Viewの共通前処理をするデコレータ
 viewの引数にcontextが増えることに注意
 """
+
+
 def custom_view(view):
     import functools
     @functools.wraps(view)

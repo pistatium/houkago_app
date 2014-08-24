@@ -44,6 +44,10 @@ class AppForm(forms.Form):
         label = "ダウンロード/サイト URL(必須)",
         required = True,
     )
+    src_url = forms.URLField(
+        label = "ソースを公開している場合(Gifhubなど)のURL",
+        required = False,
+    )
 
     why_create = forms.CharField(
         label = u"このアプリを作った理由を教えて下さい！",
@@ -64,7 +68,28 @@ class AppForm(forms.Form):
         max_length = 480, 
         required = False, 
         widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480,
-            'placeholder':'ターゲットとしたユーザー、利用想定シーンなど'})
+            'placeholder':'ターゲットとしたユーザー、利用想定シーンなど具体的に'})
+    )
+    technology = forms.CharField(
+        label = u"使用している言語、ライブラリなどは何ですか？",
+        max_length = 480, 
+        required = False, 
+        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480,
+            'placeholder':'使ったライブラリなど。採用理由等もあれば'})
+    )
+    dev_scale = forms.CharField(
+        label = u"アプリ開発の規模はどれくらいですか?",
+        max_length = 480, 
+        required = False, 
+        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480,
+            'placeholder':'構想、開発にかかった期間など'})
+    )
+    future_vision = forms.CharField(
+        label = u"今後の展望を教えて下さい！",
+        max_length = 480, 
+        required = False, 
+        widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480,
+            'placeholder':'改修予定など'})
     )
     status = forms.ChoiceField(
         label   = u"表示",

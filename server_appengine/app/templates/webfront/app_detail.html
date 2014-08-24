@@ -76,21 +76,42 @@
 					<div>
 						{{app.pr_summary|linebreaks}}
 					</div>
-				</div>			
-				{% if app.why_create %}
-					<h2>このアプリを作った理由</h2>
-					{{app.why_create|linebreaks}}
-				{% endif %}
+				</div>		
+				<div class="app_detail">	
+					{% if app.why_create %}
+						<h2>このアプリを作った理由を教えて下さい！</h2>
+						{{app.why_create|linebreaks}}
+					{% endif %}
 
-				{% if app.product_point %}
-					<h2>このアプリを作る上で力を入れたところ</h2>
-					{{ app.product_point|linebreaks}}
-				{% endif %}
-				{% if app.target_user %}
-					<h2>どんなユーザーに使って欲しいか</h2>
-					{{ app.target_user|linebreaks}}
-				{% endif %}
+					{% if app.product_point %}
+						<h2>このアプリを開発する上で力を入れたポイントは？</h2>
+						{{ app.product_point|linebreaks}}
+					{% endif %}
+					{% if app.target_user %}
+						<h2>どんなユーザーに使って欲しいですか？</h2>
+						{{ app.target_user|linebreaks}}
+					{% endif %}
+					{% if app.technology %}
+						<h2>使用している言語、ライブラリなどは何ですか？</h2>
+						{{ app.technology|linebreaks}}
+					{% endif %}
+					{% if app.dev_scale %}
+						<h2>アプリ開発の規模はどれくらいですか</h2>
+						{{ app.dev_scale|linebreaks}}
+					{% endif %}
+					{% if app.future_vision %}
+						<h2>今後の展望を教えて下さい！</h2>
+						{{ app.future_vision|linebreaks}}
+					{% endif %}
+
+					{% if app.src_url %}
+						<h3>アプリのソース</h3>
+						{{ app.src_url}}
+					{% endif %}
+
+				</div>
 		  	</div>
+		  	<hr>
 		  	<div>
 		  		<a href="{{app.dl_link}}" class="btn btn-primary btn-lg btn-block">
 					<img src="/img/platform/{{app.platform}}_w.png" width=40>

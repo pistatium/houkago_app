@@ -13,13 +13,10 @@ h1{
 
 }
 h2{
-  border-top: 15px double #DF5A6B;
+  border-top: 10px double #DF5A6B;
   padding: 10px 0 10px 1px;
   overflow: hidden;
-  word-break: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  font-size: 28px;
+  font-size: 22px;
 }
 h3 {
   border-left: 9px solid #777;
@@ -27,6 +24,7 @@ h3 {
   word-break: normal;
   word-wrap: normal;
   white-space: nowrap;
+  font-size: 18px;
 }
 a.anchor{
   padding-top:300px;
@@ -119,7 +117,9 @@ a.anchor{
   max-width: 25px;
   margin-right:5px;
 }
-
+.app_detail p{
+  margin:0px 10px;
+}
 .profiles{
 
 }
@@ -239,10 +239,15 @@ a.anchor{
 }
 
 #title_box{
-  background: #FFF7DF;
+  background-color: #FFF7DF;
+  background-image: url("/img/material/banner_bg.jpg");
   padding-left: 30px;
   padding-right: 30px;
 }
+#title_box small{
+  color: #666666;
+}
+
 
 #zenback-widget .zenback-module-label a,
 #zenback-widget .zenback-module-label span
