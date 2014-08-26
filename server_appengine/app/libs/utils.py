@@ -1,12 +1,15 @@
+# coding: utf-8
+
 import datetime
 import time
 from hashlib import sha1
-from django.http import HttpResponseRedirect
-from google.appengine.api import users
-from syskey import api_key
-from hashlib import sha1
 
 from django.core.cache import cache as _djcache
+from django.http import HttpResponseRedirect
+from google.appengine.api import users
+
+from syskey import api_key
+
 
 class UtcTzinfo(datetime.tzinfo):
     def utcoffset(self, dt):
@@ -21,6 +24,7 @@ class UtcTzinfo(datetime.tzinfo):
     def olsen_name(self):
         return 'UTC'
 
+
 class JstTzinfo(datetime.tzinfo):
     def utcoffset(self, dt):
         return datetime.timedelta(hours=9)
@@ -34,9 +38,11 @@ class JstTzinfo(datetime.tzinfo):
     def olsen_name(self):
         return 'Asia/Tokyo'
 
+
 def make_api_key(value):
     seed = (api_key % (value))
     return sha1(seed).hexdigest()
+
 
 def jst_date(value=''):
     if not value:
@@ -45,9 +51,11 @@ def jst_date(value=''):
     value = value.replace(tzinfo=UtcTzinfo()).astimezone(JstTzinfo())
     return value
 
+
 def timestamp(dt):
     dt = jst_date(dt)
     return time.mktime(dt.timetuple())
+
 
 def login_required(fn):
     """ checks to see if the user is logged in, if not, redirect to login """
@@ -71,9 +79,8 @@ def login_required(fn):
     return _dec(fn)
 
 
-
 # https://djangosnippets.org/snippets/564/
-def cache(seconds = 900):
+def cache(seconds=900):
     """
         Cache the result of a function call for the specified number of seconds, 
         using Django's caching mechanism.
@@ -90,11 +97,11 @@ def cache(seconds = 900):
     """
     def doCache(f):
         def x(*args, **kwargs):
-                key = sha1(str(f.__module__) + str(f.__name__) + str(args) + str(kwargs)).hexdigest()
-                result = _djcache.get(key)
-                if result is None:
-                    result = f(*args, **kwargs)
-                    _djcache.set(key, result, seconds)
-                return result
+            key = sha1(str(f.__module__) + str(f.__name__) + str(args) + str(kwargs)).hexdigest()
+            result = _djcache.get(key)
+            if result is None:
+                result = f(*args, **kwargs)
+                _djcache.set(key, result, seconds)
+            return result
         return x
     return doCache

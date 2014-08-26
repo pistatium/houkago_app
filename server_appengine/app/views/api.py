@@ -2,17 +2,9 @@
 
 from json import dumps as jsonDump
 
-from django.contrib.sites.models import Site
-
-from django.http import HttpResponse, Http404
-from django.shortcuts import render_to_response
-
 from django.conf.urls.defaults import *
 from django.core.urlresolvers import reverse 
-from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.cache import cache_page
-
 from google.appengine.ext import ndb
 
 from app.forms import apiform
@@ -136,7 +128,6 @@ def _makeJson(request, do_method, option={}):
 ''' 
  URL パターン
 '''
-
 urlpatterns = patterns(None,
     (r'^/app/recent/(\w+)/?$', recent_app),
     (r'^/app/detail/(\d+)/?$', detail_app),

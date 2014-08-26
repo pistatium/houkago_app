@@ -1,28 +1,12 @@
-#coding: utf-8
+# coding: utf-8
 
 from django.shortcuts import render_to_response
-from django.http import Http404
-from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse 
-from django.views.decorators.cache import cache_page
 from django.conf.urls.defaults import *
 from django.template import RequestContext
-
-from google.appengine.ext import ndb
-from google.appengine.api.datastore_errors import BadRequestError
-from google.appengine.api import memcache
 from google.appengine.api import users
 
-
-from hashlib import sha1, md5
-from random import randint
-from datetime import datetime, timedelta
-from logging import debug
-
-import syskey
-# import from project
 from app.models.developer import Developer
 from app.models.app import App
 from app.models.useapi import UseApi
@@ -174,9 +158,8 @@ def upload_icon_img(request, app_id, context):
     app_id = long(app_id)
     app = App.get_by_id(app_id)
     if app.developer_id != context["developer"].key.id():
-        hoge = app.developer_id
-        fuga = context["developer"].key.id()
-        ag.geawgew
+        # hoge = app.developer_id
+        # fuga = context["developer"].key.id()
         return HttpResponseRedirect(reverse(index))
     view_url = reverse(upload_img)
     if request.method == 'POST':
