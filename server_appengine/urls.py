@@ -19,5 +19,6 @@ urlpatterns = patterns('',
     (r'^regist', include('app.views.regist')),
     (r'^dev', include('app.views.dev')),
     (r'^upload', include('app.views.img')),
+    #(r'^idea', include('app.views.idea')),
     (r'^', include('app.views.home')),
 )
