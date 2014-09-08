@@ -121,13 +121,12 @@ a.anchor{
   margin:0px 10px;
 }
 .profiles{
-
+  margin: 10px;
 }
 .profile_wrap{
   padding:3px 3px 3px 15px;
   border-radius: 8px;
   border:#aaa solid 1px;
-  /*margin:10px 1px;*/
   overflow: hidden;
 }
 .profile_wrap h3{
@@ -236,6 +235,7 @@ a.anchor{
   word-break: normal;
   word-wrap: normal;
   overflow: hidden;
+  font-weight: bold;
 }
 
 #title_box{

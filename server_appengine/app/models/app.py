@@ -7,6 +7,7 @@ class App(ndb.Model):
     developer_id  = ndb.IntegerProperty()
     app_name      = ndb.StringProperty()
     dl_link       = ndb.StringProperty()
+    src_url       = ndb.StringProperty()
     package_name  = ndb.StringProperty()
     platform      = ndb.IntegerProperty()
     tagline       = ndb.StringProperty() # キャッチフレーズ

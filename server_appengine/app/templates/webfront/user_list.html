@@ -39,9 +39,11 @@
                 {% endif %}
             </ul>
 
-            <div class="row">
+            <div class="row profiles">
                 {% for developer in developers %}
+                    <div class="col-xs-12 col-md-6">
                         {% include 'plugin/profile_list.html' %}
+                    </div>
                 {% endfor %}
             </div>
 

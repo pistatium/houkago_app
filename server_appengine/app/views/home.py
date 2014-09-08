@@ -151,7 +151,7 @@ def app_rss(request, platform = None):
     context = RequestContext(request,{
             "platforms" : platforms,
     })
-    context["apps"] = App.getRecentQuery(platform).fetch(10)
+    context["apps"] = App.getRecentQuery(platform).fetch(50)
     return render_to_response('webfront/app_rss.xml',context, mimetype="application/xml")  
 
 

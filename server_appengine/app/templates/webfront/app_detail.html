@@ -1,7 +1,7 @@
 {% extends 'parent.html' %}
 {% load my_utils %}
 
-{% block title %}[{{platforms|choise:app.platform}}]{{app.app_name}} - 放課後アプリ部{% endblock %}
+{% block title %}{{app.app_name}}[{{platforms|choise:app.platform}}アプリ] - 個人開発者が集う！放課後アプリ部{% endblock %}
 
 
   {% block custom_og %}
