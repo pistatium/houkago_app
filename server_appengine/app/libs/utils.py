@@ -80,7 +80,7 @@ def login_required(fn):
 
 
 # https://djangosnippets.org/snippets/564/
-def cache(seconds=900):
+def cache(seconds=60):
     """
         Cache the result of a function call for the specified number of seconds, 
         using Django's caching mechanism.

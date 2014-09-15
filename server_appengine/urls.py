@@ -20,5 +20,6 @@ urlpatterns = patterns('',
     (r'^dev', include('app.views.dev')),
     (r'^upload', include('app.views.img')),
     #(r'^idea', include('app.views.idea')),
+    (r'^aff', include('app.views.aff')),
     (r'^', include('app.views.home')),
 )

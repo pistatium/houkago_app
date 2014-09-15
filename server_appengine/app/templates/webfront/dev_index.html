@@ -69,8 +69,10 @@
                                     <div>
                                         <a class="btn btn-block btn-primary" href="{% url app.views.dev.app_update app.key.id %}">アプリ情報編集</a>
                                         <a class="btn btn-block btn-info" href="{% url app.views.home.app_detail app.key.id %}">アプリページ確認</a>
-                                        
                                     </div>
+                                    
+                                    <a href="{% url app.views.home.pr_link %}">宣伝リンク(β)</a>
+                                    <input type="text" class="col-xs-12" value="http://houkago-no.appspot.com{% url app.views.aff.to_home app.key.id %}">
                             </div>
                         {% endfor %}
                     </div>

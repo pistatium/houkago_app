@@ -30,6 +30,15 @@ a.anchor{
   padding-top:300px;
   margin-top:-300px
 }
+a div:hover{
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    background: #efefea;
+}
+a:hover{
+    text-decoration: none;
+}
 .form-group{
   margin-bottom: 25px;
   margin-top: 5px;
@@ -68,6 +77,10 @@ a.anchor{
   padding: 15px;
   background: #FBFBFB;
   border-radius: 15px;
+}
+.most_pickup{
+  border-radius:5px; 
+  background:#faebcc;
 }
 
 /* Wrapper for page content to push down footer */
@@ -116,6 +129,13 @@ a.anchor{
 .platform img{
   max-width: 25px;
   margin-right:5px;
+}
+.platform_thmb{
+  width:22px; 
+  height:22px;
+  background:#DF5A6B;
+  float:left;
+  margin-right:10px;
 }
 .app_detail p{
   margin:0px 10px;

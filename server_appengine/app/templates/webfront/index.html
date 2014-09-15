@@ -29,6 +29,41 @@
                     <a href="/about">&gt;&gt;もっとみる</a>
                 </div>
         </div>
+        <h2>ピックアップアプリ(β)</h2>
+        <div class="row">
+            {% for app in pickup_apps %}
+                {% if forloop.first %} 
+                    <a href="{% url app.views.home.app_detail app.key.id %}">
+                        <div class="col-xs-12 clearfix most_pickup">
+                            <img src="{%url app.views.img.app_icon app.key.id%}" class="img-responsive recent_app_icon">
+                            <div class="media-body">
+                                <h4>
+                                    <img src="/img/platform/{{app.platform}}.png" width=18>
+                                    {{app.app_name}}
+                                </h4>
+                                {{app.tagline}}
+                            </div>
+
+                        </div>
+                    </a>
+                {% else %}
+                    <a href="{% url app.views.home.app_detail app.key.id %}">
+                        <div class="col-xs-6 col-sm-4 clearfix">
+                            <img src="{%url app.views.img.app_icon app.key.id%}" class="img-responsive recent_app_icon">
+                            <div class="media-body">
+                                <h5>
+                                    <img src="/img/platform/{{app.platform}}.png" width=18>
+                                    {{app.app_name}}
+                                </h5>
+                            </div>
+                        </div>
+                    </a>
+                {% endif %}
+            {% endfor %}
+            <div class="more_link">
+                <a href="{% url app.views.home.pr_link %}"><small>&gt;&gt; ピックアップされるには?</small></a>
+          　</div>
+        </div>
         <h2>部員活動履歴<small>(新規登録順)</small></h2>
         <div class="panel-group" id="accordion">
             {% for platform, r_apps in recent_apps.items %}
@@ -36,6 +71,11 @@
                     <div class="panel-heading">
                         <a class="panel_tappable" data-toggle="collapse" data-parent="#accordion" href="#collapse{{platform}}">
                             <h3 class="panel-title">
+                                {% if r_apps %}
+                                    <div class="platform_thmb">
+	  								<img src="/img/platform/{{r_apps.0.platform}}_w.png" width="22px">
+                                     </div>
+                                {% endif %}
                                 {{platform}}アプリ
                             </h3>
                         </a>
@@ -102,6 +142,7 @@
         </div>
 
         <div>
+            {# {% include 'plugin/appc.html' %} #}
             <h2>スポンサード・リンク</h2>
             {% include 'plugin/ads.html' %}
         </div>

@@ -53,6 +53,7 @@ def custom_view(view):
 def index(request, context):
     context["developers"] = Developer.getQuery().fetch(10)
     context["recent_apps"] = {}
+    context["pickup_apps"] = App.getPickup()
     context["has_more"] = {}
     FETCH_LIMIT = 12
     for platform in platforms:
@@ -74,6 +75,10 @@ def about_api(request, context):
     context["current_tab"] = "about"
     return render_to_response('webfront/about_api.html', context)
 
+@custom_view
+def pr_link(request, context):
+    context["current_tab"] = "about"
+    return render_to_response('webfront/pr_link.html', context)
 
 @custom_view
 def user_id(request, user_id, context):
@@ -162,6 +167,7 @@ def app_rss(request, platform = None):
 urlpatterns = patterns(None,
     (r'^about/?$', about),
     (r'^about_api/?$', about_api),
+    (r'^pr_link/?$', pr_link),
     (r'^user_id/(\d+)/?$' , user_id),
     (ur'^user/(\w+)/?$' , user),
     (ur'^user_list/(\d+)/?$' , user_list),

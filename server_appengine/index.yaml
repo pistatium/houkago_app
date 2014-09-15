@@ -15,6 +15,12 @@ indexes:
 
 - kind: App
   properties:
+  - name: status
+  - name: affiriate_point
+    direction: desc
+
+- kind: App
+  properties:
   - name: platform
   - name: status
   - name: created_at
