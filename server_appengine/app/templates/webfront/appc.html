@@ -1,0 +1,31 @@
+{% extends "parent.html" %}
+{% load my_utils %}
+{% load bootstrap %}
+{% block main %}
+    <div class="row">
+        <div class="col-md-8">
+        <h1>appCプロモーションコード発行</h1>
+        {% if not code %}
+            <h3>コードの在庫がありません</h3>
+        {% else %}
+            <b>プロモーションコードを発行いたしました。</b>
+            <br>
+            あなたのコード
+            <div class="well">
+                <b>{{code.serial}}</b>
+            </div> 
+            appC cloudの新規登録の際に1000円分のプロモーションコードとしてご利用できます。
+        {% endif %}
+        </div>
+        <div class="col-md-4">
+            <h2>appC登録</h2>
+            <a href="https://app-c.net/account/regist/?tid=54">
+                <img src="/img/material/appCcloud_bnr.png">
+            </a>
+            <p>
+            appC登録はこちらから。
+            登録時にプロモーションコードを入力してください。
+            </p>
+        </div>
+    </div>
+{% endblock %}
