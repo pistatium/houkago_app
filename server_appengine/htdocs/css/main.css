@@ -19,7 +19,7 @@ h2{
   font-size: 22px;
 }
 h3 {
-  border-left: 9px solid #777;
+  /*border-left: 9px solid #777;*/
   padding: 10px 0 10px 5px; 
   word-break: normal;
   word-wrap: normal;

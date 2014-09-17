@@ -22,6 +22,7 @@ class App(ndb.Model):
     dev_scale     = ndb.StringProperty() # 開発規模
     future_vision = ndb.StringProperty() # 今後の展望
     affiriate_point = ndb.IntegerProperty(default=1) # アフィリエイトポイント
+    affiriate_point_total = ndb.IntegerProperty(default=0) # アフィリエイトポイント 累計 初期値は0
     status        = ndb.IntegerProperty(default = 1)
     created_at    = ndb.DateTimeProperty(auto_now_add = True)
     updated_at    = ndb.DateTimeProperty(auto_now = True)
@@ -124,11 +125,12 @@ class App(ndb.Model):
         query = query.filter(cls.platform == platform)
         return query.order(-cls.creator_push).fetch(3)
 
+
     @classmethod
     @cache(30)
     def getPickup(cls, count=4):
         query = cls.query(cls.status == 1)
-        apps = query.order(-cls.affiriate_point).fetch(count)
+        apps = query.order(-cls.affiriate_point).order(-cls.affiriate_point_total).fetch(count)
         if not apps:
             return []
         # 一番先頭に来たアプリはポイントを減らす

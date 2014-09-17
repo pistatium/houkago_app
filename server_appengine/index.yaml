@@ -18,6 +18,8 @@ indexes:
   - name: status
   - name: affiriate_point
     direction: desc
+  - name: affiriate_point_total
+    direction: desc
 
 - kind: App
   properties:
@@ -46,3 +48,6 @@ indexes:
   - name: send_status
   - name: created_at
 
+- kind: AppC
+  properties:
+  - name: status

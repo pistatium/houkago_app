@@ -17,6 +17,7 @@ from app import views
 def to_home(request, app_id):
     app = App.getById(int(app_id))
     if app:
+        app.affiriate_point_total += 1
         app.affiriate_point += 1
         app.put()
     return HttpResponseRedirect(reverse(views.home.index))
