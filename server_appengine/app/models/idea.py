@@ -15,7 +15,7 @@ class IdeaThread(ndb.Model):
     total_count = ndb.IntegerProperty(default = 0)
     # レス数
     comment_count    = ndb.IntegerProperty(default = 1)
-    status       = ndb.IntegerProperty(default = 0) 
+    status       = ndb.IntegerProperty(default = 1) 
     created_at   = ndb.DateTimeProperty(auto_now_add = True)
     updated_at   = ndb.DateTimeProperty(auto_now = True)
     category     = ndb.IntegerProperty(default = 0)
@@ -55,18 +55,9 @@ class IdeaThread(ndb.Model):
         return False
     
     @classmethod
-    def get(cls, params):
-        if params["status"] == 2:
-          q = cls.query()
-        else:
-          q = cls.query(cls.status == params["status"])
-                  
-        sortby = params['sortby']
-        reverse = False
-        if params['reverse']== 1:
-            reverse = True
+    def getQuery(cls, sortby="updated", reverse=False):
+        q = cls.query(cls.status == 1)
         q = _sortQuery(cls, q, sortby, reverse)
-
         return q
 
     @classmethod

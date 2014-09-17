@@ -25,7 +25,7 @@ import syskey
 # import from project
 from app.models.developer import Developer
 from app.models.user import User
-from app.models.app import App
+from app.models.idea import Idea
 from app.models.useapi import UseApi
 from app.models.upload import ProfImage, AppImage
 from app.libs import utils
@@ -66,9 +66,18 @@ def custom_view(view):
         return view(*args, **kwargs)
     return override_view
 
-def index(view):
-    pass
+@custom_view
+def index(view, context):
+    context["ideas"] = Idea.getQuery().fetch(10)
+    return render_to_response('webfront/idea_index.html',context)
 
+@custom_view
+def idea_list(request, page, context):
+    query = Idea.getQuery()
+    p = GAEPaginator(query, COUNT)
+    context["page"] = page
+    context["ideas"] = p.page(page)
+    return render_to_response('webfront/idea_list.html',context)
 
 @custom_view
 def api_regist(request, context):
@@ -104,9 +113,9 @@ def register_complete(request):
 urlpatterns = patterns(None,
     (r'^/register/complete$', user_regist_complete),
     (r'^/register/$', user_regist),
-    (r'^/edit/$', thread_edit),
-    (r'^/create/$', thread_create),
-    (r'^/idea/(\d+)', thread_show),
-    (r'^/idea_list/(\d+)?$', thread_list),
+    (r'^/edit/$', idea_edit),
+    (r'^/create/$', idea_create),
+    (r'^/idea/(\d+)', idea_detail),
+    (r'^/idea_list/(\d+)?$', idea_list),
     (r'^/?$', index),
 )
