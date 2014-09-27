@@ -5,6 +5,8 @@ from json import dumps as jsonDump
 from django.conf.urls.defaults import *
 from django.core.urlresolvers import reverse 
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+
 from google.appengine.ext import ndb
 
 from app.forms import apiform

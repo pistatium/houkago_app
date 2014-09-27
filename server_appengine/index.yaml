@@ -47,7 +47,3 @@ indexes:
   properties:
   - name: send_status
   - name: created_at
-
-- kind: AppC
-  properties:
-  - name: status

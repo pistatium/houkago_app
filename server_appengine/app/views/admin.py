@@ -24,7 +24,7 @@ def admin_view(view):
     def override_view(*args, **kwargs):
         request = args[0]
         user = users.get_current_user()
-        if not user or not users.is_current_user_admin():
+        if (not user) or (not users.is_current_user_admin()):
             raise Http404
         kwargs["context"] = RequestContext(request)
         return view(*args, **kwargs)

@@ -35,7 +35,7 @@
                 {% if forloop.first %} 
                     <a href="{% url app.views.home.app_detail app.key.id %}">
                         <div class="col-xs-12 clearfix most_pickup">
-                            <img src="{%url app.views.img.app_icon app.key.id%}" class="img-responsive recent_app_icon">
+                            <img src="{%url app.views.img.app_icon app.key.id%}" class="img-responsive pickup_app_icon">
                             <div class="media-body">
                                 <h4>
                                     <img src="/img/platform/{{app.platform}}.png" width=18>
@@ -49,7 +49,7 @@
                 {% else %}
                     <a href="{% url app.views.home.app_detail app.key.id %}">
                         <div class="col-xs-6 col-sm-4 clearfix">
-                            <img src="{%url app.views.img.app_icon app.key.id%}" class="img-responsive recent_app_icon">
+                            <img src="{%url app.views.img.app_icon app.key.id%}" class="img-responsive pickup_app_icon">
                             <div class="media-body">
                                 <h5>
                                     <img src="/img/platform/{{app.platform}}.png" width=18>
@@ -118,8 +118,9 @@
 
 
     <div class="col-md-4">
-
+        {% include 'plugin/search_div.html' %}
         {% include 'plugin/regist_div.html' %}
+        {% include 'plugin/appc.html' %}
         
         <div>
             <h2>アプリカタログ</h2>
@@ -142,7 +143,6 @@
         </div>
 
         <div>
-            {# {% include 'plugin/appc.html' %} #}
             <h2>スポンサード・リンク</h2>
             {% include 'plugin/ads.html' %}
         </div>
