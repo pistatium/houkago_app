@@ -29,13 +29,20 @@ def detail_app(request, app_id):
     return _makeJson(request, _detail_app, {"app_id": app_id,})
 
 @csrf_exempt
+def developer_apps(request, developer_id, plat_str):
+    return _makeJson(request, _developer_apps, {"developer_id": long(developer_id), "plat_str": plat_str,})
+
+# TODO:
+@csrf_exempt
 def recent_developer(request):
     return _makeJson(request, _recent_developer)
 
+#TODO:
 @csrf_exempt
 def detail_developer(request, developer_id):
     return _makeJson(request, _recent_developer, {"developer_id": long(developer_id)})
 
+#TODO
 @csrf_exempt
 def detail_developer_alias(request, developer_alias):
     return _makeJson(request, _recent_developer, {"developer_alias": developer_alias})
@@ -55,6 +62,7 @@ def _recent_app(request, option = {}):
         "apps": App.getRecentQuery(platform).fetch(params["count"], offset=params["offset"])
     }
 
+
 def _detail_app(request, option = {}):
     app_id = long(option["app_id"])
     params = request.GET.copy()
@@ -71,6 +79,27 @@ def _detail_app(request, option = {}):
         "app": app,
         "developer": developer,
     }
+
+def _developer_apps(request, option={}):
+    developer = Developer.get_by_id(option["developer_id"])
+    if not developer:
+        return {"status": -2, "error": "invalid developer"}
+    platform = arrays.get_platform_id(option["plat_str"])
+    params = request.GET.copy()
+    params["platform"] = platform
+    form = apiform.RecentAppForm(params)
+    if not form.is_valid():
+        return {"status": -1, "thread_id":'', "error": form.errors}
+    params = form.cleaned_data
+    app = App.getQueryByDeveloper(developer.key.id(), params["platform"])
+    return {
+        "status": 1,
+        "apps": app.fetch(params["count"], offset=params["offset"])
+    }
+
+
+
+# TODO    
 def _detail_developer(request, option={}):
     if "developer_id" in option:
         developer = Developer.get_by_id(option["developer_id"])
@@ -83,8 +112,21 @@ def _detail_developer(request, option={}):
     context["apps"] = app
     context["platforms"] = platforms
     
+#TODO
+def _recent_developer(request, option={}):
+    developer = _getDeveloper(option)
+    if not developer: 
+        return {"status": -2, "error": "invalid developer"}
 
 
+def _getDeveloper(option):
+    if "developer_id" in option:
+        developer = Developer.get_by_id(option["developer_id"])
+    else:
+        developer = Developer.getByAlias(option["developer_alias"])
+    if not developer:
+        return False
+    return Developer
 
 # ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 def _makeJson(request, do_method, option={}):
@@ -133,9 +175,10 @@ def _makeJson(request, do_method, option={}):
 urlpatterns = patterns(None,
     (r'^/app/recent/(\w+)/?$', recent_app),
     (r'^/app/detail/(\d+)/?$', detail_app),
-    (r'^/developer/recent/?$', recent_developer),
-    (r'^/developer/detail/id/(\d+)/?$', detail_developer),
-    (r'^/developer/detail/alias/(\w+)/?$', detail_developer_alias),
+    (r'^/developer/(\w+)/(\w+)/?$', developer_apps),
+    #(r'^/developer/recent/?$', recent_developer),
+    #(r'^/developer/detail/id/(\d+)/?$', detail_developer),
+    #(r'^/developer/detail/alias/(\w+)/?$', detail_developer_alias),
     (r'^/?$', index),
 )
 

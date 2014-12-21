@@ -6,6 +6,7 @@
             <h3 class="panel-title">部員登録情報</h3>
         </div>
         <div class="panel-body">
+            アイコンクリックで画像アップロードできます。
             {% if not developer.profile %}
                 <div class="alert alert-warning">
                     <b>Todo:</b>プロフィールがまだ未設定です。
@@ -72,6 +73,7 @@
                                     </div>
                                     
                                     <a href="{% url app.views.home.pr_link %}">宣伝リンク(β)</a>
+                                    <p><small>このリンクをシェアしてアプリを宣伝！</small></p>
                                     <input type="text" class="col-xs-12" value="http://houkago-no.appspot.com{% url app.views.aff.to_home app.key.id %}">
                             </div>
                         {% endfor %}
