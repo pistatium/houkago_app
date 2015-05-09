@@ -29,8 +29,8 @@ def detail_app(request, app_id):
     return _makeJson(request, _detail_app, {"app_id": app_id,})
 
 @csrf_exempt
-def developer_apps(request, developer_id, plat_str):
-    return _makeJson(request, _developer_apps, {"developer_id": long(developer_id), "plat_str": plat_str,})
+def developer_apps(request, developer_alias, plat_str):
+    return _makeJson(request, _developer_apps, {"developer_alias": developer_alias, "plat_str": plat_str,})
 
 # TODO:
 @csrf_exempt
@@ -81,7 +81,7 @@ def _detail_app(request, option = {}):
     }
 
 def _developer_apps(request, option={}):
-    developer = Developer.get_by_id(option["developer_id"])
+    developer = Developer.getByAlias(option["developer_alias"])
     if not developer:
         return {"status": -2, "error": "invalid developer"}
     platform = arrays.get_platform_id(option["plat_str"])
@@ -94,7 +94,7 @@ def _developer_apps(request, option={}):
     app = App.getQueryByDeveloper(developer.key.id(), params["platform"])
     return {
         "status": 1,
-        "apps": app.fetch(params["count"], offset=params["offset"])
+        "apps": sorted(app.fetch(params["count"], offset=params["offset"]), key=lambda x:x.created_at, reverse=True)
     }
 
 
@@ -156,10 +156,11 @@ def _makeJson(request, do_method, option={}):
                 data["app_image"]  = DOMAIN + reverse(app_icon, args=[str(obj.key.id()),])
                 data["app_detail"] = DOMAIN + reverse(app_detail, args=[str(obj.key.id()),])
                 data["app_id"] = data["id"]
-            if hasattr(obj, "email"):
-                del data["email"]
-            if hasattr(obj, "billing"):
-                del data["billing"]
+            if hasattr(obj, "email"): del data["email"]
+            if hasattr(obj, "billing"): del data["billing"]
+            if hasattr(obj, "affiriate_point"): del data["affiriate_point"]
+            if hasattr(obj, "affiriate_point_total"): del data["affiriate_point_total"]
+
             return data
     result = do_method(request, option)
     response = jsonDump(result, default=to_json)
@@ -175,7 +176,7 @@ def _makeJson(request, do_method, option={}):
 urlpatterns = patterns(None,
     (r'^/app/recent/(\w+)/?$', recent_app),
     (r'^/app/detail/(\d+)/?$', detail_app),
-    (r'^/developer/(\w+)/(\w+)/?$', developer_apps),
+    (ur'^/developer/(\w+)/(\w+)/?$', developer_apps),
     #(r'^/developer/recent/?$', recent_developer),
     #(r'^/developer/detail/id/(\d+)/?$', detail_developer),
     #(r'^/developer/detail/alias/(\w+)/?$', detail_developer_alias),

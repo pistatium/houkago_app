@@ -55,7 +55,7 @@ def custom_view(view):
 
 @custom_view
 def index(request, context):
-    apps = App.getQueryByDeveloper(context["developer"].key.id())
+    apps = App.getQueryByDeveloper(context["developer"].key.id()).order(-App.created_at)
     context["apps"] = apps
     return render_to_response('webfront/dev_index.html',context)
 

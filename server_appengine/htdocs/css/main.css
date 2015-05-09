@@ -19,7 +19,6 @@ h2{
   font-size: 22px;
 }
 h3 {
-  /*border-left: 9px solid #777;*/
   padding: 10px 0 10px 5px; 
   word-break: normal;
   word-wrap: normal;
@@ -269,6 +268,9 @@ a:hover{
   word-wrap: normal;
   overflow: hidden;
   font-weight: bold;
+}
+.api-info h3{
+  border-left: 9px solid #777;
 }
 #search_box{
   height:60px; 

@@ -51,11 +51,11 @@ def custom_view(view):
 
 @custom_view
 def index(request, context):
-    context["developers"] = Developer.getQuery().fetch(10)
+    context["developers"] = Developer.getQuery().fetch(4)
     context["recent_apps"] = {}
     context["pickup_apps"] = App.getPickup()
     context["has_more"] = {}
-    FETCH_LIMIT = 12
+    FETCH_LIMIT = 6
     for platform in platforms:
         apps = App.getRecentQuery(platform[0]).fetch(FETCH_LIMIT + 1)
         if apps:
