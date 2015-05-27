@@ -49,8 +49,8 @@
             <hr>
             <div class="row">
                 {% for rapp in apps %}
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                        {% include 'plugin/app_box.html' %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        {% include 'plugin/new_app_box.html' %}
                     </div>
                 {% endfor %}
             </div>
@@ -80,11 +80,11 @@
                 {% endif %}
             </ul>
 
+            {% include 'plugin/ads_responsive.html' %}
         </div>
         <div class="col-md-4">
             {% if cat_id %}
                 <div class="list-group">
-    
             {% endif %}
 
             <h2>カテゴリ一覧</h2>
@@ -96,8 +96,7 @@
                 {% endfor %}
             </div>
 
-            <h2>スポンサード・リンク</h2>
-            {% include 'plugin/ads.html' %}
+            {% include 'plugin/ads_responsive.html' %}
         </div>
     </div>
 {% endblock %}

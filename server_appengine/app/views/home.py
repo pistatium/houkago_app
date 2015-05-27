@@ -55,12 +55,7 @@ def index(request, context):
     context["recent_apps"] = {}
     context["pickup_apps"] = App.getPickup()
     context["has_more"] = {}
-    FETCH_LIMIT = 6
-    for platform in platforms:
-        apps = App.getRecentQuery(platform[0]).fetch(FETCH_LIMIT + 1)
-        if apps:
-            context["recent_apps"][platform[1]] = apps[:FETCH_LIMIT]
-            context["has_more"][platform[1]] = bool(len(apps) > FETCH_LIMIT)
+    context["apps"] = App.getRecentQuery().fetch(18)
     return render_to_response('webfront/index.html', context)
 
 

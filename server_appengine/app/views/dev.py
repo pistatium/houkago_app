@@ -94,7 +94,7 @@ def app_regist(request, context):
 @custom_view
 def app_update(request, app_id, context={}):
     context["title"] = u"アプリ情報更新"
-    context["description"] = u"こちらで登録したアプリの情報を修正できます。\n修正がサイト上で反映されるまでしばらく時間がかかります。\n一部フォームは任意入力ですが、アプリについてより多くの情報を入力すると検索などから流入増加が見込めます。"
+    context["description"] = u"こちらで登録したアプリの情報を修正できます。\n修正がサイト上で反映されるまでしばらく時間がかかります。\n\n多くのフォームは任意入力ですが、アプリについてより沢山の情報を入力することで検索による集客が見込めます。"
     app = App.getById(int(app_id))
     if app is None:
         return HttpResponseRedirect(reverse(app_regist))

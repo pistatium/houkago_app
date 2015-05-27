@@ -131,6 +131,41 @@ a:hover{
   max-width: 25px;
   margin-right:5px;
 }
+/* web */
+.plat_9 {
+  background: #3D78B2;
+}
+/* android */
+.plat_1 {
+  background: #5C883E;
+}
+/* ios */
+.plat_2 {
+  background: #A53636;
+}
+/* wp */
+.plat_3 {
+  background: #333;
+}
+.plat_label {
+  width:100%;
+  color: #fff;
+  padding:1px 3px;
+}
+.plat_label a {
+  color: #fff;
+}
+.plat_list{
+  text-align: center;
+  padding: 0px 10px;
+}
+.plat_list a{
+  border-radius: 5px;
+  text-align: center;
+  background:#df5a6b;
+  display: block;
+  color: #fff;
+}
 .platform_thmb{
   width:22px; 
   height:22px;
@@ -146,7 +181,7 @@ a:hover{
 }
 .profile_wrap{
   padding:3px 3px 3px 15px;
-  border-radius: 8px;
+  border-radius: 5px;
   border:#aaa solid 1px;
   overflow: hidden;
 }
@@ -220,6 +255,37 @@ a:hover{
 }
 .app-box .caption > small{
   color:#555;
+}
+.pickup .new_app_box {
+  background: #FFFAE6;
+}
+.new_app_box {
+  border:1px solid #B3B3B3;
+  margin: 3px 0;
+  border-radius: 5px;
+}
+.new_app_box h3 {
+  padding: 0px;
+  word-wrap: break-word;
+  white-space: normal;
+  color: #333;
+}
+.new_app_box h4 {
+  font-size: 15px;
+  padding: 0px;
+  word-wrap: break-word;
+  white-space: normal;
+  color: #888;
+}
+.new_app_box .icon_thumbnail {
+  width:140px;
+  height: 140px;
+  margin: 5px 3px;
+  float: left;
+}
+.new_app_box .descriptions {
+  height: 150px;
+  overflow: hidden;
 }
 
 .recemt_app_date{
