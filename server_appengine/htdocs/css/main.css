@@ -67,6 +67,19 @@ a:hover{
   margin: auto;
   text-align: left;
 }
+.sidebar {
+  padding-left:20px;
+}
+.header-leading{
+  border: none;
+  margin: 3px 0px 8px 0px;
+  padding: 0px;
+}
+.header-leading-more{
+  font-size: 110%;
+  margin-bottom: 0px;
+}
+
 .more_link{
   width:99%;
   padding: 0px 30px 10px 0;
@@ -337,6 +350,12 @@ a:hover{
 }
 .api-info h3{
   border-left: 9px solid #777;
+}
+#top_header{
+  margin-top: -40px;
+}
+#top_header img {
+    border-radius: 5px;
 }
 #search_box{
   height:60px; 

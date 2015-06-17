@@ -55,6 +55,7 @@ def custom_view(view):
 
 @custom_view
 def index(request, context):
+    context["app_registed"] = request.GET.get("app_registed", None)
     apps = App.getQueryByDeveloper(context["developer"].key.id()).order(-App.created_at)
     context["apps"] = apps
     return render_to_response('webfront/dev_index.html',context)
@@ -80,7 +81,7 @@ def app_regist(request, context):
             params["developer_id"] = context["developer"].key.id()
             app = App.create(params)
             app.put()
-            return HttpResponseRedirect(reverse(index))
+            return HttpResponseRedirect(reverse(index) + "?app_registed=1")
         else:
             context["form"] = form
             return render_to_response('webfront/regist_form.html', context)

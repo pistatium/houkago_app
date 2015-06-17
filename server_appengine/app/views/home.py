@@ -53,7 +53,9 @@ def custom_view(view):
 def index(request, context):
     context["developers"] = Developer.getQuery().fetch(4)
     context["recent_apps"] = {}
-    context["pickup_apps"] = App.getPickup()
+    pickups = App.getPickup()
+    context["pickup_apps"] = pickups[0:2]
+    context["pickup_apps_after"] = pickups[2:]
     context["has_more"] = {}
     context["apps"] = App.getRecentQuery().fetch(18)
     return render_to_response('webfront/index.html', context)

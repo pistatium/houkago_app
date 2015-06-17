@@ -15,12 +15,12 @@
   {% block custom_og %}
   <meta property="og:title" content="放課後アプリ部">
   <meta property="og:type" content="website">
-  <meta property="og:description" content="法人として活動していないアプリ開発者が集まって作る新しい部活(Webサービス)です。今なら無料でディベロッパー登録が出来ます。">
+  <meta property="og:description" content="個人作成のアプリを集めてます！放課後デベロッパーのためのアプリ紹介プラットフォーム「放課後アプリ部」">
   <meta property="og:url" content="http://houkago-no.appspot.com/">
   <meta property="og:site_name" content="放課後アプリ部">
   {% endblock %}
   {% block meta %}
-    <meta property="og:image" content="http://houkago-no.appspot.com/img/material/app_logo_beta_250.png">
+    <meta property="og:image" content="http://houkago-no.appspot.com/img/material/header.jpg">
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://houkago-no.appspot.com/rss.xml" />
   {% endblock %}
 
@@ -111,6 +111,13 @@
 
   <div id="wrap">
     <div class="container">
+      {% block flash_box %}
+          {% if flash %}
+            <div class="alert alert-info">
+                {{ flash }}
+            </div>
+          {% endif %}
+      {% endblock %}
       <div>
   		{%block main%}
   		{%endblock main%}

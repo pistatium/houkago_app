@@ -9,25 +9,18 @@
 <div class="row">
     <div class="main col-md-8 col-xs-12">
 
-        <div class="jumbotron" id="title_box">
-            <div class="row">
-                <div class="col-xs-12 col-sm-3 col-md-2 pull-left center">
-                    <img src="/img/material/app_icon512.png" class="img-responsive" style="max-height:250px">
-                </div>
-                <h1 class="col-xs-11 col-sm-9 col-md-10 main_title">
-                    
-                    放課後アプリ部
-                    <br><small>集まれ！ アプリデベロッパー！</small>
-                </h1>
-            </div>
+        <div class="header" id="top_header">
+            <h1 class="row">
+                <img class="img-responsive" src="/img/material/header.jpg" alt="個人作成のアプリを集めてます！放課後アプリ部">
+            </h1>
         </div>
         <div>
-            <h2>放課後アプリ部とは</h2>
-                個人のアプリ開発者が集まって作る新しいプラットフォームです。<br>
-                会社の方針や収益性にとらわれない自由なアプリが集まってます！
-                <div class="more_link">
-                    <a href="/about">&gt;&gt;もっとみる</a>
-                </div>
+            <h2 class="header-leading">放課後アプリ部とは</h2>
+            <p class="header-leading-more">個人のアプリ開発者が集まって作る新しいプラットフォームです。<br>
+            会社の方針や収益性にとらわれない自由なアプリが集まってます！</p>
+            <div class="more_link">
+                <a href="/about">&gt;&gt;もっとみる</a>
+            </div>
         </div>
 
 
@@ -44,6 +37,13 @@
             {% for rapp in apps %}
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                     {% include 'plugin/new_app_box.html' %}
+                </div>
+            {% endfor %}
+            {% for rapp in pickup_apps_after %}
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 pickup">
+                    {% with "Pickup" as pickup %}  
+                        {% include 'plugin/new_app_box.html' %}
+                    {% endwith %}
                 </div>
             {% endfor %}
 
@@ -84,7 +84,7 @@
     </div>
 
 
-    <div class="col-md-4">
+    <div class="col-md-4 sidebar">
         {% include 'plugin/search_div.html' %}
         {% include 'plugin/regist_div.html' %}
         {% include 'plugin/appc.html' %}

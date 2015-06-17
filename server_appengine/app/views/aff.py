@@ -17,10 +17,20 @@ from app import views
 def to_home(request, app_id):
     app = App.getById(int(app_id))
     if app:
+        app.affiriate_point_total += 2
+        app.affiriate_point += 2
+        app.put()
+    return HttpResponseRedirect(reverse(views.home.index))
+
+
+@cache_page(60 * 5)
+def to_app(request, app_id):
+    app = App.getById(int(app_id))
+    if app:
         app.affiriate_point_total += 1
         app.affiriate_point += 1
         app.put()
-    return HttpResponseRedirect(reverse(views.home.index))
+    return HttpResponseRedirect(reverse(views.home.app_detail, args=[app_id]))
 
 
 # ======================================================================================
@@ -30,4 +40,6 @@ def to_home(request, app_id):
 '''
 urlpatterns = patterns(None,
         (r'^/to_home/(\d+)/?$', to_home),
+        (r'^/to_app/(\d+)/?$', to_app),
+
 )

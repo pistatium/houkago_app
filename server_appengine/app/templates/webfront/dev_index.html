@@ -74,7 +74,10 @@
                                     
                                     <a href="{% url app.views.home.pr_link %}">宣伝リンク(β)</a>
                                     <p><small>このリンクをシェアしてアプリを宣伝！</small></p>
+                                    <label>アプリ部ホームへ 2pt</label>
                                     <input type="text" class="col-xs-12" value="http://houkago-no.appspot.com{% url app.views.aff.to_home app.key.id %}">
+                                    <label>アプリ個別ページヘ 1pt</label>
+                                    <input type="text" class="col-xs-12" value="http://houkago-no.appspot.com{% url app.views.aff.to_app app.key.id %}">
                             </div>
                         {% endfor %}
                     </div>

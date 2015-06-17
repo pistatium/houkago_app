@@ -127,7 +127,7 @@ class App(ndb.Model):
 
 
     @classmethod
-    @cache(60)
+    @cache(3600)
     def getPickup(cls, count=4):
         query = cls.query(cls.status == 1)
         apps = query.order(-cls.affiriate_point).order(-cls.affiriate_point_total).fetch(count)
