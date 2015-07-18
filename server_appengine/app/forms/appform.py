@@ -45,7 +45,7 @@ class AppForm(forms.Form):
         required = True,
     )
     src_url = forms.URLField(
-        label = "ソースを公開している場合(Gifhubなど)のURL",
+        label = "ソースを公開している場合(Gifhubなど)のURLを",
         required = False,
     )
 
@@ -85,7 +85,7 @@ class AppForm(forms.Form):
             'placeholder':'構想、開発にかかった期間など'})
     )
     future_vision = forms.CharField(
-        label = u"今後の展望を教えて下さい！",
+        label = u"今後のアップデートの展望を教えて下さい！",
         max_length = 480, 
         required = False, 
         widget=forms.Textarea(attrs={"rows": 4,"cols":100, "maxlength":480,

@@ -14,14 +14,14 @@
         <link>http://houkago-no.appspot.com{% url app.views.home.app_detail app.key.id %}</link> 
         <description><![CDATA[
           <img src="{%url app.views.img.app_icon app.key.id%}">
-          <h1>{{app.app_name}}</h1>
+          <h1>[{{platforms|choise:app.platform}}] {{app.app_name}}</h1>
           {{app.tagline}}
           <a href="{{app.dl_link}}">アプリのダウンロード</a>
           <hr>
-          <a href="{% url app.views.home.app_detail app.key.id %}">放課後アプリ部で詳細を見る</a>
+          <a href="http://houkago-no.appspot.com{% url app.views.home.app_detail app.key.id %}">放課後アプリ部で詳細を見る</a>
         ]]></description> 
         <pubDate>{{app.created_at|date:"r"}}</pubDate>
-         <guid isParmalinl="true">{% url app.views.home.app_detail app.key.id %}</guid> 
+         <guid isParmalink="true">http://houkago-no.appspot.com{% url app.views.home.app_detail app.key.id %}</guid> 
       </item>
     {%endfor%}
   </channel>

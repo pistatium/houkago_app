@@ -7,6 +7,7 @@ from django.views.decorators.cache import cache_page
 from google.appengine.api import users
 from django.core.urlresolvers import reverse
 from django.http import Http404
+from django.http import HttpResponseRedirect
 from django.conf.urls import patterns
 
 # import from project
@@ -15,8 +16,7 @@ from app.models.developer import Developer
 from app.models.app import App
 from app import views
 from app.libs.arrays import platforms, get_platform_id, categories
-#from app.forms import registform
-from django.http import HttpResponseRedirect
+# from app.forms import registform
 
 # -- Views  --------------------------------------------
 # ------------------------------------------------------
@@ -30,45 +30,52 @@ viewの引数にcontextが増えることに注意
 
 def custom_view(view):
     import functools
+
     @functools.wraps(view)
     def override_view(*args, **kwargs):
-        request = args[0]        
+        request = args[0]
         user = users.get_current_user()
         developer = None
         if user:
             developer = Developer.getByUserId(user.user_id())
-        context = RequestContext(request,{
+        context = RequestContext(request, {
             "is_login": bool(user),
             "logout_page": reverse(views.regist.index),
-            "developer" : developer,
-            "platforms" : platforms,
+            "developer": developer,
+            "platforms": platforms,
         })
         kwargs["context"] = context
         return view(*args, **kwargs)
     return override_view
 
+
 @custom_view
 def index(request, context):
-    context["developers"] = Developer.getQuery().fetch(10)
+    context["developers"] = Developer.getQuery().fetch(4)
     context["recent_apps"] = {}
+    pickups = App.getPickup()
+    context["pickup_apps"] = pickups[0:2]
+    context["pickup_apps_after"] = pickups[2:]
     context["has_more"] = {}
-    FETCH_LIMIT = 12
-    for platform in platforms:
-        apps = App.getRecentQuery(platform[0]).fetch(FETCH_LIMIT + 1)
-        if apps:
-            context["recent_apps"][platform[1]] = apps[:FETCH_LIMIT]
-            context["has_more"][platform[1]] = bool(len(apps) > FETCH_LIMIT)
+    context["apps"] = App.getRecentQuery().fetch(18)
     return render_to_response('webfront/index.html', context)
+
 
 @custom_view
 def about(request, context):
     context["current_tab"] = "about"
-    return render_to_response('webfront/about.html',context)
+    return render_to_response('webfront/about.html', context)
+
 
 @custom_view
 def about_api(request, context):
     context["current_tab"] = "about"
-    return render_to_response('webfront/about_api.html',context)
+    return render_to_response('webfront/about_api.html', context)
+
+@custom_view
+def pr_link(request, context):
+    context["current_tab"] = "about"
+    return render_to_response('webfront/pr_link.html', context)
 
 @custom_view
 def user_id(request, user_id, context):
@@ -76,6 +83,7 @@ def user_id(request, user_id, context):
     if not developer:
         raise Http404
     return HttpResponseRedirect(reverse(user, args=[developer.user_alias]))
+
 
 @custom_view
 def user(request, user_alias, context):
@@ -86,7 +94,7 @@ def user(request, user_alias, context):
     context["developer"] = developer
     context["apps"] = app
     context["platforms"] = platforms
-    return render_to_response('webfront/developer_detail.html',context)
+    return render_to_response('webfront/developer_detail.html', context)
 
 @custom_view
 def user_list(request, page, context):
@@ -95,7 +103,7 @@ def user_list(request, page, context):
     p = GAEPaginator(query, COUNT)
     context["page"] = page
     context["developers"] = p.page(page)
-    return render_to_response('webfront/user_list.html',context)
+    return render_to_response('webfront/user_list.html', context)
 
 @custom_view
 def app_list(request, plat_str, page, context):
@@ -107,7 +115,8 @@ def app_list(request, plat_str, page, context):
     context["page"] = page
     context["categories"] = categories
     context["apps"] = p.page(page)
-    return render_to_response('webfront/app_list.html',context) 
+    return render_to_response('webfront/app_list.html', context) 
+
 
 @custom_view
 def app_cat(request, plat_str, cat_id, page, context):
@@ -120,7 +129,8 @@ def app_cat(request, plat_str, cat_id, page, context):
     context["categories"] = categories
     context["page"] = page
     context["apps"] = p.page(page)
-    return render_to_response('webfront/app_list.html',context) 
+    return render_to_response('webfront/app_list.html', context) 
+
 
 @custom_view
 def app_detail(request, app_id, context):
@@ -137,12 +147,13 @@ def app_detail(request, app_id, context):
     context["related_app"] = App.getRecentQuery(app.platform, app.category).fetch(3 + 1)
     return render_to_response('webfront/app_detail.html',context)   
 
+
 @cache_page(60 * 15)
 def app_rss(request, platform = None):
     context = RequestContext(request,{
             "platforms" : platforms,
     })
-    context["apps"] = App.getRecentQuery(platform).fetch(10)
+    context["apps"] = App.getRecentQuery(platform).fetch(50)
     return render_to_response('webfront/app_rss.xml',context, mimetype="application/xml")  
 
 
@@ -153,6 +164,7 @@ def app_rss(request, platform = None):
 urlpatterns = patterns(None,
     (r'^about/?$', about),
     (r'^about_api/?$', about_api),
+    (r'^pr_link/?$', pr_link),
     (r'^user_id/(\d+)/?$' , user_id),
     (ur'^user/(\w+)/?$' , user),
     (ur'^user_list/(\d+)/?$' , user_list),

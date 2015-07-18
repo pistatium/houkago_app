@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<title>admin - appc</title>
+<meta charset="utf-8">
+
+<link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<form method="post">
+    <h4>AppC Serial</h4>
+    <textarea name="serials" rows=10 cols=50></textarea>
+    {% csrf_token %}
+    <input type="submit">
+</form>
+<hr>
+<table class="table table-responsive">
+    <tr>
+        <th>シリアル</th>
+        <th>開発者ID</th>
+        <th>created_at</th>
+        <th>updated_at</th>
+        <th>状態</th>
+    </tr>
+    {% for code in codes %}
+        <tr>
+            <td>{{code.serial}}</td>
+            <td>{{code.grant_user}}</td>
+            <td>{{code.created_at|date:"Y/m/d" }}</td>
+            <td>{{code.updated_at|date:"Y/m/d" }}</td>
+            <td>{{code.status}}</td>
+        </tr>
+    {% endfor %}
+</table>
+<a href="{{page|add:-1}}" class="btn">prev</a>
+<a href="{{page|add:1}}" class="btn">next</a>

@@ -1,12 +1,16 @@
 #coding: utf-8
+from __future__ import absolute_import
 
 from google.appengine.ext import ndb
+
+from ..libs.utils import cache
 
 
 class App(ndb.Model):
     developer_id  = ndb.IntegerProperty()
     app_name      = ndb.StringProperty()
     dl_link       = ndb.StringProperty()
+    src_url       = ndb.StringProperty()
     package_name  = ndb.StringProperty()
     platform      = ndb.IntegerProperty()
     tagline       = ndb.StringProperty() # キャッチフレーズ
@@ -17,7 +21,8 @@ class App(ndb.Model):
     technology    = ndb.StringProperty() # 使用技術、ライブラリ
     dev_scale     = ndb.StringProperty() # 開発規模
     future_vision = ndb.StringProperty() # 今後の展望
-    
+    affiriate_point = ndb.IntegerProperty(default=1) # アフィリエイトポイント
+    affiriate_point_total = ndb.IntegerProperty(default=0) # アフィリエイトポイント 累計 初期値は0
     status        = ndb.IntegerProperty(default = 1)
     created_at    = ndb.DateTimeProperty(auto_now_add = True)
     updated_at    = ndb.DateTimeProperty(auto_now = True)
@@ -60,25 +65,27 @@ class App(ndb.Model):
 
     @classmethod
     def update_push(cls, developer_id, params):
-            cls.clear_push(developer_id, params["platform"])
-            best_apps = []
-            best_app_key = set([])
-            for i in range(1,4):
-                key = "best_" + str(i) + "_app"
-                if params[key] in best_app_key: 
-                    continue
-                app = App.getById(params[key])
-                if not app: continue
-                if not app.developer_id == developer_id: continue
-                if not app.platform  == int(params["platform"]): continue
+        """ 押しアプリ更新"""
+        cls.clear_push(developer_id, params["platform"])
+        best_apps = []
+        best_app_key = set([])
+        for i in range(1, 4):
+            key = "best_" + str(i) + "_app"
+            if params[key] in best_app_key: 
+                continue
+            app = App.getById(params[key])
+            if not app: continue
+            if not app.developer_id == developer_id: continue
+            if not app.platform  == int(params["platform"]): continue
 
-                setattr(app, "creator_push", len(best_apps) + 1)
-                best_apps.append(app)
-                best_app_key.add(params[key])
-            ndb.put_multi(best_apps)
+            setattr(app, "creator_push", len(best_apps) + 1)
+            best_apps.append(app)
+            best_app_key.add(params[key])
+        ndb.put_multi(best_apps)
 
     @classmethod
     def clear_push(cls, developer_id, platform):
+        """押しアプリリセット"""
         apps = cls.query(
             cls.developer_id == developer_id,
             cls.platform     == int(platform),
@@ -102,7 +109,6 @@ class App(ndb.Model):
             query = query.filter(cls.platform == platform)
         return query
     
-    #@cache
     @classmethod
     def getRecentQuery(cls, platform = None, cat_id = None):
         query = cls.query()
@@ -112,10 +118,24 @@ class App(ndb.Model):
         if cat_id is not None:
             query = query.filter(cls.category == cat_id)
         return query.order(-cls.created_at)
-
     
     @classmethod
     def getPush(cls, developer_id, platform):
         query = cls.query(cls.developer_id == developer_id)
         query = query.filter(cls.platform == platform)
         return query.order(-cls.creator_push).fetch(3)
+
+
+    @classmethod
+    @cache(3600)
+    def getPickup(cls, count=4):
+        query = cls.query(cls.status == 1)
+        apps = query.order(-cls.affiriate_point).order(-cls.affiriate_point_total).fetch(count)
+        if not apps:
+            return []
+        # 一番先頭に来たアプリはポイントを減らす
+        first_app = apps[0]
+        if first_app.affiriate_point > 1:
+            first_app.affiriate_point -= 1
+            first_app.put()
+        return apps
