@@ -1,32 +1,17 @@
-#coding: utf-8
+# coding: utf-8
 
 from django.shortcuts import render_to_response
-from django.http import Http404
-from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse 
-from django.views.decorators.cache import cache_page
 from django.conf.urls.defaults import *
 from django.template import RequestContext
-
-from google.appengine.ext import ndb
-from google.appengine.api.datastore_errors import BadRequestError
-from google.appengine.api import memcache
 from google.appengine.api import users
 
-
-from hashlib import sha1, md5
-from random import randint
-from datetime import datetime, timedelta
-from logging import debug
-
-import syskey
-# import from project
 from app.models.developer import Developer
 from app.models.app import App
 from app.models.useapi import UseApi
 from app.models.upload import ProfImage, AppImage
+from app.models.appc import AppC
 
 from app.libs import utils
 from app.forms.appform import AppForm, AppFormUpdate
@@ -70,7 +55,8 @@ def custom_view(view):
 
 @custom_view
 def index(request, context):
-    apps = App.getQueryByDeveloper(context["developer"].key.id())
+    context["app_registed"] = request.GET.get("app_registed", None)
+    apps = App.getQueryByDeveloper(context["developer"].key.id()).order(-App.created_at)
     context["apps"] = apps
     return render_to_response('webfront/dev_index.html',context)
 
@@ -95,7 +81,7 @@ def app_regist(request, context):
             params["developer_id"] = context["developer"].key.id()
             app = App.create(params)
             app.put()
-            return HttpResponseRedirect(reverse(index))
+            return HttpResponseRedirect(reverse(index) + "?app_registed=1")
         else:
             context["form"] = form
             return render_to_response('webfront/regist_form.html', context)
@@ -109,7 +95,7 @@ def app_regist(request, context):
 @custom_view
 def app_update(request, app_id, context={}):
     context["title"] = u"アプリ情報更新"
-    context["description"] = u"こちらで登録したアプリの情報を修正できます。\n修正がサイト上で反映されるまでしばらく時間がかかります。\n一部フォームは任意入力ですが、アプリについてより多くの情報を入力すると検索などから流入増加が見込めます。"
+    context["description"] = u"こちらで登録したアプリの情報を修正できます。\n修正がサイト上で反映されるまでしばらく時間がかかります。\n\n多くのフォームは任意入力ですが、アプリについてより沢山の情報を入力することで検索による集客が見込めます。"
     app = App.getById(int(app_id))
     if app is None:
         return HttpResponseRedirect(reverse(app_regist))
@@ -174,9 +160,8 @@ def upload_icon_img(request, app_id, context):
     app_id = long(app_id)
     app = App.get_by_id(app_id)
     if app.developer_id != context["developer"].key.id():
-        hoge = app.developer_id
-        fuga = context["developer"].key.id()
-        ag.geawgew
+        # hoge = app.developer_id
+        # fuga = context["developer"].key.id()
         return HttpResponseRedirect(reverse(index))
     view_url = reverse(upload_img)
     if request.method == 'POST':
@@ -220,6 +205,13 @@ def api_regist(request, context):
     return render_to_response('webfront/api_regist.html',context)
 
 
+@custom_view
+def appc(request, context):
+    code = AppC.grant(context["developer"].key.id())
+    context["code"] = code
+    return render_to_response('webfront/appc.html',context)
+
+
 @utils.login_required
 def regist_complete(request):
     return render_to_response('webfront/regist_complete.html',{})
@@ -237,5 +229,6 @@ urlpatterns = patterns(None,
     (r'^/upload_img/?$', upload_img),
     (r'^/upload_icon_img/(\d+)/?$', upload_icon_img),
     (r'^/api_regist$', api_regist),
+    (r'^/appc$', appc),
     (r'^/?$', index),
 )

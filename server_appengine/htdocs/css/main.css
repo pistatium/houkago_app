@@ -19,7 +19,6 @@ h2{
   font-size: 22px;
 }
 h3 {
-  border-left: 9px solid #777;
   padding: 10px 0 10px 5px; 
   word-break: normal;
   word-wrap: normal;
@@ -30,6 +29,32 @@ a.anchor{
   padding-top:300px;
   margin-top:-300px
 }
+a div:hover{
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    background: #efefea;
+}
+a:hover{
+    text-decoration: none;
+}
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -20px;
+  /* Pad bottom by footer height */
+  padding: 0 0 20px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 40px;
+  padding-top: 10px;
+  background-color: #f5f5f5;
+}
+
 .form-group{
   margin-bottom: 25px;
   margin-top: 5px;
@@ -42,6 +67,19 @@ a.anchor{
   margin: auto;
   text-align: left;
 }
+.sidebar {
+  padding-left:20px;
+}
+.header-leading{
+  border: none;
+  margin: 3px 0px 8px 0px;
+  padding: 0px;
+}
+.header-leading-more{
+  font-size: 110%;
+  margin-bottom: 0px;
+}
+
 .more_link{
   width:99%;
   padding: 0px 30px 10px 0;
@@ -69,23 +107,12 @@ a.anchor{
   background: #FBFBFB;
   border-radius: 15px;
 }
-
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto;
-  /* Negative indent footer by its height */
-  margin: 0 auto -20px;
-  /* Pad bottom by footer height */
-  padding: 0 0 20px;
+.most_pickup{
+  border-radius:5px; 
+  background:#faebcc;
 }
 
-/* Set the fixed height of the footer here */
-#footer {
-  height: 40px;
-  padding-top: 10px;
-  background-color: #f5f5f5;
-}
+
 .desc{
   margin-bottom: 20px;
   margin-left: 5px;
@@ -117,18 +144,59 @@ a.anchor{
   max-width: 25px;
   margin-right:5px;
 }
+/* web */
+.plat_9 {
+  background: #3D78B2;
+}
+/* android */
+.plat_1 {
+  background: #5C883E;
+}
+/* ios */
+.plat_2 {
+  background: #A53636;
+}
+/* wp */
+.plat_3 {
+  background: #333;
+}
+.plat_label {
+  width:100%;
+  color: #fff;
+  padding:1px 3px;
+}
+.plat_label a {
+  color: #fff;
+}
+.plat_list{
+  text-align: center;
+  padding: 0px 10px;
+}
+.plat_list a{
+  border-radius: 5px;
+  text-align: center;
+  background:#df5a6b;
+  display: block;
+  color: #fff;
+}
+.platform_thmb{
+  width:22px; 
+  height:22px;
+  background:#DF5A6B;
+  float:left;
+  margin-right:10px;
+}
 .app_detail p{
   margin:0px 10px;
   font-size: 16px;
 }
 .profiles{
-
+  margin: 10px;
 }
 .profile_wrap{
   padding:3px 3px 3px 15px;
-  border-radius: 8px;
+  border-radius: 5px;
   border:#aaa solid 1px;
-  /*margin:10px 1px;*/
   overflow: hidden;
 }
 .profile_wrap h3{
@@ -202,6 +270,37 @@ a.anchor{
 .app-box .caption > small{
   color:#555;
 }
+.pickup .new_app_box {
+  background: #FFFAE6;
+}
+.new_app_box {
+  border:1px solid #B3B3B3;
+  margin: 3px 0;
+  border-radius: 5px;
+}
+.new_app_box h3 {
+  padding: 0px;
+  word-wrap: break-word;
+  white-space: normal;
+  color: #333;
+}
+.new_app_box h4 {
+  font-size: 15px;
+  padding: 0px;
+  word-wrap: break-word;
+  white-space: normal;
+  color: #888;
+}
+.new_app_box .icon_thumbnail {
+  width:140px;
+  height: 140px;
+  margin: 5px 3px;
+  float: left;
+}
+.new_app_box .descriptions {
+  height: 150px;
+  overflow: hidden;
+}
 
 .recemt_app_date{
   font-size:xx-small;
@@ -212,6 +311,17 @@ a.anchor{
   float: left;
   margin: 1px;
   margin-right: 5px;
+}
+.most_pickup_app_icon{
+  max-height:120px;
+  max-width: 120px;
+}
+.pickup_app_icon{
+  max-height:100px;
+  max-width: 100px;
+  float: left;
+  margin: 10px 1px;
+  margin-right: 5px; 
 }
 .list_thumb{
   max-height: 85px;
@@ -237,8 +347,25 @@ a.anchor{
   word-break: normal;
   word-wrap: normal;
   overflow: hidden;
+  font-weight: bold;
 }
-
+.api-info h3{
+  border-left: 9px solid #777;
+}
+#top_header{
+  margin-top: -40px;
+}
+#top_header img {
+    border-radius: 5px;
+}
+#search_box{
+  height:60px; 
+  box-sizing:content-box;
+}
+#search_box *{
+ box-sizing:content-box; 
+ line-height: 100%;
+}
 #title_box{
   background-color: #FFF7DF;
   background-image: url("/img/material/banner_bg.jpg");

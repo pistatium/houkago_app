@@ -1,0 +1,32 @@
+{% extends "parent.html" %}
+{% load my_utils %}
+{% block title %}アプリアイデア{% endblock %}
+
+{% block main %}
+    <h1>アプリアイデア掲示板</h1>
+    <p>放課後アプリ部では
+        「こんなアプリがあったら是非使ってみたい!」
+        「◯◯するのに便利なアプリが欲しい！」
+        「◯◯ができるアプリがあったら楽しそう！」
+        といった新しいアプリのアイデアを募集しています。</p>
+    <p>放課後アプリ部の開発者に気に入ってもらえたアイデアは、
+        採用されてアプリとして実現されるかもしれません</p>
+    
+        
+
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            {% include 'plugin/api_info.html' %}
+        </div>
+        <div class="col-xs-12 col-sm-4">
+
+            {% include 'plugin/regist_div.html' %}
+
+            <div>
+                <h2>スポンサード・リンク</h2>
+                {% include 'plugin/ads.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

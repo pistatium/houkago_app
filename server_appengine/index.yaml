@@ -9,8 +9,22 @@ indexes:
 
 - kind: App
   properties:
+  - name: developer_id
+  - name: created_at
+    direction: desc
+
+- kind: App
+  properties:
   - name: status
   - name: created_at
+    direction: desc
+
+- kind: App
+  properties:
+  - name: status
+  - name: affiriate_point
+    direction: desc
+  - name: affiriate_point_total
     direction: desc
 
 - kind: App
@@ -39,4 +53,3 @@ indexes:
   properties:
   - name: send_status
   - name: created_at
-

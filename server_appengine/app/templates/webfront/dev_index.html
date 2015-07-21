@@ -6,6 +6,7 @@
             <h3 class="panel-title">部員登録情報</h3>
         </div>
         <div class="panel-body">
+            アイコンクリックで画像アップロードできます。
             {% if not developer.profile %}
                 <div class="alert alert-warning">
                     <b>Todo:</b>プロフィールがまだ未設定です。
@@ -69,8 +70,14 @@
                                     <div>
                                         <a class="btn btn-block btn-primary" href="{% url app.views.dev.app_update app.key.id %}">アプリ情報編集</a>
                                         <a class="btn btn-block btn-info" href="{% url app.views.home.app_detail app.key.id %}">アプリページ確認</a>
-                                        
                                     </div>
+                                    
+                                    <a href="{% url app.views.home.pr_link %}">宣伝リンク(β)</a>
+                                    <p><small>このリンクをシェアしてアプリを宣伝！</small></p>
+                                    <label>アプリ部ホームへ 2pt</label>
+                                    <input type="text" class="col-xs-12" value="http://houkago-no.appspot.com{% url app.views.aff.to_home app.key.id %}">
+                                    <label>アプリ個別ページヘ 1pt</label>
+                                    <input type="text" class="col-xs-12" value="http://houkago-no.appspot.com{% url app.views.aff.to_app app.key.id %}">
                             </div>
                         {% endfor %}
                     </div>
@@ -94,6 +101,22 @@
                                 API利用申請
                         </a>
                     </p>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">appC Cloudキャンペーン</h3>
+                </div>
+                <div class="panel-body">
+                    <p>放課後アプリ部に開発者登録された方限定で！
+                    appCのプロモーションコードを配布しております。</p>
+                    <p>appC Cloudに新規登録の際に、下記で発行されるプロモーションコードを入力していただくと、
+                    1000円分のデポジットが手に入ります。この機会に是非ご利用ください。</p>
+                   
+                    <a href="{% url app.views.dev.appc %}" class="btn btn-middle btn-success">
+                        プロモーションコード取得
+                    </a>
+                     
                 </div>
             </div>
         </div>
