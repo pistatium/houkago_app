@@ -290,6 +290,7 @@ a:hover{
   word-wrap: break-word;
   white-space: normal;
   color: #888;
+  max-height: 52px;
 }
 .new_app_box .icon_thumbnail {
   width:140px;
