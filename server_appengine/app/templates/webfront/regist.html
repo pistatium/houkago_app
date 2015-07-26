@@ -128,6 +128,9 @@
                     {% include 'plugin/profile_list.html' %}
                 </div>
             {% endfor %}
+            <div class="more_link">
+                <a href="{% url app.views.home.user_list 1 %}">&gt;&gt; もっとみる</a>
+            </div>
 		</div>
 	</div>
 {% endblock main %}
