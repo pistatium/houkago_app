@@ -151,25 +151,20 @@
 				</div>
 			</div>
 			<h3>{{developer.uname}}押しアプリ</h3>
-			<div class="row">
-				{% for papp in push_app %}
-					<div class="col-xs-4">
-						<a href="{% url app.views.home.app_detail papp.key.id %}">
-							<div>
-								<img src="{%url app.views.img.app_icon papp.key.id%}" class="img-responsive">
-							</div>
-							<small>{{papp.app_name}}</small>
-						</a>
-					</div>
-				{% endfor %}
-			</div>
+            {% for rapp in push_app %}
+                <div class="col-xs-12">
+                    {% include 'plugin/new_app_box.html' %}
+                </div>
+            {% endfor %}
 
 			{% if related_app|length > 1 %}
 				<h2>関連アプリ</h2>
 
 				{% for rapp in related_app %}
 					{% if rapp.key.id != app.key.id %}
-						{% include 'plugin/app_box.html' %}
+                        <div class="col-xs-12">
+                            {% include 'plugin/new_app_box.html' %}
+                        </div>
 					{% endif %}
 				{% endfor %}
 			{% endif %}
