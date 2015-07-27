@@ -156,6 +156,13 @@ def app_rss(request, platform = None):
     context["apps"] = App.getRecentQuery(platform).fetch(50)
     return render_to_response('webfront/app_rss.xml',context, mimetype="application/xml")  
 
+@cache_page(60 * 15)
+def sitemap(request):
+    context = RequestContext(request,{
+    })
+    context["apps"] = App.getRecentQuery(None)
+    context["developers"] = Developer.getQuery()
+    return render_to_response('webfront/sitemap.xml',context, mimetype="application/xml")  
 
 #======================================================================================
 ''' 
@@ -173,5 +180,6 @@ urlpatterns = patterns(None,
     (r'^app_cat/(\w+)//(\d+)?$' , app_cat),
     (r'^app_detail/(\d+)/?$' , app_detail),
     (r'^rss.xml$', app_rss),
+    (r'^sitemap.xml$', sitemap),
     (r'^/?$', index),
 )
