@@ -99,9 +99,15 @@
 
     <div class="col-md-4 sidebar">
         {% include 'plugin/search_div.html' %}
+
+
         {% include 'plugin/regist_div.html' %}
-        {% include 'plugin/appc.html' %}
         
+        <div>
+            <h2>&nbsp;</h2>
+            {% include 'plugin/ads.html' %}
+        </div>
+
         <div>
             <h2>アプリカタログ</h2>
                <a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium.houkagoapp">
@@ -114,6 +120,9 @@
 
                 </p>
         </div>
+
+        {% include 'plugin/appc.html' %}
+
         <div>
             <h2><a class="twitter-timeline" href="https://twitter.com/houkago_app" data-widget-id="480624310030049280">@houkago_app</a></h2>
             
@@ -122,8 +131,9 @@
 
         </div>
 
+
         <div>
-            <h2>スポンサード・リンク</h2>
+            <h2>&nbsp;</h2>
             {% include 'plugin/ads.html' %}
         </div>
     </div>
