@@ -11,7 +11,6 @@ from app.models.developer import Developer
 from app.models.app import App
 from app.models.useapi import UseApi
 from app.models.upload import ProfImage, AppImage
-from app.models.appc import AppC
 
 from app.libs import utils
 from app.forms.appform import AppForm, AppFormUpdate
@@ -205,12 +204,6 @@ def api_regist(request, context):
     return render_to_response('webfront/api_regist.html',context)
 
 
-@custom_view
-def appc(request, context):
-    code = AppC.grant(context["developer"].key.id())
-    context["code"] = code
-    return render_to_response('webfront/appc.html',context)
-
 
 @utils.login_required
 def regist_complete(request):
@@ -229,6 +222,5 @@ urlpatterns = patterns(None,
     (r'^/upload_img/?$', upload_img),
     (r'^/upload_icon_img/(\d+)/?$', upload_icon_img),
     (r'^/api_regist$', api_regist),
-    (r'^/appc$', appc),
     (r'^/?$', index),
 )

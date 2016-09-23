@@ -9,7 +9,6 @@ from google.appengine.api import users
 from django.template import RequestContext
 
 from app.libs import utils
-from app.models.appc import AppC
 from app import views
 
 # -- Views  --------------------------------------------
@@ -30,23 +29,6 @@ def admin_view(view):
         return view(*args, **kwargs)
     return override_view
 
-@admin_view
-def appc(request, page=0, context={}):
-    if request.method == 'POST':
-        codes = request.POST["serials"].splitlines()
-        AppC.batch_import(codes)
-        context["codes"] = codes
-    page = int(page)
-    context["codes"] = AppC.get_list(page)
-    context["page"] = page
-    return render_to_response('admin/appc.html', context)
 
 # ======================================================================================
 
-'''
- URL パターン
-'''
-urlpatterns = patterns(None,
-    (r'^/appc/$', appc),
-    (r'^/appc/(\d+)?$', appc),
-)
