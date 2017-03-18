@@ -1,0 +1,23 @@
+machine:
+  timezone:
+    Asia/Tokyo
+  environment:
+    GAE_SDK_VERSION: 1.9.24
+    PATH: $PATH:$HOME/google_appengine
+
+dependencies:
+  pre:
+    - curl -o $HOME/google_appengine.zip https://storage.googleapis.com/appengine-sdks/featured/google_appengine_$GAE_SDK_VERSION.zip
+    - unzip -q -d $HOME $HOME/google_appengine.zip
+    - cd server_appengine && bash scripts/decrypt.sh
+
+test:
+  override:
+    - echo FIXME
+
+deployment:
+  appengine:
+    branch: master
+    commands:
+      - cd server_appengine && gcloud auth activate-service-account $ACCOUNT --key-file $(pwd)/.secret/key.json
+      - cd server_appengine && appcfg.py update --oauth2_access_token $(gcloud auth print-access-token 2> /dev/null) .

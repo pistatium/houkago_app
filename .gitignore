@@ -1,7 +1,6 @@
 .*
 *.pyc
 Design
-server_appengine/syskey.py
 ads.html
 *.pptx
 android/keystore
