@@ -43,7 +43,6 @@ class RegistForm(forms.Form):
     site_addr   = forms.URLField(
         label = "サイト、ブログURL",
         required = False,
-        verify_exists = True,
     )
 
     def clean_user_alias(self):

@@ -1,7 +1,5 @@
-.*
 *.pyc
 Design
-ads.html
 *.pptx
 android/keystore
 android/.*
