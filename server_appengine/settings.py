@@ -5,6 +5,9 @@ import syskey
 DEBUG = os.environ.get('SERVER_SOFTWARE', '').startswith('Development') 
 TEMPLATE_DEBUG = DEBUG
 
+if not DEBUG:
+    ALLOWED_HOSTS = ["*"]
+ 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
