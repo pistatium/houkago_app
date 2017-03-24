@@ -2,8 +2,8 @@
 	<div class="profile_wrap">
 		<div class="row">
 			<div class="col-xs-4">
-				<a href="{% url app.views.dev.upload_img %}">
-					<img class="prof_thumb img-responsive" src="{%url app.views.img.user_icon developer.key.id%}">
+				<a href="{% url "app.views.dev.upload_img" %}">
+					<img class="prof_thumb img-responsive" src="{% url "app.views.img.user_icon" developer.key.id %}">
 				</a>
 			</div>
 			<div class="col-xs-8">
@@ -16,7 +16,7 @@
 		<div class="row" style="margin:10px">
 			{% for app in apps %}
 			<a href="{{app.dl_link}}">
-				<img class="col-xs-4 img-responsive img-thumbnail" src="{%url app.views.img.app_icon app.key.id%}">
+				<img class="col-xs-4 img-responsive img-thumbnail" src="{% url "app.views.img.app_icon" app.key.id%}">
 			</a>
 			{% endfor %}
 		</div>

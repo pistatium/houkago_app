@@ -25,7 +25,7 @@
             <div class="tab-content">
                 {% for p in plat_list %}
                         <div class="tab-pane {{ forloop.first|yesno:'active,' }}" id="plat_{{p.grouper}}">
-                        <form class="form-horizontal" action="{% url app.views.dev.update_push %}" method="POST">
+                        <form class="form-horizontal" action="{% url "app.views.dev.update_push" %}" method="POST">
                             {% for i in "123" %}
                                 <div class="form-group">
 

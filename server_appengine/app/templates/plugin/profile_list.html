@@ -1,9 +1,9 @@
 {% load my_utils %}
-	<a href="{% url app.views.home.user developer.user_alias %}">
+	<a href="{% url "app.views.home.user" developer.user_alias %}">
 		<div class="profile_wrap">
 			<div class="row">
 				<div class="col-xs-3 center">
-					<img class="img-responsive list_thumb" src="{%url app.views.img.user_icon developer.key.id%}">
+					<img class="img-responsive list_thumb" src="{% url "app.views.img.user_icon" developer.key.id%}">
 				</div>
 				<div class="col-xs-9 profile_main" >
 					<h3>{{developer.uname}}</h3>

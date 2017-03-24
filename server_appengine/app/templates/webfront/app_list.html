@@ -89,10 +89,10 @@
 
             <h2>カテゴリ一覧</h2>
             <div class="list-group">      
-                <a class="list-group-item {{cat_id|default:0|yesno:"list-group-item-success, active"}}" href="{% url app.views.home.app_list plat_str 1 %}">全カテゴリ{{plat_str}}アプリ一覧</a>     
+                <a class="list-group-item {{cat_id|default:0|yesno:"list-group-item-success, active"}}" href="{% url "app.views.home.app_list" plat_str 1 %}">全カテゴリ{{plat_str}}アプリ一覧</a>     
 
                 {% for cat in categories %}
-                    <a class="list-group-item {{cat_id|eq:cat.0|yesno:"active,"}}" href="{% url app.views.home.app_cat plat_str cat.0 1 %}">{{cat.1}}</a>
+                    <a class="list-group-item {{cat_id|eq:cat.0|yesno:"active,"}}" href="{% url "app.views.home.app_cat" plat_str cat.0 1 %}">{{cat.1}}</a>
                 {% endfor %}
             </div>
 

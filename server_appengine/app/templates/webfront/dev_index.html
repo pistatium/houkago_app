@@ -18,8 +18,8 @@
                 {% include 'plugin/profile_card.html' %}
                 
                 <div class="col-xs-12 col-sm-5 col-lg-7">
-                    <a class="btn btn-block btn-primary" href="{% url app.views.regist.user_update %}">プロフィール編集</a>
-                    <a class="btn btn-block btn-info" href="{% url app.views.home.user developer.user_alias %}">プロフィールページ確認</a> 
+                    <a class="btn btn-block btn-primary" href="{% url "app.views.regist.user_update" %}">プロフィール編集</a>
+                    <a class="btn btn-block btn-info" href="{% url "app.views.home.user" developer.user_alias %}">プロフィールページ確認</a> 
                 </div>
             </div>
         
@@ -37,7 +37,7 @@
                         ※ユーザー向けページに内容が反映されるまでしばらく時間がかかります。
                     </p>
                     <p>
-                        <a href="{% url app.views.dev.app_regist %}" class="btn btn-middle btn-success">
+                        <a href="{% url "app.views.dev.app_regist" %}" class="btn btn-middle btn-success">
                             <span class="glyphicon glyphicon-plus"></span>
                             アプリ登録
                         </a>
@@ -55,9 +55,9 @@
                                 <div class="col-md-6 col-xs-12 col-sm-12 dev_app">
                                     <div class="pull-right">[公開]</div>
                             {% endif %}
-                            <a href="{% url app.views.dev.upload_icon_img app.key.id %}">
+                            <a href="{% url "app.views.dev.upload_icon_img" app.key.id %}">
                                 <div class="center">
-                                    <img src="{% url app.views.img.app_icon app.key.id %}" class="img-responsive dev_app_icon" >
+                                    <img src="{% url "app.views.img.app_icon" app.key.id %}" class="img-responsive dev_app_icon" >
                             </div>
                             </a>
                                     <div class="platform clearfix center">
@@ -68,16 +68,16 @@
                                     <p>カテゴリ：{{app.category|cat2str}}</p>
                                     <p>更新日：{{app.updated_at}}</p>
                                     <div>
-                                        <a class="btn btn-block btn-primary" href="{% url app.views.dev.app_update app.key.id %}">アプリ情報編集</a>
-                                        <a class="btn btn-block btn-info" href="{% url app.views.home.app_detail app.key.id %}">アプリページ確認</a>
+                                        <a class="btn btn-block btn-primary" href="{% url "app.views.dev.app_update" app.key.id %}">アプリ情報編集</a>
+                                        <a class="btn btn-block btn-info" href="{% url "app.views.home.app_detail" app.key.id %}">アプリページ確認</a>
                                     </div>
                                     
-                                    <a href="{% url app.views.home.pr_link %}">宣伝リンク(β)</a>
+                                    <a href="{% url "app.views.home.pr_link" %}">宣伝リンク(β)</a>
                                     <p><small>このリンクをシェアしてアプリを宣伝！</small></p>
                                     <label>アプリ部ホームへ 2pt</label>
-                                    <input type="text" class="col-xs-12" value="http://houkago-no.appspot.com{% url app.views.aff.to_home app.key.id %}">
+                                    <input type="text" class="col-xs-12" value="http://houkago-no.appspot.com{% url "app.views.aff.to_home" app.key.id %}">
                                     <label>アプリ個別ページヘ 1pt</label>
-                                    <input type="text" class="col-xs-12" value="http://houkago-no.appspot.com{% url app.views.aff.to_app app.key.id %}">
+                                    <input type="text" class="col-xs-12" value="http://houkago-no.appspot.com{% url "app.views.aff.to_app" app.key.id %}">
                             </div>
                         {% endfor %}
                     </div>
@@ -96,7 +96,7 @@
                 <div class="panel-body">
                     放課後アプリ部のAPIを利用したい場合は下記フォームから申請して下さい。
                     <p>
-                        <a href="{% url app.views.dev.api_regist %}" class="btn btn-middle btn-success">
+                        <a href="{% url "app.views.dev.api_regist" %}" class="btn btn-middle btn-success">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 API利用申請
                         </a>

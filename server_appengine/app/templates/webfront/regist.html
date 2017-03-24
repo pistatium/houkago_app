@@ -14,7 +14,7 @@
 		</p>
 
 	{% else %}
-			<a href="{% url app.views.dev.index %}" class="btn btn-info">開発者ページへ</a>
+			<a href="{% url "app.views.dev.index" %}" class="btn btn-info">開発者ページへ</a>
 		    <h2>ログアウト</h2>
 		    <p>
 		    	現在 <code>{{developer.uname}}</code>でログイン中です。
@@ -129,7 +129,7 @@
                 </div>
             {% endfor %}
             <div class="more_link">
-                <a href="{% url app.views.home.user_list 1 %}">&gt;&gt; もっとみる</a>
+                <a href="{% url "app.views.home.user_list" 1 %}">&gt;&gt; もっとみる</a>
             </div>
 		</div>
 	</div>

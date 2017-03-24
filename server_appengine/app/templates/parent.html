@@ -72,7 +72,7 @@
             </li>
             {% if is_login %}
               <li id="nav_dev">
-                <a href ="{% url app.views.dev.index %}">
+                <a href ="{% url "app.views.dev.index" %}">
                     <!--<span class="glyphicon glyphicon-pencil"></span>-->
                     開発者向けページ
                 </a>
@@ -99,7 +99,7 @@
             {% if is_login %}
               <li id="nav_pre"><a href="{{logout_page}}">ログアウト</a></li>
            {% else %}
-              <li id="nav_pre"><a href="{% url app.views.regist.index %}">
+              <li id="nav_pre"><a href="{% url "app.views.regist.index" %}">
                 <span class="glyphicon glyphicon-list-alt"></span>
                 入部申請(ログイン)
               </a></li>

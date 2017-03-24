@@ -8,19 +8,19 @@
   <meta property="og:title" content="{{app.app_name}} - 放課後アプリ部">
   <meta property="og:type" content="website">
   <meta property="og:description" content="{{app.tagline}} | 個人開発者が集まる放課後アプリ部！">
-  <meta property="og:image" content="http://houkago-no.appspot.com{%url app.views.img.app_icon app.key.id%}">
+  <meta property="og:image" content="http://houkago-no.appspot.com{% url "app.views.img.app_icon" app.key.id%}">
 
   <meta property="og:site_name" content="放課後アプリ部">
   {% endblock %}
 
 {% block meta %}
-	<meta property="og:image" content="http://houkago-no.appspot.com{%url app.views.img.app_icon app.key.id%}">
+	<meta property="og:image" content="http://houkago-no.appspot.com{% url "app.views.img.app_icon" app.key.id%}">
 	<meta name="twitter:card" content="product">
 	<meta name="twitter:site" content="@houkago_app">
 	<meta name="twitter:creator" content="{{developer.tw_name}}">
 	<meta name="twitter:title" content="{{app.app_name}} - 放課後アプリ部 ">
 	<meta name="twitter:description" content="{{app.tagline}}">
-	<meta name="twitter:image:src" content="http://houkago-no.appspot.com{%url app.views.img.app_icon app.key.id%}">
+	<meta name="twitter:image:src" content="http://houkago-no.appspot.com{% url "app.views.img.app_icon" app.key.id%}">
 	<meta name="twitter:data1" content="アプリの概要">
 	<meta name="twitter:label1" content="{{app.pr_summary|truncate:100}}">
 	<meta name="twitter:data2" content="このアプリを作った理由">
@@ -34,7 +34,7 @@
 		<div class="col-xs-12 col-sm-8">
 			<div class="row">
 		        <div class="col-xs-12 col-sm-3 col-md-4 pull-left center">
-    		        <img src="{%url app.views.img.app_icon app.key.id%}" class="img-responsive max320">
+    		        <img src="{% url "app.views.img.app_icon" app.key.id%}" class="img-responsive max320">
 		        </div>
 				<div class="col-xs-12 col-sm-9 col-md-8">
 					<h1 class="media-heading">
@@ -58,7 +58,7 @@
 	  						{% if app.category %}
 	  							<dt>カテゴリ</dt>
 								<dd>
-									<a href="{% url app.views.home.app_cat platforms|choise:app.platform app.category 1 %}">
+									<a href="{% url "app.views.home.app_cat" platforms|choise:app.platform app.category 1 %}">
 										{{app.category|cat2str}}
 									</a>
 								</dd>
@@ -139,9 +139,9 @@
 			<div class="row">
 				<div class="col-xs-2 col-md-2"></div>
 				<div class="col-xs-8 col-md-8 center">
-					<a href="{% url app.views.home.user developer.user_alias %}">
+					<a href="{% url "app.views.home.user" developer.user_alias %}">
 						<div class="thumbnail">
-							<img class="prof_thumb img-responsive" src="{%url app.views.img.user_icon developer.key.id%}">
+							<img class="prof_thumb img-responsive" src="{% url "app.views.img.user_icon" developer.key.id%}">
 							<div class="caption">
 								<h4>{{developer.uname}}</h4>
 								{{developer.profile|linebreaks}}

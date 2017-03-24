@@ -1,6 +1,6 @@
 {% load my_utils %}
 
-<a href="{% url app.views.home.app_detail rapp.key.id %}" class="">
+<a href="{% url "app.views.home.app_detail" rapp.key.id %}" class="">
     <div class="clearfix new_app_box" >
     	<div class="plat_label plat_{{rapp.platform}}" >
 			<img src="/img/platform/{{rapp.platform}}_w.png" width=18>
@@ -11,7 +11,7 @@
 				<span class="pull-right">{{rapp.created_at|date:"Y/m/d"}}登録 </span>
 			{% endif %}
 		</div>
-        <img src="{% url app.views.img.app_icon rapp.key.id %}" class="icon_thumbnail">
+        <img src="{% url "app.views.img.app_icon" rapp.key.id %}" class="icon_thumbnail">
         <div claass="descriptions">
             <h3>{{rapp.app_name}}</h3>
             <h4>{{rapp.tagline}}</h4>

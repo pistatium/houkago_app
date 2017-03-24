@@ -61,13 +61,13 @@
             {% endfor %}
 
             <div class="more_link">
-                <a href="{% url app.views.home.pr_link %}"><small>&gt;&gt; ピックアップされるには?</small></a>
+                <a href="{% url "app.views.home.pr_link" %}"><small>&gt;&gt; ピックアップされるには?</small></a>
             </div>
 
             <div class="row" style="margin:0 5px;">
                 {% for platform in platforms %}
                     <div class="col-xs-4 plat_list">
-                        <a href="{% url app.views.home.app_list platform.1 1 %}">
+                        <a href="{% url "app.views.home.app_list" platform.1 1 %}">
                             <img src="/img/platform/{{platform.0}}_w.png" width="100px" alt="{{platform.1}}アプリ一覧">
                             <br>
                             アプリをもっとみる
@@ -89,7 +89,7 @@
             {% endfor %}
         </div>
         <div class="more_link">
-            <a href="{% url app.views.home.user_list 1 %}">&gt;&gt; もっとみる</a>
+            <a href="{% url "app.views.home.user_list" 1 %}">&gt;&gt; もっとみる</a>
         </div>
             
 

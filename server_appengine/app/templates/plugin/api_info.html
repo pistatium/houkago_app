@@ -34,7 +34,7 @@
 <dl>
 	{% for p in platforms %}
 		<dt>{{ p.1 }}アプリ一覧</dt>
-		<dd>{% url app.views.api.recent_app p.1 %}</dd>
+		<dd>{% url "app.views.api.recent_app" p.1 %}</dd>
 	{% endfor %}
 </dl>
 <h4>拡張パラメータ</h4>
@@ -50,7 +50,7 @@
 <dl>
 	{% for p in platforms %}
 		<dt>{{ p.1 }}アプリ一覧</dt>
-		<dd>{% url app.views.api.developer_apps developer.user_alias|default:"developer_id" p.1 %}</dd>
+		<dd>{% url "app.views.api.developer_apps" developer.user_alias|default:"developer_id" p.1 %}</dd>
 	{% endfor %}
 	<small>(※取得したいユーザーに応じてdeveloper_idを変えてください。)</small>
 </dl>
@@ -65,7 +65,7 @@
 <h4>概要</h4>
 <p>一覧で取得したIDをキーにアプリの詳細が取得できます。<p>
 <h4>URL</h4>
-{% url app.views.api.detail_app 12345 %} <small>(※12345はアプリID)</small>
+{% url "app.views.api.detail_app" 12345 %} <small>(※12345はアプリID)</small>
 <h4>拡張パラメータ</h4>
 なし
 </div>

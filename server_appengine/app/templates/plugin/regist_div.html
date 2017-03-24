@@ -1,7 +1,7 @@
 {% if is_login %}
 	<h2>ログイン中</h2>
 	<p>
-		<a href="{% url app.views.dev.index %}" class="btn btn-primary btn-block">開発者用ページヘ</a>
+		<a href="{% url "app.views.dev.index" %}" class="btn btn-primary btn-block">開発者用ページヘ</a>
 	</p>
 	<p>こちらからプロフィールの変更、アプリの登録等が行えます。</p>
 {% else %}
@@ -14,7 +14,7 @@
 			このサイト上で紹介・宣伝することが可能です。
 		</p>
 		<p>
-			<a class="btn btn-primary btn-block btn-lg" href="{% url app.views.regist.index %}">放課後アプリ部に入部する！</a>
+			<a class="btn btn-primary btn-block btn-lg" href="{% url "app.views.regist.index" %}">放課後アプリ部に入部する！</a>
 		</p>
 
 
