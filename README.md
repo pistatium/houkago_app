@@ -1,4 +1,7 @@
 ﻿# houkago_app
+
+[![CircleCI](https://circleci.com/gh/pistatium/houkago_app.svg?style=svg)](https://circleci.com/gh/pistatium/houkago_app)
+
 -----
 
 ## about.

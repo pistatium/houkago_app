@@ -1,4 +1,6 @@
 machine:
+  python:
+    version: 2.7
   timezone:
     Asia/Tokyo
   environment:
@@ -11,9 +13,12 @@ dependencies:
     - unzip -q -d $HOME $HOME/google_appengine.zip
     - cd server_appengine && bash scripts/decrypt.sh
 
+  override:
+    - pip install pytest
+    - pip install -r server_appengine/requirements.txt
 test:
   override:
-    - echo FIXME
+    - py.test server_appengine/
 
 deployment:
   appengine:
